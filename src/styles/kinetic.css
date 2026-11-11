@@ -967,18 +967,23 @@ html.has-cursor * {
 }
 
 /* --- texto largo: justificado con partición ------------------------------ */
+.hero-copy p,
 .about-copy p,
 .exp-row p,
+.pipeline-lead,
+.latest-lead,
+.latest-card p,
+.sobre-lead,
 .sobre-body p,
 .sobre-card p,
 .sobre-row p,
-.latest-card p,
 .blog-excerpt,
+.blog-summary,
 .blog-prose p,
 .blog-prose li {
   text-align: justify;
   hyphens: auto;
   -webkit-hyphens: auto;
-  hyphenate-limit-chars: 6 3 3;
+  hyphenate-limit-chars: 6 3 4;
   text-wrap: pretty;
 }
