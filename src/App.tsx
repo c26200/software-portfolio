@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import CustomCursor from './components/CustomCursor';
 import Footer from './components/Footer';
+import PageMeta from './components/PageMeta';
 import Home from './pages/Home';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
@@ -10,6 +11,7 @@ import NotFound from './pages/NotFound';
 export default function App() {
   return (
     <>
+      <PageMeta />
       <CustomCursor />
       <Header />
       <main>
