@@ -15,6 +15,7 @@ export default function Projects() {
   const { t } = useTranslation();
   const railRef = useRef<HTMLDivElement>(null);
   const [preview, setPreview] = useState<ShowcaseProject | null>(null);
+  const draggedRef = useRef(false);
 
   // Drag to scroll
   useEffect(() => {
@@ -29,27 +30,35 @@ export default function Projects() {
 
     const onDown = (event: PointerEvent) => {
       // En táctil manda el scroll nativo del navegador
-      if (event.pointerType !== 'mouse') return;
+      if (event.pointerType !== 'mouse' || event.button !== 0) return;
       down = true;
       moved = false;
+      draggedRef.current = false;
       startX = event.clientX;
       startLeft = rail.scrollLeft;
       pointerId = event.pointerId;
     };
+
     const onMove = (event: PointerEvent) => {
       if (!down) return;
       const dx = event.clientX - startX;
       if (!moved) {
-        if (Math.abs(dx) < 6) return;
+        if (Math.abs(dx) < 5) return;
         moved = true;
+        draggedRef.current = true;
         rail.classList.add('drag');
-        rail.setPointerCapture(pointerId);
       }
-      rail.scrollLeft = startLeft - dx * 1.4;
+      event.preventDefault();
+      rail.scrollLeft = startLeft - dx;
     };
+
     const onEnd = () => {
-      if (pointerId >= 0 && rail.hasPointerCapture(pointerId)) {
-        rail.releasePointerCapture(pointerId);
+      if (pointerId >= 0) {
+        try {
+          if (rail.hasPointerCapture(pointerId)) rail.releasePointerCapture(pointerId);
+        } catch {
+          /* la captura puede no existir si el evento fue sintético */
+        }
       }
       down = false;
       moved = false;
@@ -58,15 +67,16 @@ export default function Projects() {
     };
 
     rail.addEventListener('pointerdown', onDown);
-    rail.addEventListener('pointermove', onMove);
-    rail.addEventListener('pointerup', onEnd);
-    rail.addEventListener('pointercancel', onEnd);
+    // Escuchar en window permite arrastrar fuera del carril sin perder el gesto
+    window.addEventListener('pointermove', onMove);
+    window.addEventListener('pointerup', onEnd);
+    window.addEventListener('pointercancel', onEnd);
 
     return () => {
       rail.removeEventListener('pointerdown', onDown);
-      rail.removeEventListener('pointermove', onMove);
-      rail.removeEventListener('pointerup', onEnd);
-      rail.removeEventListener('pointercancel', onEnd);
+      window.removeEventListener('pointermove', onMove);
+      window.removeEventListener('pointerup', onEnd);
+      window.removeEventListener('pointercancel', onEnd);
     };
   }, []);
 
@@ -203,6 +213,12 @@ export default function Projects() {
               draggable={false}
               onDragStart={(event) => event.preventDefault()}
               onClick={(event) => {
+                // Un arrastre no debe abrir la ficha
+                if (draggedRef.current) {
+                  event.preventDefault();
+                  draggedRef.current = false;
+                  return;
+                }
                 // El clic abre la ficha en el sitio; el enlace queda como respaldo
                 if (event.metaKey || event.ctrlKey || event.shiftKey || index >= showcaseProjects.length) return;
                 event.preventDefault();
