@@ -9,8 +9,6 @@ interface ProjectCopy {
   category: string;
 }
 
-const SPEED = 45; // px per second
-
 export default function Projects() {
   const { t } = useTranslation();
   const railRef = useRef<HTMLDivElement>(null);
@@ -80,102 +78,6 @@ export default function Projects() {
     };
   }, []);
 
-  // Continuous, seamless loop. The list is duplicated so wrapping is invisible.
-  useEffect(() => {
-    const rail = railRef.current;
-    if (!rail) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    const cards = Array.from(rail.querySelectorAll<HTMLElement>('.card'));
-    const setSize = showcaseProjects.length;
-    if (cards.length < setSize * 2) return;
-
-    const loopWidth = cards[setSize].offsetLeft - cards[0].offsetLeft;
-    if (loopWidth <= 0) return;
-
-    let visible = false;
-    let hovering = false;
-    let focused = false;
-    let dragging = false;
-    let resumeTimer: ReturnType<typeof setTimeout> | undefined;
-    let raf = 0;
-    let last = performance.now();
-    let position = rail.scrollLeft;
-
-    const isPaused = () => hovering || focused || dragging || !visible || document.hidden;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        visible = entry.isIntersecting;
-      },
-      { threshold: 0.15 },
-    );
-    observer.observe(rail);
-
-    const loop = (now: number) => {
-      const delta = Math.min(64, now - last);
-      last = now;
-
-      if (!isPaused()) {
-        position += (SPEED * delta) / 1000;
-        while (position >= loopWidth) position -= loopWidth;
-        rail.scrollLeft = position;
-      } else {
-        position = rail.scrollLeft;
-      }
-
-      raf = requestAnimationFrame(loop);
-    };
-    raf = requestAnimationFrame(loop);
-
-    // En táctil el puntero es transitorio: pointerleave nunca llega y el relevo
-    // se quedaría pausado para siempre. Solo el ratón implica hover real.
-    const onEnter = (event: PointerEvent) => {
-      if (event.pointerType === 'mouse') hovering = true;
-    };
-    const onLeave = (event: PointerEvent) => {
-      if (event.pointerType === 'mouse') hovering = false;
-    };
-    const onFocusIn = () => {
-      focused = true;
-    };
-    const onFocusOut = () => {
-      focused = false;
-    };
-    const onPointerDown = () => {
-      dragging = true;
-      if (resumeTimer) clearTimeout(resumeTimer);
-    };
-    const onPointerUp = () => {
-      if (resumeTimer) clearTimeout(resumeTimer);
-      resumeTimer = setTimeout(() => {
-        dragging = false;
-      }, 2200);
-    };
-
-    rail.addEventListener('pointerenter', onEnter);
-    rail.addEventListener('pointerleave', onLeave);
-    rail.addEventListener('focusin', onFocusIn);
-    rail.addEventListener('focusout', onFocusOut);
-    rail.addEventListener('pointerdown', onPointerDown);
-    rail.addEventListener('pointerup', onPointerUp);
-    rail.addEventListener('pointercancel', onPointerUp);
-
-    return () => {
-      cancelAnimationFrame(raf);
-      if (resumeTimer) clearTimeout(resumeTimer);
-      observer.disconnect();
-      rail.removeEventListener('pointerenter', onEnter);
-      rail.removeEventListener('pointerleave', onLeave);
-      rail.removeEventListener('focusin', onFocusIn);
-      rail.removeEventListener('focusout', onFocusOut);
-      rail.removeEventListener('pointerdown', onPointerDown);
-      rail.removeEventListener('pointerup', onPointerUp);
-      rail.removeEventListener('pointercancel', onPointerUp);
-    };
-  }, []);
-
-  const railProjects = [...showcaseProjects, ...showcaseProjects];
 
   return (
     <section id="proyectos">
@@ -197,18 +99,15 @@ export default function Projects() {
       </div>
 
       <div className="rail" ref={railRef}>
-        {railProjects.map((project, index) => {
+        {showcaseProjects.map((project) => {
           const copy = t(`projects.folder.${project.slug}`, { returnObjects: true }) as ProjectCopy;
-          const clone = index >= showcaseProjects.length;
           return (
             <a
               className="card"
-              key={`${project.slug}-${index}`}
+              key={project.slug}
               href={project.href}
               target="_blank"
               rel="noopener noreferrer"
-              tabIndex={clone ? -1 : undefined}
-              aria-hidden={clone || undefined}
               aria-haspopup="dialog"
               draggable={false}
               onDragStart={(event) => event.preventDefault()}
@@ -220,7 +119,7 @@ export default function Projects() {
                   return;
                 }
                 // El clic abre la ficha en el sitio; el enlace queda como respaldo
-                if (event.metaKey || event.ctrlKey || event.shiftKey || index >= showcaseProjects.length) return;
+                if (event.metaKey || event.ctrlKey || event.shiftKey) return;
                 event.preventDefault();
                 setPreview(project);
               }}
