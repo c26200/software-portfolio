@@ -35,10 +35,13 @@ function inject(html, body, meta, lang) {
   out = setMeta(out, 'property', 'og:description', meta.description);
   out = setMeta(out, 'property', 'og:url', meta.canonical ?? 'https://carlosgordillo.com/');
   out = setMeta(out, 'property', 'og:type', meta.type);
+  out = setMeta(out, 'property', 'og:image', meta.ogImage);
+  out = setMeta(out, 'property', 'og:image:alt', meta.title);
   out = setMeta(out, 'property', 'og:locale', lang === 'en' ? 'en_US' : 'es_CO');
   out = setMeta(out, 'property', 'og:locale:alternate', lang === 'en' ? 'es_CO' : 'en_US');
   out = setMeta(out, 'name', 'twitter:title', meta.title);
   out = setMeta(out, 'name', 'twitter:description', meta.description);
+  out = setMeta(out, 'name', 'twitter:image', meta.ogImage);
 
   if (meta.type === 'article' && meta.publishedTime) {
     out = setMeta(out, 'property', 'article:published_time', meta.publishedTime);

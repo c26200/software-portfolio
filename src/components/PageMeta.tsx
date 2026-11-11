@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { getPageMeta, OG_IMAGE, SITE_NAME, SITE_ORIGIN, type PageAlternate } from '../seo';
+import { getPageMeta, SITE_NAME, SITE_ORIGIN, type PageAlternate } from '../seo';
 
 function setMeta(attr: 'name' | 'property', key: string, content: string) {
   let el = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);
@@ -67,14 +67,15 @@ export default function PageMeta() {
     setMeta('property', 'og:description', page.description);
     setMeta('property', 'og:url', currentUrl);
     setMeta('property', 'og:type', page.type);
-    setMeta('property', 'og:image', OG_IMAGE);
+    setMeta('property', 'og:image', page.ogImage);
+    setMeta('property', 'og:image:alt', page.title);
     setMeta('property', 'og:site_name', SITE_NAME);
     setMeta('property', 'og:locale', lang === 'en' ? 'en_US' : 'es_CO');
     setMeta('property', 'og:locale:alternate', lang === 'en' ? 'es_CO' : 'en_US');
     setMeta('name', 'twitter:card', 'summary_large_image');
     setMeta('name', 'twitter:title', page.title);
     setMeta('name', 'twitter:description', page.description);
-    setMeta('name', 'twitter:image', OG_IMAGE);
+    setMeta('name', 'twitter:image', page.ogImage);
     setCanonical(page.canonical);
     setAlternates(page.alternates);
 

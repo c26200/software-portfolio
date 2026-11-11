@@ -6,6 +6,7 @@ import { localizePath, stripLocale } from './i18n-paths';
 export const SITE_ORIGIN = 'https://carlosgordillo.com';
 export const SITE_NAME = 'Carlos Gordillo';
 export const OG_IMAGE = `${SITE_ORIGIN}/og-image.png`;
+export const OG_IMAGE_EN = `${SITE_ORIGIN}/og-image-en.png`;
 
 export interface PageAlternate {
   hreflang: string;
@@ -19,6 +20,7 @@ export interface PageMetadata {
   type: 'website' | 'article';
   noindex?: boolean;
   publishedTime?: string;
+  ogImage: string;
   alternates?: PageAlternate[];
   jsonLd?: Record<string, unknown>;
 }
@@ -36,6 +38,7 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
   const enPath = localizePath(logical, 'en');
   const canonicalPath = lang === 'en' ? enPath : esPath;
   const canonical = `${SITE_ORIGIN}${canonicalPath}`;
+  const ogImage = lang === 'en' ? OG_IMAGE_EN : OG_IMAGE;
   const alternates: PageAlternate[] = [
     { hreflang: 'es', href: `${SITE_ORIGIN}${esPath}` },
     { hreflang: 'en', href: `${SITE_ORIGIN}${enPath}` },
@@ -51,6 +54,7 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
       description: seo.homeDescription,
       canonical,
       type: 'website',
+      ogImage,
       alternates,
       jsonLd: {
         '@context': 'https://schema.org',
@@ -58,7 +62,7 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
         name: 'Carlos Manuel Gordillo Mora',
         alternateName: SITE_NAME,
         url: `${SITE_ORIGIN}/`,
-        image: OG_IMAGE,
+        image: ogImage,
         jobTitle: seo.jobTitle,
         address: {
           '@type': 'PostalAddress',
@@ -80,6 +84,7 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
       description: seo.blogDescription,
       canonical,
       type: 'website',
+      ogImage,
       alternates,
       jsonLd: {
         '@context': 'https://schema.org',
@@ -101,6 +106,7 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
       canonical,
       type: 'article',
       publishedTime: post.date,
+      ogImage,
       alternates,
       jsonLd: {
         '@context': 'https://schema.org',
@@ -110,7 +116,7 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
         datePublished: post.date,
         dateModified: post.date,
         inLanguage: lang,
-        image: OG_IMAGE,
+        image: ogImage,
         author: { '@type': 'Person', name: SITE_NAME, url: `${SITE_ORIGIN}/` },
         mainEntityOfPage: {
           '@type': 'WebPage',
@@ -125,5 +131,6 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
     description: seo.notFoundDescription,
     type: 'website',
     noindex: true,
+    ogImage: OG_IMAGE,
   };
 }
