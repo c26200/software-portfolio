@@ -1,6 +1,6 @@
 import { Link, useLocation, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { formatPostDate, getPostContent, posts } from '../content/blog';
+import { buildToc, formatPostDate, getPostContent, posts } from '../content/blog';
 import { localizePath, pathLanguage } from '../i18n-paths';
 
 export default function BlogPost() {
@@ -25,6 +25,7 @@ export default function BlogPost() {
   }
 
   const related = posts.filter((item) => item.slug !== post.slug);
+  const { html, toc } = buildToc(copy.html);
 
   return (
     <section className="blog-section">
@@ -39,7 +40,19 @@ export default function BlogPost() {
           </time>
         </p>
         <h1 className="blog-post-title">{copy.title}</h1>
-        <div className="blog-prose" dangerouslySetInnerHTML={{ __html: copy.html }} />
+        {toc.length > 0 && (
+          <nav className="blog-toc" aria-label={t('blog.contents')}>
+            <p className="blog-toc-label">{t('blog.contents')}</p>
+            <ol>
+              {toc.map((item) => (
+                <li key={item.id}>
+                  <a href={`#${item.id}`}>{item.text}</a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+        )}
+        <div className="blog-prose" dangerouslySetInnerHTML={{ __html: html }} />
         {related.length > 0 && (
           <aside className="blog-related" aria-label={t('blog.related')}>
             <p className="blog-related-label">{t('blog.related')}</p>

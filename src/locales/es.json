@@ -260,7 +260,8 @@
     "publishedOn": "Publicado el",
     "empty": "Próximamente...",
     "notFound": "Post no encontrado",
-    "related": "También te puede interesar"
+    "related": "También te puede interesar",
+    "contents": "En este artículo"
   },
   "notFound": {
     "text": "La página que buscas no existe o fue movida.",

@@ -260,7 +260,8 @@
     "publishedOn": "Published on",
     "empty": "Coming soon...",
     "notFound": "Post not found",
-    "related": "Related reading"
+    "related": "Related reading",
+    "contents": "In this article"
   },
   "notFound": {
     "text": "The page you are looking for does not exist or has moved.",
