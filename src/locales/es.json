@@ -24,7 +24,8 @@
   },
   "kinetic": {
     "kicker": "Puerto Boyacá · Colombia",
-    "h1Role": "Desarrollador Full Stack e IA en Colombia",
+    "location": "Puerto Boyacá · Colombia",
+    "h1Role": "Desarrollador Full Stack e IA",
     "heroLead": "Del modelo al producto.",
     "heroCopy": "Diseño y despliego productos digitales completos: frontend, APIs, datos e inteligencia artificial, con infraestructura propia.",
     "ctaProjects": "Ver proyectos",

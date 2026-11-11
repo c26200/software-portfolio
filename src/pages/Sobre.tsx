@@ -46,7 +46,7 @@ export default function Sobre() {
       <div className="sobre-top">
         <figure className="sobre-photo">
           <img
-            src="/img/carlos-gordillo.webp"
+            src="/img/carlos-gordillo-cut.webp"
             alt={t('sobre.photoAlt')}
             width={800}
             height={800}

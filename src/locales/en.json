@@ -24,7 +24,8 @@
   },
   "kinetic": {
     "kicker": "Puerto Boyacá · Colombia",
-    "h1Role": "Full Stack & AI Developer in Colombia",
+    "location": "Puerto Boyacá · Colombia",
+    "h1Role": "Full Stack & AI Developer",
     "heroLead": "From model to product.",
     "heroCopy": "I design and ship complete digital products: frontend, APIs, data and artificial intelligence, on my own infrastructure.",
     "ctaProjects": "See projects",

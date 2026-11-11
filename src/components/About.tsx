@@ -35,7 +35,7 @@ export default function About() {
         <Reveal>
           <figure className="about-photo">
             <img
-              src="/img/carlos-gordillo.webp"
+              src="/img/carlos-gordillo-cut.webp"
               alt={t('about.photoAlt')}
               width={800}
               height={800}
