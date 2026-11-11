@@ -214,6 +214,7 @@ button { font: inherit; }
   display: block;
   max-width: 42ch;
   margin-top: 22px;
+  margin-left: 5px;
   color: var(--accent);
   font-family: var(--mono);
   font-size: clamp(12px, 1.15vw, 16px);
@@ -221,7 +222,17 @@ button { font: inherit; }
   line-height: 1.5;
   text-transform: uppercase;
 }
-.hero-location { margin-top: 12px; margin-bottom: 0; }
+.hero-location {
+  margin-top: 12px;
+  margin-bottom: 0;
+  margin-left: 5px;
+}
+/* El punto deja de colgar fuera de la columna: pasa a ser parte de la línea */
+.hero-location i {
+  position: static;
+  transform: none;
+  margin-right: 9px;
+}
 .hero-copy { max-width: 340px; padding-bottom: 12px; }
 .hero-copy p { font-size: 15px; line-height: 1.65; color: var(--text-muted); margin-bottom: 22px; }
 .hero-copy p b { color: var(--fg); font-weight: 500; }
