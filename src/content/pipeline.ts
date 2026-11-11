@@ -72,7 +72,7 @@ export const pipelineStages: PipelineStage[] = [
     id: 'monitor',
     label: 'monitor',
     tool: 'uptime',
-    cmd: 'curl -f https://codelegaldev.site',
+    cmd: 'curl -f https://software-portfolio-silk-eight.vercel.app',
     log: '✓ monitor · healthy',
     duration: 900,
   },
