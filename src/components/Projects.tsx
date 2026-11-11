@@ -206,7 +206,14 @@ export default function Projects() {
                 ↗
               </span>
               <div className="shot">
-                <img src={project.image} alt={clone ? '' : copy.title} loading="lazy" draggable={false} />
+                <img
+                  src={project.image}
+                  alt={clone ? '' : copy.title}
+                  width={1440}
+                  height={900}
+                  loading="lazy"
+                  draggable={false}
+                />
               </div>
               <div className="meta">
                 <h3>{copy.title}</h3>

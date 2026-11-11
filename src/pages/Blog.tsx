@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { posts } from '../content/blog';
+import { formatPostDate, posts } from '../content/blog';
 
 export default function Blog() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   return (
     <section className="blog-section">
@@ -20,7 +20,9 @@ export default function Blog() {
           ) : (
             posts.map((post) => (
               <article className="blog-card" key={post.slug}>
-                <p className="blog-date">{post.date}</p>
+                <p className="blog-date">
+                  <time dateTime={post.date}>{formatPostDate(post.date, i18n.language)}</time>
+                </p>
                 <Link to={`/blog/${post.slug}`} className="blog-link">
                   <h2 className="blog-title">{post.title}</h2>
                 </Link>

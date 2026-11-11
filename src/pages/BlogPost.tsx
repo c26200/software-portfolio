@@ -1,10 +1,10 @@
 import { Link, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { posts } from '../content/blog';
+import { formatPostDate, posts } from '../content/blog';
 
 export default function BlogPost() {
   const { slug } = useParams();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const post = posts.find((item) => item.slug === slug);
 
   if (!post) {
@@ -24,7 +24,9 @@ export default function BlogPost() {
     <section className="blog-section">
       <article className="blog-container">
         <p className="blog-date">
-          {t('blog.publishedOn')} {post.date}
+          <time dateTime={post.date}>
+            {t('blog.publishedOn')} {formatPostDate(post.date, i18n.language)}
+          </time>
         </p>
         <h1 className="blog-post-title">{post.title}</h1>
         <div className="blog-prose" dangerouslySetInnerHTML={{ __html: post.html }} />

@@ -255,6 +255,14 @@
     "readMore": "Leer más",
     "publishedOn": "Publicado el"
   },
+  "seo": {
+    "homeTitle": "Carlos Gordillo — Ingeniero Full Stack & IA",
+    "homeDescription": "Portafolio de Carlos Gordillo, ingeniero full stack e IA en Colombia. Proyectos de React, Node.js, Python, Docker e inteligencia artificial. Contáctame.",
+    "jobTitle": "Ingeniero Full Stack & IA",
+    "blogDescription": "Artículos sobre inteligencia artificial, series temporales, Docker y desarrollo full stack por Carlos Gordillo.",
+    "notFoundTitle": "Página no encontrada — Carlos Gordillo",
+    "notFoundDescription": "La página que buscas no existe o se ha movido."
+  },
   "pipeline": {
     "demo": "github actions · demo",
     "step": "Paso",
