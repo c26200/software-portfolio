@@ -512,6 +512,43 @@ export function buildToc(html: string): { html: string; toc: TocItem[] } {
   return { html: withIds, toc };
 }
 
+function decodeEntities(text: string) {
+  return text
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>');
+}
+
+function toPlainText(html: string) {
+  return decodeEntities(html.replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ').trim();
+}
+
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+/** Extracts the visible FAQ section so JSON-LD matches the page content. */
+export function extractFaq(html: string): FaqItem[] {
+  const heading = html.match(
+    /<h2>([^<]*(?:Preguntas frecuentes|Frequently asked questions)[^<]*)<\/h2>/,
+  );
+  if (!heading || heading.index === undefined) return [];
+
+  const after = html.slice(heading.index + heading[0].length);
+  const nextHeading = after.indexOf('<h2>');
+  const block = nextHeading === -1 ? after : after.slice(0, nextHeading);
+
+  return [...block.matchAll(/<h3>([\s\S]*?)<\/h3>\s*<p>([\s\S]*?)<\/p>/g)]
+    .map((match) => ({
+      question: toPlainText(match[1]),
+      answer: toPlainText(match[2]),
+    }))
+    .filter((item) => item.question.length > 0 && item.answer.length > 0);
+}
+
 export function formatPostDate(date: string, language: string) {
   return new Intl.DateTimeFormat(language.startsWith('en') ? 'en-US' : 'es-CO', {
     day: 'numeric',

@@ -15,7 +15,7 @@ projects with real screenshots, an animated CI/CD pipeline and a bilingual blog.
 - Draggable project rail with screenshots of four deployed apps, linked to their repositories
 - Latest articles section on the home page, with links to the full blog
 - Animated CI/CD pipeline demo with eight stages, pause on scroll and reduced-motion support
-- Blog with bilingual pillar guides, table of contents, FAQ and related posts, plus a
+- Blog with bilingual pillar guides, table of contents, FAQ schema and related posts, plus a
   translated 404 page
 - Responsive layout with a full-screen mobile menu
 

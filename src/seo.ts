@@ -1,6 +1,6 @@
 import es from './locales/es.json';
 import en from './locales/en.json';
-import { getPostContent, posts } from './content/blog';
+import { extractFaq, getPostContent, posts } from './content/blog';
 import { localizePath, stripLocale } from './i18n-paths';
 
 export const SITE_ORIGIN = 'https://carlosgordillo.com';
@@ -101,6 +101,47 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
 
   if (post) {
     const content = getPostContent(post, lang);
+    const faq = extractFaq(content.html);
+    const article = {
+      '@type': 'BlogPosting',
+      '@id': `${canonical}#article`,
+      headline: content.title,
+      description: content.excerpt,
+      datePublished: post.date,
+      dateModified: post.updated ?? post.date,
+      inLanguage: lang,
+      image: ogImage,
+      author: {
+        '@type': 'Person',
+        name: SITE_NAME,
+        url: `${SITE_ORIGIN}/`,
+        sameAs: [
+          'https://github.com/c26200',
+          'https://www.linkedin.com/in/cmgordillo26/',
+        ],
+      },
+      mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': canonical,
+      },
+    };
+
+    const graph: Record<string, unknown>[] = [article];
+    if (faq.length > 0) {
+      graph.push({
+        '@type': 'FAQPage',
+        '@id': `${canonical}#faq`,
+        mainEntity: faq.map((item) => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: item.answer,
+          },
+        })),
+      });
+    }
+
     return {
       title: `${content.title} — ${SITE_NAME}`,
       description: content.excerpt,
@@ -112,26 +153,7 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
       alternates,
       jsonLd: {
         '@context': 'https://schema.org',
-        '@type': 'BlogPosting',
-        headline: content.title,
-        description: content.excerpt,
-        datePublished: post.date,
-        dateModified: post.updated ?? post.date,
-        inLanguage: lang,
-        image: ogImage,
-        author: {
-          '@type': 'Person',
-          name: SITE_NAME,
-          url: `${SITE_ORIGIN}/`,
-          sameAs: [
-            'https://github.com/c26200',
-            'https://www.linkedin.com/in/cmgordillo26/',
-          ],
-        },
-        mainEntityOfPage: {
-          '@type': 'WebPage',
-          '@id': canonical,
-        },
+        '@graph': graph,
       },
     };
   }
