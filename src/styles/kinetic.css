@@ -271,6 +271,7 @@ button { font: inherit; }
 
 /* --- sections ------------------------------------------------------------ */
 section { padding: clamp(48px, 6.5vw, 96px) var(--pad); max-width: 1500px; margin: 0 auto; position: relative; }
+section[id], article[id] { scroll-margin-top: 96px; }
 .sec-top {
   display: flex;
   flex-direction: column;
@@ -324,8 +325,8 @@ section { padding: clamp(48px, 6.5vw, 96px) var(--pad); max-width: 1500px; margi
   margin: 0 calc(var(--pad) * -1);
   padding-left: var(--pad);
   padding-right: var(--pad);
-  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 32px, #000 calc(100% - 32px), transparent 100%);
-  mask-image: linear-gradient(90deg, transparent 0, #000 32px, #000 calc(100% - 32px), transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 var(--pad), #000 calc(100% - var(--pad)), transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 var(--pad), #000 calc(100% - var(--pad)), transparent 100%);
 }
 .rail::-webkit-scrollbar { display: none; }
 .rail.drag { cursor: grabbing; scroll-snap-type: none; }
@@ -424,7 +425,16 @@ section { padding: clamp(48px, 6.5vw, 96px) var(--pad); max-width: 1500px; margi
   border: 1px solid var(--line);
   padding: 18px 20px;
 }
-.blog-toc-label {
+.blog-toc-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: default;
   font-family: var(--mono);
   font-size: 12px;
   letter-spacing: 0.12em;
@@ -432,6 +442,7 @@ section { padding: clamp(48px, 6.5vw, 96px) var(--pad); max-width: 1500px; margi
   color: var(--dim);
   margin-bottom: 14px;
 }
+.blog-toc-mark { display: none; }
 .blog-toc ol {
   list-style: none;
   margin: 0;
@@ -479,6 +490,14 @@ section { padding: clamp(48px, 6.5vw, 96px) var(--pad); max-width: 1500px; margi
   .blog-toc ol { grid-template-columns: 1fr; }
   .blog-prose table { display: block; overflow-x: auto; }
 }
+
+/* En móvil el índice se pliega: 20 enlaces abiertos ocupan más de una pantalla */
+@media (max-width: 900px) {
+  .blog-toc-toggle { cursor: pointer; margin-bottom: 0; }
+  .blog-toc-mark { display: inline; font-size: 15px; letter-spacing: 0; }
+  .blog-toc ol { display: none; margin-top: 16px; }
+  .blog-toc.is-open ol { display: grid; }
+}
 .blog-prose ul, .blog-prose ol { margin: 0 0 1em 22px; }
 .blog-prose li { margin-bottom: 6px; }
 .blog-prose code { font-family: var(--mono); font-size: 0.85em; background: var(--hover); border: 1px solid var(--line); border-radius: 3px; padding: 1px 6px; }
@@ -521,6 +540,9 @@ section { padding: clamp(48px, 6.5vw, 96px) var(--pad); max-width: 1500px; margi
   .stats { border-left: 0; border-top: 1px solid var(--line); margin-top: 10px; }
   .sec-top { flex-direction: column; align-items: flex-start; gap: 6px; }
   .sec-top h2 { text-align: left; }
+  /* En táctil el carrusel se detiene y encaja por tarjeta */
+  .rail { scroll-snap-type: x mandatory; }
+  .card { scroll-snap-align: start; }
 }
 @media (max-width: 600px) {
   .rail-head { flex-direction: column; align-items: flex-start; gap: 10px; }
@@ -941,5 +963,22 @@ html.has-cursor * {
 }
 @media (max-width: 760px) {
   .contact-top { grid-template-columns: 1fr; }
-  .contact-portrait { width: 150px; }
+  .contact-portrait { width: 200px; }
+}
+
+/* --- texto largo: justificado con partición ------------------------------ */
+.about-copy p,
+.exp-row p,
+.sobre-body p,
+.sobre-card p,
+.sobre-row p,
+.latest-card p,
+.blog-excerpt,
+.blog-prose p,
+.blog-prose li {
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphenate-limit-chars: 6 3 3;
+  text-wrap: pretty;
 }

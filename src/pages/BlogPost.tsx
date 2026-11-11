@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { buildToc, formatPostDate, getPostContent, posts } from '../content/blog';
@@ -10,6 +11,7 @@ export default function BlogPost() {
   const language = pathLanguage(pathname);
   const post = posts.find((item) => item.slug === slug);
   const copy = post ? getPostContent(post, language) : undefined;
+  const [tocOpen, setTocOpen] = useState(false);
 
   if (!post || !copy) {
     return (
@@ -41,8 +43,18 @@ export default function BlogPost() {
         </p>
         <h1 className="blog-post-title">{copy.title}</h1>
         {toc.length > 0 && (
-          <nav className="blog-toc" aria-label={t('blog.contents')}>
-            <p className="blog-toc-label">{t('blog.contents')}</p>
+          <nav className={`blog-toc${tocOpen ? ' is-open' : ''}`} aria-label={t('blog.contents')}>
+            <button
+              type="button"
+              className="blog-toc-toggle"
+              aria-expanded={tocOpen}
+              onClick={() => setTocOpen((open) => !open)}
+            >
+              {t('blog.contents')}
+              <span className="blog-toc-mark" aria-hidden="true">
+                {tocOpen ? '−' : '+'}
+              </span>
+            </button>
             <ol>
               {toc.map((item) => (
                 <li key={item.id}>

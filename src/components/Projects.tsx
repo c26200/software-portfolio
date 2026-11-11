@@ -33,6 +33,8 @@ export default function Projects() {
     let pointerId = -1;
 
     const onDown = (event: PointerEvent) => {
+      // En táctil manda el scroll nativo del navegador
+      if (event.pointerType !== 'mouse') return;
       down = true;
       moved = false;
       startX = event.clientX;
@@ -78,6 +80,8 @@ export default function Projects() {
     const rail = railRef.current;
     if (!rail) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    // Sin hover no hay forma de pausar el avance automático
+    if (window.matchMedia('(hover: none)').matches) return;
 
     const cards = Array.from(rail.querySelectorAll<HTMLElement>('.card'));
     const setSize = showcaseProjects.length;
