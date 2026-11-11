@@ -6,7 +6,7 @@ export default function Contact() {
   return (
     <section id="contacto" className="contact">
       <div className="sec-top">
-        <span>05 — {t('nav.contact')}</span>
+        <span>06 — {t('nav.contact')}</span>
       </div>
       <h2>
         {t('kinetic.contactTitleA')}

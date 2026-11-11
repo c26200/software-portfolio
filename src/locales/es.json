@@ -62,7 +62,11 @@
     "themeToLight": "Cambiar a modo claro",
     "pipelineTitleA": "Del commit al",
     "pipelineTitleEm": "deploy",
-    "pipelineLead": "Un cambio entra una vez y recorre el mismo camino: instalar, revisar, probar, construir, escanear y desplegar. Si algo falla, no llega a producción."
+    "pipelineLead": "Un cambio entra una vez y recorre el mismo camino: instalar, revisar, probar, construir, escanear y desplegar. Si algo falla, no llega a producción.",
+    "blogTitleA": "Últimos",
+    "blogTitleEm": "artículos",
+    "blogLead": "Notas técnicas sobre inteligencia artificial, datos e infraestructura, sin relleno.",
+    "allPosts": "Ver todos"
   },
   "sections": {
     "about": {

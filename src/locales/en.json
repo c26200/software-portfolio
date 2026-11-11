@@ -62,7 +62,11 @@
     "themeToLight": "Switch to light mode",
     "pipelineTitleA": "From commit to",
     "pipelineTitleEm": "deploy",
-    "pipelineLead": "A change enters once and follows the same path: install, lint, test, build, scan and deploy. If anything fails, it never reaches production."
+    "pipelineLead": "A change enters once and follows the same path: install, lint, test, build, scan and deploy. If anything fails, it never reaches production.",
+    "blogTitleA": "Latest",
+    "blogTitleEm": "articles",
+    "blogLead": "Technical notes on artificial intelligence, data and infrastructure, without filler.",
+    "allPosts": "All posts"
   },
   "sections": {
     "about": {

@@ -13,6 +13,7 @@ projects with real screenshots, an animated CI/CD pipeline and a bilingual blog.
   and prerendered HTML for both
 - Light and dark themes, switchable from the header and persisted per visitor
 - Draggable project rail with screenshots of four deployed apps, linked to their repositories
+- Latest articles section on the home page, with links to the full blog
 - Animated CI/CD pipeline demo with eight stages, pause on scroll and reduced-motion support
 - Blog with index and article pages, plus a translated 404 page
 - Responsive layout with a full-screen mobile menu
@@ -37,8 +38,8 @@ public/               favicon, OG image, project screenshots, robots.txt, 404.ht
 scripts/              prerender.mjs — renders each route and the sitemap at build
 src/
 ├── components/       Hero, KineticCanvas, Marquee, About, Stat, Experience,
-│                     Pipeline, Projects, Contact, Header, LanguageSwitch,
-│                     ThemeToggle, MobileMenu, Footer, Reveal
+│                     Pipeline, Projects, LatestPosts, Contact, Header,
+│                     LanguageSwitch, ThemeToggle, MobileMenu, Footer, Reveal
 ├── pages/            Home, Blog, BlogPost, NotFound
 ├── locales/          es.json, en.json — all editable copy
 ├── content/          blog.ts, projects.ts, pipeline.ts
