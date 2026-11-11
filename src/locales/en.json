@@ -2,7 +2,8 @@
   "site": {
     "title": "Carlos Gordillo — Full Stack & AI Engineer",
     "edition": "Carlos Gordillo · 2026 Edition",
-    "footer": "Designed and developed by Carlos Manuel Gordillo Mora — 2026"
+    "footer": "Designed and developed by Carlos Manuel Gordillo Mora — 2026",
+    "about": "About"
   },
   "nav": {
     "profile": "Profile",
@@ -92,6 +93,7 @@
     }
   },
   "about": {
+    "photoAlt": "Carlos Gordillo, full stack and AI engineer, in Puerto Boyacá, Colombia",
     "paragraphs": [
       "Full Stack and AI developer focused on building complete products: interfaces, APIs, data and deployment. I work with React, TypeScript, Node.js and Python, and integrate deep learning models — LSTM, Transformers and convolutional networks — to turn data into decisions.",
       "I design and operate the infrastructure behind those products: Docker containers on self-managed Linux servers, PostgreSQL, ETL pipelines with n8n, and secure exposure through Cloudflare Tunnel and Zero Trust policies. I have processed over 50,000 records and shipped real-time monitoring dashboards.",
@@ -123,6 +125,64 @@
         "value": "cmgm26200@gmail.com"
       }
     }
+  },
+  "sobre": {
+    "kicker": "About",
+    "titleA": "About",
+    "titleEm": "Carlos Gordillo",
+    "lead": "Mechatronics engineer from Universidad de Pamplona and full stack and AI developer. I build complete products and operate the infrastructure behind them.",
+    "photoAlt": "Carlos Gordillo, mechatronics engineer and full stack and AI developer",
+    "facts": [
+      { "label": "Full name", "value": "Carlos Manuel Gordillo Mora" },
+      { "label": "Location", "value": "Puerto Boyacá, Boyacá, Colombia" },
+      { "label": "Focus", "value": "Full Stack & AI development" },
+      { "label": "Education", "value": "Mechatronics Engineering, Universidad de Pamplona" },
+      { "label": "Languages", "value": "Spanish native · English technical" },
+      { "label": "Availability", "value": "Open to projects and positions" }
+    ],
+    "bioTitle": "How I got here",
+    "bio": [
+      "I am a mechatronics engineer, graduated in April 2026 from Universidad de Pamplona. Mechatronics taught me to think in systems that sense, control and talk to each other; software let me carry that same logic into products anyone can open in a browser.",
+      "I started by automating processes that were done by hand. At Universidad de Pamplona I designed and shipped the institutional agreements system: a Node.js backend, a React and TypeScript frontend, PostgreSQL, and n8n ETL pipelines that processed more than 50,000 records.",
+      "Today I teach programming at SENA and work as an independent consultant. I build with React, Node.js, Python and Docker, integrate deep learning models, and operate the whole stack: Linux servers, databases, automation and deployments."
+    ],
+    "workTitle": "How I work",
+    "work": [
+      {
+        "title": "Complete systems, not loose layers",
+        "text": "I would rather deliver the whole product: interface, API, database and deployment. If something breaks in production, it is inside what I built and what I answer for."
+      },
+      {
+        "title": "Infrastructure is part of the product",
+        "text": "Docker containers on self-managed Linux servers, PostgreSQL, Cloudflare Tunnel and Zero Trust policies. I deploy and operate what I build instead of handing it off and disappearing."
+      },
+      {
+        "title": "Models have to be useful",
+        "text": "I train LSTMs, Transformers and convolutional networks, but the work ends when the model runs inside an observable service, not when the chart looks good in a notebook."
+      }
+    ],
+    "educationTitle": "Education",
+    "education": [
+      {
+        "year": "2019 — 2026",
+        "title": "Mechatronics Engineering",
+        "org": "Universidad de Pamplona",
+        "note": "Pamplona, Norte de Santander · Graduated April 2026. Coursework in systems, control and automation."
+      }
+    ],
+    "awardsTitle": "Recognition",
+    "awardLabel": "Recognition",
+    "awards": [
+      {
+        "title": "First place — Deep Learning contest",
+        "org": "Universidad de Pamplona",
+        "note": "University recognition for a deep learning project."
+      }
+    ],
+    "ctaTitle": "Should we work together?",
+    "ctaButton": "Email me",
+    "ctaContact": "See the portfolio",
+    "backHome": "← Back to home"
   },
   "experience": {
     "items": [
@@ -290,6 +350,8 @@
       "Cloudflare"
     ],
     "breadcrumbHome": "Home",
+    "aboutTitle": "About Carlos Gordillo — Full Stack & AI",
+    "aboutDescription": "Mechatronics engineer from Universidad de Pamplona and full stack and AI developer in Colombia. Education, background and how I work.",
     "blogDescription": "Articles on artificial intelligence, time series, Docker and full stack development by Carlos Gordillo.",
     "notFoundTitle": "Page not found — Carlos Gordillo",
     "notFoundDescription": "The page you are looking for does not exist or has moved."

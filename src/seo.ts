@@ -127,6 +127,50 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
     };
   }
 
+  if (logical === '/sobre') {
+    return {
+      title: seo.aboutTitle,
+      description: seo.aboutDescription,
+      canonical,
+      type: 'website',
+      ogImage,
+      alternates,
+      jsonLd: {
+        '@context': 'https://schema.org',
+        '@graph': [
+          {
+            '@type': 'ProfilePage',
+            '@id': `${canonical}#webpage`,
+            url: canonical,
+            name: seo.aboutTitle,
+            description: seo.aboutDescription,
+            inLanguage: lang,
+            isPartOf: { '@id': SITE_ID },
+            mainEntity: { '@id': PERSON_ID },
+            breadcrumb: { '@id': `${canonical}#breadcrumb` },
+          },
+          {
+            '@type': 'BreadcrumbList',
+            '@id': `${canonical}#breadcrumb`,
+            itemListElement: [
+              {
+                '@type': 'ListItem',
+                position: 1,
+                name: seo.breadcrumbHome,
+                item: `${SITE_ORIGIN}${localizePath('/', lang)}`,
+              },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: seo.aboutTitle,
+              },
+            ],
+          },
+        ],
+      },
+    };
+  }
+
   if (logical === '/blog') {
     return {
       title: `Blog — ${SITE_NAME}`,

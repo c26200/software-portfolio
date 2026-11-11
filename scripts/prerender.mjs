@@ -78,6 +78,8 @@ function inject(html, body, meta, lang) {
 const routes = [
   { path: '/', lang: 'es' },
   { path: '/en', lang: 'en' },
+  { path: '/sobre', lang: 'es' },
+  { path: '/en/sobre', lang: 'en' },
   { path: '/blog', lang: 'es' },
   { path: '/en/blog', lang: 'en' },
   ...posts.flatMap((post) => [

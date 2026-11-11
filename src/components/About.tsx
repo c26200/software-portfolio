@@ -33,6 +33,16 @@ export default function About() {
         </Reveal>
 
         <Reveal>
+          <figure className="about-photo">
+            <img
+              src="/img/carlos-gordillo.webp"
+              alt={t('about.photoAlt')}
+              width={800}
+              height={800}
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
           <div className="stats">
             <Stat end={6} pad={2} label={t('kinetic.statProjects')} />
             <Stat end={50} suffix="k+" label={t('kinetic.statEtl')} />

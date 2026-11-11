@@ -7,6 +7,7 @@ import LanguageSync from './components/LanguageSync';
 import Home from './pages/Home';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
+import Sobre from './pages/Sobre';
 import NotFound from './pages/NotFound';
 
 export default function App() {
@@ -20,6 +21,8 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/en" element={<Home />} />
+          <Route path="/sobre" element={<Sobre />} />
+          <Route path="/en/sobre" element={<Sobre />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/en/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />

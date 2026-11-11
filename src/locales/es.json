@@ -2,7 +2,8 @@
   "site": {
     "title": "Carlos Gordillo — Ingeniero Full Stack & IA",
     "edition": "Carlos Gordillo · Edición 2026",
-    "footer": "Diseñado y desarrollado por Carlos Manuel Gordillo Mora — 2026"
+    "footer": "Diseñado y desarrollado por Carlos Manuel Gordillo Mora — 2026",
+    "about": "Sobre mí"
   },
   "nav": {
     "profile": "Perfil",
@@ -92,6 +93,7 @@
     }
   },
   "about": {
+    "photoAlt": "Carlos Gordillo, ingeniero full stack e IA, en Puerto Boyacá, Colombia",
     "paragraphs": [
       "Desarrollador Full Stack e IA enfocado en construir productos completos: interfaces, APIs, datos y despliegue. Trabajo con React, TypeScript, Node.js y Python, e integro modelos de aprendizaje profundo — LSTM, Transformers y redes convolucionales — para convertir datos en decisiones.",
       "Diseño y opero la infraestructura que sostiene esos productos: contenedores Docker sobre servidores Linux propios, PostgreSQL, pipelines ETL con n8n y exposición segura mediante Cloudflare Tunnel y políticas Zero Trust. He procesado más de 50.000 registros y desplegado dashboards de monitoreo en tiempo real.",
@@ -123,6 +125,64 @@
         "value": "cmgm26200@gmail.com"
       }
     }
+  },
+  "sobre": {
+    "kicker": "Sobre mí",
+    "titleA": "Sobre",
+    "titleEm": "Carlos Gordillo",
+    "lead": "Ingeniero mecatrónico de la Universidad de Pamplona y desarrollador full stack e IA. Construyo productos completos y opero la infraestructura que los sostiene.",
+    "photoAlt": "Carlos Gordillo, ingeniero mecatrónico y desarrollador full stack e IA",
+    "facts": [
+      { "label": "Nombre completo", "value": "Carlos Manuel Gordillo Mora" },
+      { "label": "Ciudad", "value": "Puerto Boyacá, Boyacá, Colombia" },
+      { "label": "Especialidad", "value": "Desarrollo Full Stack e IA" },
+      { "label": "Formación", "value": "Ingeniería Mecatrónica, Universidad de Pamplona" },
+      { "label": "Idiomas", "value": "Español nativo · Inglés técnico" },
+      { "label": "Disponibilidad", "value": "Abierto a proyectos y posiciones" }
+    ],
+    "bioTitle": "Cómo llegué aquí",
+    "bio": [
+      "Soy ingeniero mecatrónico, graduado en abril de 2026 por la Universidad de Pamplona. La mecatrónica me enseñó a pensar en sistemas que se miden, se controlan y se comunican entre sí; el software me dejó llevar esa misma lógica a productos que cualquiera puede abrir en un navegador.",
+      "Empecé automatizando procesos que se hacían a mano. En la Universidad de Pamplona diseñé y desplegué el sistema de gestión de convenios interinstitucionales: backend en Node.js, frontend en React con TypeScript, PostgreSQL y pipelines ETL en n8n que procesaron más de 50.000 registros.",
+      "Hoy soy instructor de programación en el SENA y trabajo como consultor independiente. Construyo con React, Node.js, Python y Docker, integro modelos de aprendizaje profundo y opero la infraestructura completa: servidores Linux, bases de datos, automatizaciones y despliegues."
+    ],
+    "workTitle": "Cómo trabajo",
+    "work": [
+      {
+        "title": "Sistemas completos, no capas sueltas",
+        "text": "Prefiero entregar el producto entero: interfaz, API, base de datos y despliegue. Si algo falla en producción, está dentro de lo que construí y de lo que respondo."
+      },
+      {
+        "title": "La infraestructura es parte del producto",
+        "text": "Contenedores Docker sobre servidores Linux propios, PostgreSQL, Cloudflare Tunnel y políticas Zero Trust. Despliego y opero lo que desarrollo en lugar de entregarlo y desaparecer."
+      },
+      {
+        "title": "Los modelos tienen que servir",
+        "text": "Entreno LSTM, Transformers y redes convolucionales, pero el trabajo termina cuando el modelo corre dentro de un servicio observable, no cuando la gráfica se ve bien en el notebook."
+      }
+    ],
+    "educationTitle": "Formación",
+    "education": [
+      {
+        "year": "2019 — 2026",
+        "title": "Ingeniería Mecatrónica",
+        "org": "Universidad de Pamplona",
+        "note": "Pamplona, Norte de Santander · Titulación en abril de 2026. Formación en sistemas, control y automatización."
+      }
+    ],
+    "awardsTitle": "Reconocimientos",
+    "awardLabel": "Reconocimiento",
+    "awards": [
+      {
+        "title": "Primer puesto — Concurso de Deep Learning",
+        "org": "Universidad de Pamplona",
+        "note": "Reconocimiento universitario por un proyecto de aprendizaje profundo."
+      }
+    ],
+    "ctaTitle": "¿Trabajamos juntos?",
+    "ctaButton": "Escríbeme",
+    "ctaContact": "Ver el portafolio",
+    "backHome": "← Volver al inicio"
   },
   "experience": {
     "items": [
@@ -290,6 +350,8 @@
       "Cloudflare"
     ],
     "breadcrumbHome": "Inicio",
+    "aboutTitle": "Sobre Carlos Gordillo — Full Stack & IA",
+    "aboutDescription": "Ingeniero mecatrónico de la Universidad de Pamplona y desarrollador full stack e IA en Colombia. Formación, trayectoria y cómo trabajo.",
     "blogDescription": "Artículos sobre inteligencia artificial, series temporales, Docker y desarrollo full stack por Carlos Gordillo.",
     "notFoundTitle": "Página no encontrada — Carlos Gordillo",
     "notFoundDescription": "La página que buscas no existe o se ha movido."
