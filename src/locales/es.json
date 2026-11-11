@@ -42,7 +42,7 @@
     "experienceTitleEm": "construido",
     "projectsTitleA": "Trabajo",
     "projectsTitleEm": "reciente",
-    "projectsLead": "Cuatro productos, un mismo criterio: que se sientan bien.",
+    "projectsLead": "Seis productos, un mismo criterio: que se sientan bien.",
     "dragHint": "Arrastra",
     "others": "Otros proyectos",
     "contactTitleA": "¿Construimos",
@@ -311,6 +311,16 @@
         "title": "DashLoud",
         "category": "Dashboard analítico",
         "description": "Dashboard editorial de alto contraste con métricas, gráficas de ingresos y panel de transacciones. Tema claro y oscuro."
+      },
+      "trading-predictor": {
+        "title": "TradeScope AI",
+        "category": "Predicción bursátil",
+        "description": "Sistema de predicción financiera con ensemble LSTM + Transformer, streaming de precios por WebSocket y panel de señales en tiempo real. Primer puesto en el concurso de deep learning de la Universidad de Pamplona."
+      },
+      "portfolio-mecatronica": {
+        "title": "Portafolio Mecatrónico",
+        "category": "Portafolio interactivo",
+        "description": "Portafolio de ingeniería mecatrónica construido con Astro: lienzo arrastrable con notas y piezas técnicas, navegación por teclado y disposición persistente entre visitas."
       }
     },
     "items": [

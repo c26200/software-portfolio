@@ -991,7 +991,7 @@ html.has-cursor * {
    la izquierda y se desactiva la partición de palabras. */
 @media (max-width: 900px) {
   :root {
-    --prose-align: left;
+    --prose-align: center;
     --prose-hyphens: manual;
   }
 }

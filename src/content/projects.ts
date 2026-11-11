@@ -34,4 +34,16 @@ export const showcaseProjects: ShowcaseProject[] = [
     image: '/projects/kanban-task-manager.webp',
     stack: ['React', '@dnd-kit', 'Tailwind CSS', 'localStorage'],
   },
+  {
+    slug: 'trading-predictor',
+    href: 'https://github.com/c26200/trading-predictor',
+    image: '/projects/trading-predictor.webp',
+    stack: ['Python', 'PyTorch', 'LSTM', 'Transformers', 'FastAPI', 'WebSocket'],
+  },
+  {
+    slug: 'portfolio-mecatronica',
+    href: 'https://github.com/c26200/mechatronics-portfolio',
+    image: '/projects/portfolio-mecatronica.webp',
+    stack: ['Astro', 'TypeScript', 'CSS Grid', 'Drag & drop'],
+  },
 ];

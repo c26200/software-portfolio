@@ -9,22 +9,12 @@ interface ProjectCopy {
   category: string;
 }
 
-interface OtherProject {
-  category: string;
-  title: string;
-  link?: string;
-}
-
 const SPEED = 45; // px per second
 
 export default function Projects() {
   const { t } = useTranslation();
   const railRef = useRef<HTMLDivElement>(null);
-  const [paused, setPaused] = useState(false);
   const [preview, setPreview] = useState<ShowcaseProject | null>(null);
-  const pausedRef = useRef(false);
-  pausedRef.current = paused;
-  const others = t('projects.items', { returnObjects: true }) as OtherProject[];
 
   // Drag to scroll
   useEffect(() => {
@@ -102,8 +92,7 @@ export default function Projects() {
     let last = performance.now();
     let position = rail.scrollLeft;
 
-    const isPaused = () =>
-      pausedRef.current || hovering || focused || dragging || !visible || document.hidden;
+    const isPaused = () => hovering || focused || dragging || !visible || document.hidden;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -244,41 +233,9 @@ export default function Projects() {
 
       <div className="rail-foot">
         <div className="rail-line" />
-        <span className="rail-hint">01 — 04</span>
-        <button
-          type="button"
-          className="rail-toggle"
-          aria-pressed={paused}
-          onClick={() => setPaused((value) => !value)}
-        >
-          {paused ? t('kinetic.playLabel') : t('kinetic.pauseLabel')}
-        </button>
+        <span className="rail-hint">01 — {String(showcaseProjects.length).padStart(2, '0')}</span>
       </div>
 
-      <Reveal className="others">
-        <span className="others-label">{t('kinetic.others')}</span>
-        <ul>
-          {others.map((project) => (
-            <li key={project.title}>
-              <span>
-                <b>{project.title}</b> — {project.category}
-              </span>
-              {project.link ? (
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`${t('kinetic.repoOf')} ${project.title}`}
-                >
-                  GitHub ↗
-                </a>
-              ) : (
-                <span className="rail-hint">—</span>
-              )}
-            </li>
-          ))}
-        </ul>
-      </Reveal>
 
       {preview && <ProjectPreviewModal project={preview} onClose={() => setPreview(null)} />}
     </section>

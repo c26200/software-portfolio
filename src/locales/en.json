@@ -42,7 +42,7 @@
     "experienceTitleEm": "built",
     "projectsTitleA": "Recent",
     "projectsTitleEm": "work",
-    "projectsLead": "Four products, one standard: they should feel right.",
+    "projectsLead": "Six products, one standard: they should feel right.",
     "dragHint": "Drag",
     "others": "Other projects",
     "contactTitleA": "Shall we build",
@@ -311,6 +311,16 @@
         "title": "DashLoud",
         "category": "Analytics dashboard",
         "description": "High-contrast editorial dashboard with metrics, revenue charts and a transactions panel. Light and dark themes."
+      },
+      "trading-predictor": {
+        "title": "TradeScope AI",
+        "category": "Market prediction",
+        "description": "Financial forecasting system with an LSTM + Transformer ensemble, WebSocket price streaming and a real-time signal dashboard. First place in the Universidad de Pamplona deep learning contest."
+      },
+      "portfolio-mecatronica": {
+        "title": "Mechatronics Portfolio",
+        "category": "Interactive portfolio",
+        "description": "Mechatronics engineering portfolio built with Astro: a draggable canvas with notes and technical parts, keyboard navigation and a layout that persists between visits."
       }
     },
     "items": [
