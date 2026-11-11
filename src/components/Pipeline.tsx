@@ -17,7 +17,9 @@ export default function Pipeline() {
   const [statuses, setStatuses] = useState<Status[]>(initialStatuses);
   const [log, setLog] = useState<string[]>(() => [`$ ${pipelineStages[0].cmd}`]);
   const [done, setDone] = useState(false);
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reduceMotion =
+    typeof window !== 'undefined' &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   useEffect(() => {
     const el = sectionRef.current;

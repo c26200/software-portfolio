@@ -4,7 +4,8 @@ export type Theme = 'light' | 'dark';
 
 export function useTheme() {
   const [theme, setTheme] = useState<Theme>(() => {
-    const stored = localStorage.getItem('kinetic-theme');
+    const stored =
+      typeof window !== 'undefined' ? window.localStorage.getItem('kinetic-theme') : null;
     return stored === 'light' || stored === 'dark' ? stored : 'dark';
   });
 

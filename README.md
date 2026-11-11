@@ -32,7 +32,9 @@ npm run preview
 ## Structure
 
 ```
-public/               favicon, profile photo, project screenshots, _redirects
+public/               favicon, OG image, project screenshots, robots.txt,
+                      sitemap.xml, 404.html
+scripts/              prerender.mjs — renders each route to static HTML at build
 src/
 ├── components/       Hero, KineticCanvas, Marquee, About, Stat, Experience,
 │                     Pipeline, Projects, Contact, Header, LanguageSwitch,
@@ -40,15 +42,20 @@ src/
 ├── pages/            Home, Blog, BlogPost, NotFound
 ├── locales/          es.json, en.json — all editable copy
 ├── content/          blog.ts, projects.ts, pipeline.ts
+├── seo.ts            per-route metadata and JSON-LD
+├── entry-server.tsx  SSR entry used only by the prerenderer
 └── styles/           kinetic.css (visual system) and pipeline.css
 ```
 
 ## Deployment
 
-The site is a static SPA. On Vercel the default Vite preset works: build `npm run build`,
-output `dist`. `vercel.json` rewrites every path to `index.html` so `/blog` and
-`/blog/:slug` survive a hard refresh. `public/_redirects` does the same on Netlify and
-Cloudflare Pages.
+`npm run build` creates the client bundle, renders `/`, `/blog` and every post to their own
+`index.html`, and injects the route metadata into each file. Crawlers and social previews
+receive the full page without running JavaScript; unknown paths return a real 404 through
+`public/404.html`.
+
+On Vercel the default Vite preset works: build `npm run build`, output `dist`. No rewrites
+are needed because every route is a static file.
 
 ## Notes
 

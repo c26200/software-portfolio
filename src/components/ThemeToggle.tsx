@@ -6,7 +6,10 @@ type Theme = 'light' | 'dark';
 export default function ThemeToggle() {
   const { t } = useTranslation();
   const [theme, setTheme] = useState<Theme>(() =>
-    document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark',
+    typeof document !== 'undefined' &&
+    document.documentElement.getAttribute('data-theme') === 'light'
+      ? 'light'
+      : 'dark',
   );
 
   useEffect(() => {
