@@ -66,11 +66,12 @@ export default function CustomCursor() {
       );
       const inNav = Boolean(element?.closest('.bar nav'));
       active = Boolean(element) && !inNav;
+      // Las tarjetas abren una ficha en el sitio, no un enlace externo
       external = Boolean(
         element &&
           !inNav &&
-          (element.classList.contains('card') ||
-            element.getAttribute('target') === '_blank'),
+          !element.classList.contains('card') &&
+          element.getAttribute('target') === '_blank',
       );
 
       frame.classList.toggle('active', active);
