@@ -3,7 +3,7 @@
 Personal portfolio for Carlos Gordillo, a full stack and AI developer. Profile, experience,
 projects with real screenshots, an animated CI/CD pipeline and a bilingual blog.
 
-**[Live site](https://software-portfolio-silk-eight.vercel.app)**
+**[Live site](https://carlosgordillo.com)**
 
 ![Portfolio preview](./preview.png)
 
