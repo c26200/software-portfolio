@@ -1,32 +1,27 @@
-import { useTranslation } from 'react-i18next';
+import { Link, useLocation } from 'react-router-dom';
+import { localizePath, pathLanguage, stripLocale } from '../i18n-paths';
 
 export default function LanguageSwitch() {
-  const { i18n } = useTranslation();
-  const current = i18n.language.split('-')[0];
-
-  const change = (language: string) => {
-    i18n.changeLanguage(language);
-    localStorage.setItem('lang', language);
-  };
+  const { pathname } = useLocation();
+  const current = pathLanguage(pathname);
+  const logicalPath = stripLocale(pathname).replace(/\/+$/, '') || '/';
 
   return (
     <div className="lang-switch">
-      <button
-        type="button"
+      <Link
+        to={localizePath(logicalPath, 'es')}
         className={current === 'es' ? 'active' : ''}
-        onClick={() => change('es')}
-        aria-pressed={current === 'es'}
+        aria-current={current === 'es' ? 'page' : undefined}
       >
         ES
-      </button>
-      <button
-        type="button"
+      </Link>
+      <Link
+        to={localizePath(logicalPath, 'en')}
         className={current === 'en' ? 'active' : ''}
-        onClick={() => change('en')}
-        aria-pressed={current === 'en'}
+        aria-current={current === 'en' ? 'page' : undefined}
       >
         EN
-      </button>
+      </Link>
     </div>
   );
 }

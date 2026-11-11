@@ -52,5 +52,18 @@
       <a href="/">Volver al portafolio</a>
       <a href="/blog">Ir al blog</a>
     </main>
+    <script>
+      (function () {
+        var path = window.location.pathname;
+        if (path !== '/en' && path.indexOf('/en/') !== 0) return;
+        document.documentElement.lang = 'en';
+        document.title = 'Page not found — Carlos Gordillo';
+        var h1 = document.querySelector('h1');
+        var links = document.querySelectorAll('a');
+        if (h1) h1.textContent = 'Page not found';
+        if (links[0]) links[0].textContent = 'Back to the portfolio';
+        if (links[1]) links[1].textContent = 'Go to the blog';
+      })();
+    </script>
   </body>
 </html>

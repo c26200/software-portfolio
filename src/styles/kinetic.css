@@ -102,7 +102,7 @@ button { font: inherit; }
 .bar .say:hover { background: var(--fg); color: var(--bg); }
 
 .lang-switch { display: flex; border: 1px solid var(--line-strong); border-radius: 99px; overflow: hidden; }
-.lang-switch button {
+.lang-switch a {
   border: 0;
   background: transparent;
   color: var(--dim);
@@ -111,9 +111,10 @@ button { font: inherit; }
   letter-spacing: 0.08em;
   padding: 7px 10px;
   cursor: pointer;
+  text-decoration: none;
   transition: background 0.25s, color 0.25s;
 }
-.lang-switch button.active { background: var(--fg); color: var(--bg); }
+.lang-switch a.active { background: var(--fg); color: var(--bg); }
 
 .hamburger {
   display: none;

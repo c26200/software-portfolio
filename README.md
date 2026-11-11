@@ -9,7 +9,8 @@ projects with real screenshots, an animated CI/CD pipeline and a bilingual blog.
 
 ## What it does
 
-- Bilingual Spanish/English site with the language stored in `localStorage`
+- Bilingual Spanish/English site with separate URLs (`/` and `/en`), `hreflang` alternates
+  and prerendered HTML for both
 - Light and dark themes, switchable from the header and persisted per visitor
 - Draggable project rail with screenshots of four deployed apps, linked to their repositories
 - Animated CI/CD pipeline demo with eight stages, pause on scroll and reduced-motion support
@@ -32,9 +33,8 @@ npm run preview
 ## Structure
 
 ```
-public/               favicon, OG image, project screenshots, robots.txt,
-                      sitemap.xml, 404.html
-scripts/              prerender.mjs — renders each route to static HTML at build
+public/               favicon, OG image, project screenshots, robots.txt, 404.html
+scripts/              prerender.mjs — renders each route and the sitemap at build
 src/
 ├── components/       Hero, KineticCanvas, Marquee, About, Stat, Experience,
 │                     Pipeline, Projects, Contact, Header, LanguageSwitch,
@@ -49,13 +49,20 @@ src/
 
 ## Deployment
 
-`npm run build` creates the client bundle, renders `/`, `/blog` and every post to their own
-`index.html`, and injects the route metadata into each file. Crawlers and social previews
-receive the full page without running JavaScript; unknown paths return a real 404 through
-`public/404.html`.
+`npm run build` creates the client bundle, renders the four Spanish routes and the four
+English routes to their own `index.html`, injects the route metadata into each file and
+generates `sitemap.xml` with both language versions and their alternates. Crawlers and social
+previews receive the full page without running JavaScript; unknown paths return a real 404
+through `public/404.html`.
 
 On Vercel the default Vite preset works: build `npm run build`, output `dist`. No rewrites
 are needed because every route is a static file.
+
+## Languages
+
+Spanish lives at `/`, `/blog` and `/blog/:slug`; English lives at `/en`, `/en/blog` and
+`/en/blog/:slug`. Every page declares `hreflang` alternates and a canonical URL, and the
+language switch uses real links, so both versions are crawlable and indexable independently.
 
 ## Notes
 

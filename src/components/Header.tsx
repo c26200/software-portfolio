@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import LanguageSwitch from './LanguageSwitch';
 import ThemeToggle from './ThemeToggle';
 import MobileMenu from './MobileMenu';
+import { localizePath, pathLanguage } from '../i18n-paths';
 
 export default function Header() {
   const { t } = useTranslation();
@@ -22,13 +23,16 @@ export default function Header() {
     setMenuOpen(false);
   }, [pathname]);
 
-  const isHome = pathname === '/';
-  const href = (id: string) => (isHome ? `#${id}` : `/#${id}`);
+  const normalized = pathname === '/' ? '/' : pathname.replace(/\/+$/, '');
+  const language = pathLanguage(pathname);
+  const homePath = localizePath('/', language);
+  const isHome = normalized === '/' || normalized === '/en';
+  const href = (id: string) => (isHome ? `#${id}` : `${homePath}#${id}`);
 
   return (
     <>
       <header className={`bar ${scrolled ? 'scrolled' : ''}`}>
-        <Link to="/" className="brand" aria-label="Carlos Gordillo">
+        <Link to={homePath} className="brand" aria-label="Carlos Gordillo">
           C.G.
         </Link>
 
@@ -38,7 +42,7 @@ export default function Header() {
           <a href={href('pipeline')}>{t('nav.pipeline')}</a>
           <a href={href('proyectos')}>{t('nav.projects')}</a>
           <a href={href('contacto')}>{t('nav.contact')}</a>
-          <Link to="/blog">{t('nav.blog')}</Link>
+          <Link to={localizePath('/blog', language)}>{t('nav.blog')}</Link>
         </nav>
 
         <div className="bar-right">

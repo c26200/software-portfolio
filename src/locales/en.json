@@ -253,7 +253,13 @@
     "title": "Blog",
     "back": "← Back",
     "readMore": "Read more",
-    "publishedOn": "Published on"
+    "publishedOn": "Published on",
+    "empty": "Coming soon...",
+    "notFound": "Post not found"
+  },
+  "notFound": {
+    "text": "The page you are looking for does not exist or has moved.",
+    "back": "← Back to home"
   },
   "seo": {
     "homeTitle": "Carlos Gordillo — Full Stack & AI Engineer",

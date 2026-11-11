@@ -33,8 +33,10 @@ function inject(html, body, meta, lang) {
   out = setMeta(out, 'name', 'robots', meta.noindex ? 'noindex, follow' : 'index, follow');
   out = setMeta(out, 'property', 'og:title', meta.title);
   out = setMeta(out, 'property', 'og:description', meta.description);
-  out = setMeta(out, 'property', 'og:url', meta.canonical ?? `https://carlosgordillo.com${lang}`);
+  out = setMeta(out, 'property', 'og:url', meta.canonical ?? 'https://carlosgordillo.com/');
   out = setMeta(out, 'property', 'og:type', meta.type);
+  out = setMeta(out, 'property', 'og:locale', lang === 'en' ? 'en_US' : 'es_CO');
+  out = setMeta(out, 'property', 'og:locale:alternate', lang === 'en' ? 'es_CO' : 'en_US');
   out = setMeta(out, 'name', 'twitter:title', meta.title);
   out = setMeta(out, 'name', 'twitter:description', meta.description);
 
@@ -50,6 +52,15 @@ function inject(html, body, meta, lang) {
     );
   }
 
+  out = out.replace(/\s*<link rel="alternate" hreflang="[^"]*" href="[^"]*" \/>/g, '');
+  const alternateTags = (meta.alternates ?? [])
+    .map(
+      (alternate) =>
+        `    <link rel="alternate" hreflang="${alternate.hreflang}" href="${escapeHtml(alternate.href)}" />`,
+    )
+    .join('\n');
+  if (alternateTags) out = out.replace('</head>', `${alternateTags}\n  </head>`);
+
   if (meta.jsonLd) {
     const json = JSON.stringify(meta.jsonLd).replace(/</g, '\\u003c');
     out = out.replace(
@@ -61,18 +72,49 @@ function inject(html, body, meta, lang) {
   return out.replace('<div id="root"></div>', `<div id="root">${body}</div>`);
 }
 
-const routes = ['/', '/blog', ...posts.map((post) => `/blog/${post.slug}`)];
+const routes = [
+  { path: '/', lang: 'es' },
+  { path: '/en', lang: 'en' },
+  { path: '/blog', lang: 'es' },
+  { path: '/en/blog', lang: 'en' },
+  ...posts.flatMap((post) => [
+    { path: `/blog/${post.slug}`, lang: 'es' },
+    { path: `/en/blog/${post.slug}`, lang: 'en' },
+  ]),
+];
 
-for (const route of routes) {
-  const body = await render(route, 'es');
-  const meta = getPageMeta(route, 'es');
-  const output = inject(template, body, meta, 'es');
+for (const { path: route, lang } of routes) {
+  const body = await render(route, lang);
+  const meta = getPageMeta(route, lang);
+  const output = inject(template, body, meta, lang);
   const relative = route === '/' ? 'index.html' : `${route.replace(/^\//, '')}/index.html`;
   const file = path.join(dist, relative);
 
   await fs.mkdir(path.dirname(file), { recursive: true });
   await fs.writeFile(file, output);
-  console.log(`prerendered ${route} -> dist/${relative.replace(/\\/g, '/')} (${body.length} bytes)`);
+  console.log(
+    `prerendered [${lang}] ${route} -> dist/${relative.replace(/\\/g, '/')} (${body.length} bytes)`,
+  );
 }
 
-console.log(`prerender complete: ${routes.length} routes`);
+const sitemapEntries = routes
+  .map(({ path: route, lang }) => {
+    const meta = getPageMeta(route, lang);
+    const links = (meta.alternates ?? [])
+      .map(
+        (alternate) =>
+          `    <xhtml:link rel="alternate" hreflang="${alternate.hreflang}" href="${escapeHtml(alternate.href)}"/>`,
+      )
+      .join('\n');
+    return `  <url>\n    <loc>${escapeHtml(meta.canonical ?? '')}</loc>\n${links}\n  </url>`;
+  })
+  .join('\n');
+
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+${sitemapEntries}
+</urlset>
+`;
+
+await fs.writeFile(path.join(dist, 'sitemap.xml'), sitemap);
+console.log(`prerender complete: ${routes.length} routes and sitemap.xml`);

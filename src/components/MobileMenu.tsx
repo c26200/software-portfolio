@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { localizePath, pathLanguage } from '../i18n-paths';
 
 interface MobileMenuProps {
   open: boolean;
@@ -10,8 +11,11 @@ interface MobileMenuProps {
 export default function MobileMenu({ open, onClose }: MobileMenuProps) {
   const { t } = useTranslation();
   const { pathname } = useLocation();
-  const isHome = pathname === '/';
-  const href = (id: string) => (isHome ? `#${id}` : `/#${id}`);
+  const normalized = pathname === '/' ? '/' : pathname.replace(/\/+$/, '');
+  const language = pathLanguage(pathname);
+  const homePath = localizePath('/', language);
+  const isHome = normalized === '/' || normalized === '/en';
+  const href = (id: string) => (isHome ? `#${id}` : `${homePath}#${id}`);
 
   useEffect(() => {
     const previous = document.body.style.overflow;
@@ -50,7 +54,7 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
       <a href={href('contacto')} onClick={onClose} tabIndex={open ? 0 : -1}>
         {t('nav.contact')}
       </a>
-      <Link to="/blog" onClick={onClose} tabIndex={open ? 0 : -1}>
+      <Link to={localizePath('/blog', language)} onClick={onClose} tabIndex={open ? 0 : -1}>
         {t('nav.blog')}
       </Link>
     </nav>

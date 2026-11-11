@@ -1,9 +1,12 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { formatPostDate, posts } from '../content/blog';
+import { formatPostDate, getPostContent, posts } from '../content/blog';
+import { localizePath, pathLanguage } from '../i18n-paths';
 
 export default function Blog() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
+  const { pathname } = useLocation();
+  const language = pathLanguage(pathname);
 
   return (
     <section className="blog-section">
@@ -16,26 +19,29 @@ export default function Blog() {
 
         <div className="blog-list">
           {posts.length === 0 ? (
-            <p className="blog-empty">Próximamente...</p>
+            <p className="blog-empty">{t('blog.empty')}</p>
           ) : (
-            posts.map((post) => (
-              <article className="blog-card" key={post.slug}>
-                <p className="blog-date">
-                  <time dateTime={post.date}>{formatPostDate(post.date, i18n.language)}</time>
-                </p>
-                <Link to={`/blog/${post.slug}`} className="blog-link">
-                  <h2 className="blog-title">{post.title}</h2>
-                </Link>
-                <p className="blog-excerpt">{post.excerpt}</p>
-                <Link to={`/blog/${post.slug}`} className="blog-readmore">
-                  {t('blog.readMore')} →
-                </Link>
-              </article>
-            ))
+            posts.map((post) => {
+              const copy = getPostContent(post, language);
+              return (
+                <article className="blog-card" key={post.slug}>
+                  <p className="blog-date">
+                    <time dateTime={post.date}>{formatPostDate(post.date, language)}</time>
+                  </p>
+                  <Link to={localizePath(`/blog/${post.slug}`, language)} className="blog-link">
+                    <h2 className="blog-title">{copy.title}</h2>
+                  </Link>
+                  <p className="blog-excerpt">{copy.excerpt}</p>
+                  <Link to={localizePath(`/blog/${post.slug}`, language)} className="blog-readmore">
+                    {t('blog.readMore')} →
+                  </Link>
+                </article>
+              );
+            })
           )}
         </div>
 
-        <Link to="/" className="blog-back">
+        <Link to={localizePath('/', language)} className="blog-back">
           {t('blog.back')}
         </Link>
       </div>

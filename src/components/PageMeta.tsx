@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { getPageMeta, OG_IMAGE, SITE_NAME, SITE_ORIGIN } from '../seo';
+import { getPageMeta, OG_IMAGE, SITE_NAME, SITE_ORIGIN, type PageAlternate } from '../seo';
 
 function setMeta(attr: 'name' | 'property', key: string, content: string) {
   let el = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);
@@ -33,6 +33,17 @@ function setCanonical(href?: string) {
   document.head.appendChild(el);
 }
 
+function setAlternates(alternates?: PageAlternate[]) {
+  document.head.querySelectorAll('link[rel="alternate"][hreflang]').forEach((el) => el.remove());
+  for (const alternate of alternates ?? []) {
+    const el = document.createElement('link');
+    el.rel = 'alternate';
+    el.hreflang = alternate.hreflang;
+    el.href = alternate.href;
+    document.head.appendChild(el);
+  }
+}
+
 /**
  * Keeps the document metadata in sync with the active route and language.
  * The same metadata is injected at build time by scripts/prerender.mjs.
@@ -59,11 +70,13 @@ export default function PageMeta() {
     setMeta('property', 'og:image', OG_IMAGE);
     setMeta('property', 'og:site_name', SITE_NAME);
     setMeta('property', 'og:locale', lang === 'en' ? 'en_US' : 'es_CO');
+    setMeta('property', 'og:locale:alternate', lang === 'en' ? 'es_CO' : 'en_US');
     setMeta('name', 'twitter:card', 'summary_large_image');
     setMeta('name', 'twitter:title', page.title);
     setMeta('name', 'twitter:description', page.description);
     setMeta('name', 'twitter:image', OG_IMAGE);
     setCanonical(page.canonical);
+    setAlternates(page.alternates);
 
     if (page.type === 'article' && page.publishedTime) {
       setMeta('property', 'article:published_time', page.publishedTime);

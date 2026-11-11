@@ -253,7 +253,13 @@
     "title": "Blog",
     "back": "← Volver",
     "readMore": "Leer más",
-    "publishedOn": "Publicado el"
+    "publishedOn": "Publicado el",
+    "empty": "Próximamente...",
+    "notFound": "Post no encontrado"
+  },
+  "notFound": {
+    "text": "La página que buscas no existe o fue movida.",
+    "back": "← Volver al inicio"
   },
   "seo": {
     "homeTitle": "Carlos Gordillo — Ingeniero Full Stack & IA",
