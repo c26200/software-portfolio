@@ -80,7 +80,7 @@ export default function Projects() {
     let moved = false;
     let visible = false;
     let startX = 0;
-    let startPosition = 0;
+    let lastX = 0;
     let resumeAt = 0;
 
     const onPointerDown = (event: PointerEvent) => {
@@ -89,20 +89,22 @@ export default function Projects() {
       moved = false;
       draggedRef.current = false;
       startX = event.clientX;
-      startPosition = positionRef.current;
+      lastX = event.clientX;
     };
 
     const onPointerMove = (event: PointerEvent) => {
       if (!down) return;
-      const dx = event.clientX - startX;
       if (!moved) {
-        if (Math.abs(dx) < 5) return;
+        if (Math.abs(event.clientX - startX) < 5) return;
         moved = true;
         draggedRef.current = true;
         rail.classList.add('drag');
       }
+      // Mover de forma incremental conserva el ajuste del reciclado
+      const dx = event.clientX - lastX;
+      lastX = event.clientX;
       if (event.cancelable) event.preventDefault();
-      positionRef.current = startPosition - dx;
+      positionRef.current -= dx;
       normalize();
     };
 
