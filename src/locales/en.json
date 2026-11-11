@@ -69,7 +69,11 @@
     "blogTitleA": "Latest",
     "blogTitleEm": "articles",
     "blogLead": "Technical notes on artificial intelligence, data and infrastructure, without filler.",
-    "allPosts": "All posts"
+    "allPosts": "All posts",
+    "swipeHint": "Swipe",
+    "pauseLabel": "Pause",
+    "playLabel": "Resume",
+    "repoOf": "Repository for"
   },
   "sections": {
     "about": {

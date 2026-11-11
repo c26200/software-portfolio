@@ -322,7 +322,7 @@ section[id], article[id] { scroll-margin-top: 96px; }
   scroll-behavior: auto;
   scroll-snap-type: none;
   padding-bottom: 18px;
-  cursor: grab;
+  cursor: pointer;
   scrollbar-width: none;
   margin: 0 calc(var(--pad) * -1);
   padding-left: var(--pad);
@@ -821,7 +821,7 @@ html.has-cursor * {
 }
 .sobre-facts dt {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--dim);
@@ -879,7 +879,7 @@ html.has-cursor * {
 }
 .sobre-row .yr {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--dim);
@@ -1109,4 +1109,32 @@ html.has-cursor * {
   }
   .latest-card { text-align: center; }
   .latest-card .latest-arrow { display: none; }
+}
+
+/* --- carrusel: control de pausa y pista según dispositivo ----------------- */
+.hint-touch { display: none; }
+@media (hover: none), (pointer: coarse) {
+  .hint-pointer { display: none; }
+  .hint-touch { display: inline; }
+}
+.rail-toggle {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dim);
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: color 0.25s, border-color 0.25s;
+}
+.rail-toggle:hover { color: var(--fg); border-color: var(--line-strong); }
+.rail-toggle:focus-visible { outline: 2px solid var(--lime); outline-offset: 3px; }
+
+/* --- marquesina: se detiene al pasar el cursor --------------------------- */
+.marquee:hover .marquee-track { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .marquee:hover .marquee-track { animation-play-state: running; }
 }

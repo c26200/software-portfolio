@@ -69,7 +69,11 @@
     "blogTitleA": "Últimos",
     "blogTitleEm": "artículos",
     "blogLead": "Notas técnicas sobre inteligencia artificial, datos e infraestructura, sin relleno.",
-    "allPosts": "Ver todos"
+    "allPosts": "Ver todos",
+    "swipeHint": "Desliza",
+    "pauseLabel": "Pausar",
+    "playLabel": "Reanudar",
+    "repoOf": "Repositorio de"
   },
   "sections": {
     "about": {

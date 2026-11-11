@@ -13,7 +13,7 @@ export default function Hero() {
         <div>
           <h1>
             <span className="hero-name">
-              Carlos
+              Carlos{' '}
               <br />
               <em>Gordillo</em>
             </span>

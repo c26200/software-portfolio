@@ -1,7 +1,8 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { showcaseProjects } from '../content/projects';
+import { showcaseProjects, type ShowcaseProject } from '../content/projects';
 import Reveal from './Reveal';
+import ProjectPreviewModal from './ProjectPreviewModal';
 
 interface ProjectCopy {
   title: string;
@@ -19,6 +20,10 @@ const SPEED = 45; // px per second
 export default function Projects() {
   const { t } = useTranslation();
   const railRef = useRef<HTMLDivElement>(null);
+  const [paused, setPaused] = useState(false);
+  const [preview, setPreview] = useState<ShowcaseProject | null>(null);
+  const pausedRef = useRef(false);
+  pausedRef.current = paused;
   const others = t('projects.items', { returnObjects: true }) as OtherProject[];
 
   // Drag to scroll
@@ -97,7 +102,8 @@ export default function Projects() {
     let last = performance.now();
     let position = rail.scrollLeft;
 
-    const paused = () => hovering || focused || dragging || !visible || document.hidden;
+    const isPaused = () =>
+      pausedRef.current || hovering || focused || dragging || !visible || document.hidden;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -111,7 +117,7 @@ export default function Projects() {
       const delta = Math.min(64, now - last);
       last = now;
 
-      if (!paused()) {
+      if (!isPaused()) {
         position += (SPEED * delta) / 1000;
         while (position >= loopWidth) position -= loopWidth;
         rail.scrollLeft = position;
@@ -187,7 +193,8 @@ export default function Projects() {
             {t('kinetic.projectsLead')}
           </p>
         </Reveal>
-        <span className="rail-hint">{t('kinetic.dragHint')} →</span>
+        <span className="rail-hint hint-pointer">{t('kinetic.dragHint')} →</span>
+        <span className="rail-hint hint-touch">{t('kinetic.swipeHint')} →</span>
       </div>
 
       <div className="rail" ref={railRef}>
@@ -203,16 +210,23 @@ export default function Projects() {
               rel="noopener noreferrer"
               tabIndex={clone ? -1 : undefined}
               aria-hidden={clone || undefined}
+              aria-haspopup="dialog"
               draggable={false}
               onDragStart={(event) => event.preventDefault()}
+              onClick={(event) => {
+                // El clic abre la ficha en el sitio; el enlace queda como respaldo
+                if (event.metaKey || event.ctrlKey || event.shiftKey || index >= showcaseProjects.length) return;
+                event.preventDefault();
+                setPreview(project);
+              }}
             >
               <span className="go" aria-hidden="true">
-                ↗
+                →
               </span>
               <div className="shot">
                 <img
                   src={project.image}
-                  alt={clone ? '' : copy.title}
+                  alt=""
                   width={1440}
                   height={900}
                   loading="lazy"
@@ -231,6 +245,14 @@ export default function Projects() {
       <div className="rail-foot">
         <div className="rail-line" />
         <span className="rail-hint">01 — 04</span>
+        <button
+          type="button"
+          className="rail-toggle"
+          aria-pressed={paused}
+          onClick={() => setPaused((value) => !value)}
+        >
+          {paused ? t('kinetic.playLabel') : t('kinetic.pauseLabel')}
+        </button>
       </div>
 
       <Reveal className="others">
@@ -242,7 +264,12 @@ export default function Projects() {
                 <b>{project.title}</b> — {project.category}
               </span>
               {project.link ? (
-                <a href={project.link} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${t('kinetic.repoOf')} ${project.title}`}
+                >
                   GitHub ↗
                 </a>
               ) : (
@@ -252,6 +279,8 @@ export default function Projects() {
           ))}
         </ul>
       </Reveal>
+
+      {preview && <ProjectPreviewModal project={preview} onClose={() => setPreview(null)} />}
     </section>
   );
 }
