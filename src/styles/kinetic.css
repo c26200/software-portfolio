@@ -540,9 +540,6 @@ section[id], article[id] { scroll-margin-top: 96px; }
   .stats { border-left: 0; border-top: 1px solid var(--line); margin-top: 10px; }
   .sec-top { flex-direction: column; align-items: flex-start; gap: 6px; }
   .sec-top h2 { text-align: left; }
-  /* En táctil el carrusel se detiene y encaja por tarjeta */
-  .rail { scroll-snap-type: x mandatory; }
-  .card { scroll-snap-align: start; }
 }
 @media (max-width: 600px) {
   .rail-head { flex-direction: column; align-items: flex-start; gap: 10px; }
@@ -981,9 +978,47 @@ html.has-cursor * {
 .blog-summary,
 .blog-prose p,
 .blog-prose li {
-  text-align: justify;
-  hyphens: auto;
-  -webkit-hyphens: auto;
+  text-align: var(--prose-align, justify);
+  hyphens: var(--prose-hyphens, auto);
+  -webkit-hyphens: var(--prose-hyphens, auto);
   hyphenate-limit-chars: 6 3 4;
   text-wrap: pretty;
+}
+
+/* A 350 px no hay ancho para justificar sin guiones feos: en móvil se alinea a
+   la izquierda y se desactiva la partición de palabras. */
+@media (max-width: 900px) {
+  :root {
+    --prose-align: left;
+    --prose-hyphens: manual;
+  }
+}
+
+/* --- objetivos táctiles en móvil ---------------------------------------- */
+@media (max-width: 900px) {
+  .btn {
+    min-height: 46px;
+    padding: 13px 20px;
+  }
+  .theme-toggle {
+    width: 42px;
+    height: 42px;
+  }
+  .socials a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 46px;
+    padding: 12px 18px;
+  }
+  .others li a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding-block: 8px;
+  }
+  .footer-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
 }
