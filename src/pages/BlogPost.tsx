@@ -24,16 +24,40 @@ export default function BlogPost() {
     );
   }
 
+  const related = posts.filter((item) => item.slug !== post.slug);
+
   return (
     <section className="blog-section">
       <article className="blog-container">
-        <p className="blog-date">
+        <p className="blog-byline">
+          <Link to={localizePath('/', language)} className="blog-author" rel="author">
+            Carlos Gordillo
+          </Link>
+          <span aria-hidden="true"> · </span>
           <time dateTime={post.date}>
             {t('blog.publishedOn')} {formatPostDate(post.date, language)}
           </time>
         </p>
         <h1 className="blog-post-title">{copy.title}</h1>
         <div className="blog-prose" dangerouslySetInnerHTML={{ __html: copy.html }} />
+        {related.length > 0 && (
+          <aside className="blog-related" aria-label={t('blog.related')}>
+            <p className="blog-related-label">{t('blog.related')}</p>
+            <ul>
+              {related.map((item) => {
+                const itemCopy = getPostContent(item, language);
+                return (
+                  <li key={item.slug}>
+                    <Link to={localizePath(`/blog/${item.slug}`, language)}>
+                      <span>{itemCopy.title}</span>
+                      <span aria-hidden="true">→</span>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </aside>
+        )}
         <Link to={localizePath('/blog', language)} className="blog-back">
           {t('blog.back')}
         </Link>

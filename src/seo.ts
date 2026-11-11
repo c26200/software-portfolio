@@ -20,6 +20,7 @@ export interface PageMetadata {
   type: 'website' | 'article';
   noindex?: boolean;
   publishedTime?: string;
+  lastModified?: string;
   ogImage: string;
   alternates?: PageAlternate[];
   jsonLd?: Record<string, unknown>;
@@ -106,6 +107,7 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
       canonical,
       type: 'article',
       publishedTime: post.date,
+      lastModified: post.updated ?? post.date,
       ogImage,
       alternates,
       jsonLd: {
@@ -114,10 +116,18 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
         headline: content.title,
         description: content.excerpt,
         datePublished: post.date,
-        dateModified: post.date,
+        dateModified: post.updated ?? post.date,
         inLanguage: lang,
         image: ogImage,
-        author: { '@type': 'Person', name: SITE_NAME, url: `${SITE_ORIGIN}/` },
+        author: {
+          '@type': 'Person',
+          name: SITE_NAME,
+          url: `${SITE_ORIGIN}/`,
+          sameAs: [
+            'https://github.com/c26200',
+            'https://www.linkedin.com/in/cmgordillo26/',
+          ],
+        },
         mainEntityOfPage: {
           '@type': 'WebPage',
           '@id': canonical,

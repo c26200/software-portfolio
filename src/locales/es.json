@@ -255,7 +255,8 @@
     "readMore": "Leer más",
     "publishedOn": "Publicado el",
     "empty": "Próximamente...",
-    "notFound": "Post no encontrado"
+    "notFound": "Post no encontrado",
+    "related": "También te puede interesar"
   },
   "notFound": {
     "text": "La página que buscas no existe o fue movida.",

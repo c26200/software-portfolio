@@ -109,7 +109,10 @@ const sitemapEntries = routes
           `    <xhtml:link rel="alternate" hreflang="${alternate.hreflang}" href="${escapeHtml(alternate.href)}"/>`,
       )
       .join('\n');
-    return `  <url>\n    <loc>${escapeHtml(meta.canonical ?? '')}</loc>\n${links}\n  </url>`;
+    const lastmod = meta.lastModified
+      ? `\n    <lastmod>${meta.lastModified}</lastmod>`
+      : '';
+    return `  <url>\n    <loc>${escapeHtml(meta.canonical ?? '')}</loc>${lastmod}\n${links}\n  </url>`;
   })
   .join('\n');
 
