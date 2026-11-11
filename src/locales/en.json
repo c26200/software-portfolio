@@ -1,0 +1,274 @@
+{
+  "site": {
+    "title": "Carlos Gordillo — Full Stack Developer & AI",
+    "edition": "Carlos Gordillo · 2026 Edition",
+    "footer": "Designed and developed by Carlos Manuel Gordillo Mora — 2026"
+  },
+  "nav": {
+    "profile": "Profile",
+    "hero": "Home",
+    "experience": "Experience",
+    "studies": "Studies",
+    "skills": "Skills",
+    "projects": "Projects",
+    "contact": "Contact",
+    "blog": "Blog",
+    "pipeline": "Pipeline"
+  },
+  "hero": {
+    "name": "Carlos Gordillo",
+    "subtitle": "Full Stack and AI Developer. I design and ship complete digital products on React, Node.js, Python and Docker, integrating deep learning models, ETL pipelines and cloud infrastructure.",
+    "meta": "Vol. 1 — 2026 — Puerto Boyacá, Boyacá, CO",
+    "photoAlt": "Carlos Manuel Gordillo Mora"
+  },
+  "kinetic": {
+    "kicker": "Full stack developer, AI and DevOps",
+    "heroLead": "From model to product.",
+    "heroCopy": "I design and ship complete digital products: frontend, APIs, data and artificial intelligence, on my own infrastructure.",
+    "ctaProjects": "See projects",
+    "ctaContact": "Contact",
+    "scroll": "Scroll",
+    "aboutTitleA": "From data to",
+    "aboutTitleEm": "product",
+    "aboutLead": "Complete systems, not isolated layers.",
+    "statProjects": "Projects",
+    "statEtl": "ETL records",
+    "statAward": "1st place DL",
+    "statYears": "Years",
+    "experienceTitleA": "Where I have",
+    "experienceTitleEm": "built",
+    "projectsTitleA": "Recent",
+    "projectsTitleEm": "work",
+    "projectsLead": "Four products, one standard: they should feel right.",
+    "dragHint": "Drag",
+    "others": "Other projects",
+    "contactTitleA": "Shall we build",
+    "contactTitleEm": "something?",
+    "available": "Available",
+    "menu": "Menu",
+    "say": "Let's talk",
+    "marquee": [
+      "React",
+      "Node.js",
+      "Python",
+      "Docker",
+      "n8n",
+      "PostgreSQL",
+      "LSTM",
+      "Transformers",
+      "Cloudflare"
+    ],
+    "themeToDark": "Switch to dark mode",
+    "themeToLight": "Switch to light mode",
+    "pipelineTitleA": "From commit to",
+    "pipelineTitleEm": "deploy",
+    "pipelineLead": "A change enters once and follows the same path: install, lint, test, build, scan and deploy. If anything fails, it never reaches production."
+  },
+  "sections": {
+    "about": {
+      "num": "01",
+      "title": "About Me"
+    },
+    "experience": {
+      "num": "02",
+      "title": "Experience"
+    },
+    "studies": {
+      "num": "03",
+      "title": "Studies"
+    },
+    "skills": {
+      "num": "04",
+      "title": "Skills"
+    },
+    "projects": {
+      "num": "05",
+      "title": "Projects"
+    }
+  },
+  "about": {
+    "paragraphs": [
+      "Full Stack and AI developer focused on building complete products: interfaces, APIs, data and deployment. I work with React, TypeScript, Node.js and Python, and integrate deep learning models — LSTM, Transformers and convolutional networks — to turn data into decisions.",
+      "I design and operate the infrastructure behind those products: Docker containers on self-managed Linux servers, PostgreSQL, ETL pipelines with n8n, and secure exposure through Cloudflare Tunnel and Zero Trust policies. I have processed over 50,000 records and shipped real-time monitoring dashboards.",
+      "I care about the intersection of product, data and artificial intelligence: models that are trained, served and explained. When I am not building, I explore new automation architectures and ways to make complex systems feel simple."
+    ],
+    "sidebar": {
+      "city": {
+        "label": "City",
+        "value": "Puerto Boyacá, Boyacá"
+      },
+      "career": {
+        "label": "Focus",
+        "value": "Full Stack & AI"
+      },
+      "institution": {
+        "label": "Institution",
+        "value": "Universidad de Pamplona"
+      },
+      "availability": {
+        "label": "Availability",
+        "value": "Immediate · Relocation"
+      },
+      "languages": {
+        "label": "Languages",
+        "value": "Spanish (Native) · English (Technical)"
+      },
+      "contact": {
+        "label": "Contact",
+        "value": "cmgm26200@gmail.com"
+      }
+    }
+  },
+  "experience": {
+    "items": [
+      {
+        "year": "2026 — Present",
+        "org": "SENA",
+        "role": "Instructor — Software Programming",
+        "desc": "Technical instruction in programming and software development. Competency-based curriculum design, hands-on labs and active methodologies to build measurable skills."
+      },
+      {
+        "year": "2025",
+        "org": "Universidad de Pamplona",
+        "role": "Agreement Manager · Data Automation",
+        "desc": "Full Stack architecture and implementation on a self-managed Linux server with Docker: backend (Node.js/Express), frontend (React + TypeScript) and PostgreSQL. ETL pipeline design with n8n for massive spreadsheet ingestion — over 50,000 records — with transformation, validation and incremental loading. Secure exposure with Cloudflare Tunnel and Zero Trust policies."
+      },
+      {
+        "year": "2024 — Present",
+        "org": "Independent Technology Consulting",
+        "role": "Full Stack Developer & AI",
+        "desc": "Product development with Next.js, Node.js and Docker on a self-managed Linux VPS. Process automation with Python and n8n. Integration of machine learning models — financial time series with LSTM and Transformers, convolutional classification — and real-time monitoring dashboards."
+      }
+    ]
+  },
+  "studies": {
+    "items": [
+      {
+        "year": "2019 — Present",
+        "institution": "Universidad de Pamplona",
+        "program": "Engineering",
+        "note": "Pamplona, Norte de Santander · Engineering studies with a focus on systems and automation"
+      }
+    ]
+  },
+  "skills": {
+    "categories": [
+      {
+        "name": "Software Development & AI",
+        "tags": [
+          "React",
+          "Next.js",
+          "TypeScript",
+          "Node.js",
+          "Express",
+          "Python",
+          "Deep Learning",
+          "LSTM / Transformers",
+          "CNNs",
+          "Pandas / NumPy",
+          "Jupyter",
+          "HTML5 & CSS3"
+        ]
+      },
+      {
+        "name": "Backend & Data",
+        "tags": [
+          "PostgreSQL",
+          "SQL",
+          "ETL Pipelines",
+          "n8n · Workflows",
+          "REST APIs",
+          "Advanced Excel"
+        ]
+      },
+      {
+        "name": "Infrastructure & DevOps",
+        "tags": [
+          "Docker",
+          "Docker Compose",
+          "Cloudflare Tunnels",
+          "Zero Trust",
+          "Git / GitHub",
+          "Linux · VPS"
+        ]
+      }
+    ]
+  },
+  "projects": {
+    "folderLabel": "frontend-folio 2026",
+    "hintHover": "Hover to open the folder",
+    "hintTouch": "Tap a card to open the project",
+    "open": "Open",
+    "close": "Close",
+    "stack": "Stack",
+    "viewCode": "View code",
+    "other": "Other projects",
+    "folder": {
+      "saas-landing-page": {
+        "title": "Nexus",
+        "category": "SaaS landing",
+        "description": "AI product landing page with large-scale type, lime accents, metric blocks and motion. Dark and direct."
+      },
+      "cinetrack": {
+        "title": "CineTrack",
+        "category": "Film index",
+        "description": "Personal film index with real posters, OMDB search, wall, kanban and list views, ratings and notes. Local persistence."
+      },
+      "kanban-task-manager": {
+        "title": "Kanban Flow",
+        "category": "Task management",
+        "description": "Board with drag and drop across zones, inline editing and localStorage persistence, styled as a technical blueprint."
+      },
+      "dashloud": {
+        "title": "DashLoud",
+        "category": "Analytics dashboard",
+        "description": "High-contrast editorial dashboard with metrics, revenue charts and a transactions panel. Light and dark themes."
+      }
+    },
+    "items": [
+      {
+        "category": "Deep Learning · 1st Place",
+        "title": "Stock Market Prediction with LSTM and Transformers",
+        "link": "https://github.com/c26200/trading-predictor",
+        "featured": true
+      },
+      {
+        "category": "Full Stack · Docker · Cloudflare",
+        "title": "Inter-Institutional Agreement Management System",
+        "featured": false,
+        "link": "https://github.com/c26200/convenios-dashboard"
+      }
+    ]
+  },
+  "contact": {
+    "headline": "Let's Collaborate?",
+    "email": "cmgm26200@gmail.com",
+    "links": {
+      "linkedin": "LinkedIn",
+      "github": "GitHub",
+      "phone": "+57 311 490 0238"
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "back": "← Back",
+    "readMore": "Read more",
+    "publishedOn": "Published on"
+  },
+  "pipeline": {
+    "demo": "github actions · demo",
+    "step": "Step",
+    "replay": "Replay",
+    "complete": "Pipeline complete",
+    "steps": {
+      "commit": "Every push to main triggers the workflow.",
+      "install": "Reproducible dependencies from the lockfile.",
+      "lint": "ESLint and TypeScript with no errors.",
+      "test": "Unit and integration tests.",
+      "build": "Optimized production build.",
+      "scan": "The Docker image is scanned with Trivy.",
+      "deploy": "Container to production via Cloudflare Tunnel.",
+      "monitor": "Health check and live logs."
+    }
+  }
+}

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Direcciones · miniaturas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;700;800&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #d9d9d5; font-family: Inter, sans-serif; padding: 28px; }
+  .sheet { display: grid; grid-template-columns: repeat(3, 480px); gap: 22px; justify-content: center; }
+  .cell { width: 480px; }
+  .thumb { width: 480px; height: 300px; overflow: hidden; position: relative; }
+  .cap { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #444; margin-top: 8px; font-family: "IBM Plex Mono", monospace; }
+  .cap b { color: #111; }
+
+  /* 1 Instrument */
+  .t1 { background: #f4f4f0; color: #0a0a0a; padding: 18px 20px; }
+  .t1 .grid { position: absolute; inset: 0; background-image: linear-gradient(90deg, #0000 0 49.8%, #00000012 49.8% 50.2%, #0000 50.2%); background-size: 40px 100%; }
+  .t1 .top { position: relative; display: flex; justify-content: space-between; font: 500 8px "IBM Plex Mono"; letter-spacing: .16em; text-transform: uppercase; }
+  .t1 .top .dot { width: 6px; height: 6px; background: #ff3d00; border-radius: 50%; display: inline-block; margin-right: 5px; }
+  .t1 h1 { position: relative; font: 800 64px/0.86 Archivo; letter-spacing: -.045em; margin-top: 26px; }
+  .t1 .spec { position: relative; margin-top: 14px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 14px; border-top: 1px solid #0a0a0a; padding-top: 8px; }
+  .t1 .spec div { font: 400 8px/1.6 "IBM Plex Mono"; border-right: 1px solid #0a0a0add; padding-right: 8px; }
+  .t1 .spec span { display: block; font-size: 6px; letter-spacing: .14em; text-transform: uppercase; color: #777; margin-bottom: 3px; }
+  .t1 .row { position: absolute; left: 20px; right: 20px; bottom: 16px; display: flex; justify-content: space-between; align-items: flex-end; }
+  .t1 .big { font: 800 28px Archivo; letter-spacing: -.03em; }
+  .t1 .red { width: 54px; height: 5px; background: #ff3d00; }
+
+  /* 2 Kinetic */
+  .t2 { background: #0a0a0a; color: #f1ede4; }
+  .t2 .nav { display: flex; justify-content: space-between; font: 500 8px "JetBrains Mono"; letter-spacing: .14em; text-transform: uppercase; padding: 16px 20px; color: #f1ede499; }
+  .t2 .glyph { position: absolute; left: 50%; top: 46%; transform: translate(-50%, -50%); display: grid; grid-template-columns: repeat(9, 20px); gap: 4px; }
+  .t2 .glyph i { width: 20px; height: 20px; background: #f1ede4; }
+  .t2 .glyph i.off { background: #ffffff10; }
+  .t2 .glyph i.lime { background: #c8ff2e; }
+  .t2 h1 { position: absolute; left: 20px; bottom: 44px; font: 400 54px/0.9 "Instrument Serif"; letter-spacing: -.02em; }
+  .t2 .role { position: absolute; right: 20px; bottom: 44px; width: 150px; font: 400 8px/1.7 Inter; color: #f1ede4b3; }
+  .t2 .marq { position: absolute; left: 0; right: 0; bottom: 0; border-top: 1px solid #f1ede433; padding: 8px 20px; font: 500 8px "JetBrains Mono"; letter-spacing: .18em; text-transform: uppercase; color: #f1ede499; white-space: nowrap; overflow: hidden; }
+
+  /* 3 Quiet */
+  .t3 { background: #ecebe4; color: #0b0b0b; display: flex; align-items: center; justify-content: center; }
+  .t3 .disc { position: absolute; width: 190px; height: 190px; border-radius: 50%; background: #efff00; left: 52%; top: 44%; transform: translate(-50%,-50%); }
+  .t3 .nav { position: absolute; top: 16px; left: 20px; right: 20px; display: flex; justify-content: space-between; font: 500 8px "Inter"; letter-spacing: .08em; }
+  .t3 h1 { position: relative; text-align: center; font: 600 40px/0.98 Inter; letter-spacing: -.045em; max-width: 380px; }
+  .t3 .sub { position: absolute; bottom: 26px; font: 500 8px "Inter"; letter-spacing: .06em; color: #0b0b0b99; }
+  .t3 .pip { position: absolute; bottom: 16px; display: flex; gap: 4px; }
+  .t3 .pip i { width: 22px; height: 3px; background: #0b0b0b22; }
+  .t3 .pip i.on { background: #0b0b0b; }
+
+  /* 4 Editorial */
+  .t4 { background: #0a0a0a; color: #f2efe8; }
+  .t4 .nav { display: flex; justify-content: space-between; font: 500 8px Inter; padding: 16px 20px; color: #f2efe8aa; }
+  .t4 .mark { position: absolute; left: 50%; top: 40%; transform: translate(-50%,-50%); display: grid; grid-template-columns: repeat(11, 24px); gap: 3px; }
+  .t4 .mark i { width: 24px; height: 24px; background: #f2efe8; }
+  .t4 .mark i.x { background: #f2efe805; }
+  .t4 h1 { position: absolute; left: 20px; bottom: 16px; font: 400 58px/0.85 "Instrument Serif"; }
+  .t4 h1 em { font-style: italic; color: #f2efe8aa; }
+  .t4 .tick { position: absolute; right: 20px; bottom: 18px; font: 500 7px "JetBrains Mono"; letter-spacing: .16em; text-transform: uppercase; color: #f2efe899; text-align: right; line-height: 1.8; }
+
+  /* 5 Swiss */
+  .t5 { background: #fff; color: #000; padding: 16px 20px; }
+  .t5 .nav { display: flex; justify-content: space-between; font: 500 8px "IBM Plex Mono"; letter-spacing: .12em; text-transform: uppercase; }
+  .t5 h1 { font: 700 72px/0.85 Inter; letter-spacing: -.06em; margin-top: 28px; }
+  .t5 .cols { position: absolute; left: 20px; right: 20px; bottom: 18px; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid #000; }
+  .t5 .cols div { border-right: 1px solid #000; padding: 8px 8px 0 0; font: 400 7px/1.6 "IBM Plex Mono"; }
+  .t5 .cols div:last-child { border-right: 0; }
+  .t5 .cols b { display: block; font: 600 14px Inter; letter-spacing: -.02em; margin-bottom: 2px; }
+
+  /* 6 Color */
+  .t6 { background: #f4efe4; color: #14110d; padding: 16px 20px; display: flex; flex-direction: column; }
+  .t6 h1 { font: 400 46px/0.9 "Instrument Serif"; letter-spacing: -.015em; }
+  .t6 p { font: 400 8px/1.7 Inter; max-width: 240px; margin-top: 10px; color: #14110d99; }
+  .t6 .bands { position: absolute; left: 0; right: 0; bottom: 0; height: 74px; display: flex; align-items: flex-end; }
+  .t6 .bands i { flex: 1; height: 46px; }
+  .t6 .bands i:nth-child(3n) { height: 58px; }
+  .t6 .bands i:nth-child(7) { height: 74px; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="cell">
+    <div class="thumb t1">
+      <div class="grid"></div>
+      <div class="top"><span><i class="dot"></i>Carlos Gordillo — Ingeniero Mecatrónico</span><span>Ficha 001 / 2026</span></div>
+      <h1>CARLOS<br>GORDILLO</h1>
+      <div class="spec">
+        <div><span>Rol</span>Full Stack<br>DevOps · IoT</div>
+        <div><span>Base</span>Puerto Boyacá<br>Colombia</div>
+        <div><span>Estado</span>Disponible<br>Reubicación</div>
+      </div>
+      <div class="row"><div class="big">Del PLC al contenedor.</div><div class="red"></div></div>
+    </div>
+    <p class="cap"><b>01 · Instrumento técnico</b> — Jetset / ficha técnica</p>
+  </div>
+
+  <div class="cell">
+    <div class="thumb t2">
+      <div class="nav"><span>CG — 2026</span><span>Proyectos · Perfil · Contacto</span></div>
+      <div class="glyph" id="g2"></div>
+      <h1>Carlos<br>Gordillo</h1>
+      <div class="role">Ingeniero mecatrónico y desarrollador full stack. Sistemas completos, de la señal al despliegue.</div>
+      <div class="marq">HARDWARE — SOFTWARE — INFRAESTRUCTURA — AUTOMATIZACIÓN —</div>
+    </div>
+    <p class="cap"><b>02 · Identidad cinética</b> — Dumbar / Locomotive</p>
+  </div>
+
+  <div class="cell">
+    <div class="thumb t3">
+      <div class="nav"><span>Carlos Gordillo</span><span>Work · About · Contact</span></div>
+      <div class="disc"></div>
+      <h1>Construyo sistemas completos.</h1>
+      <div class="sub">Mecatrónica · Full stack · Infraestructura</div>
+      <div class="pip"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+    </div>
+    <p class="cap"><b>03 · Oficio silencioso</b> — Rauno Freiberg</p>
+  </div>
+
+  <div class="cell">
+    <div class="thumb t4">
+      <div class="nav"><span>Carlos Gordillo ©</span><span>Perfil &nbsp; Proyectos &nbsp; Contacto</span></div>
+      <div class="mark" id="g4"></div>
+      <h1>Carlos<br><em>Gordillo</em></h1>
+      <div class="tick">Ingeniero mecatrónico<br>Full stack · DevOps<br>Puerto Boyacá, CO</div>
+    </div>
+    <p class="cap"><b>04 · Editorial cinético</b> — Locomotive</p>
+  </div>
+
+  <div class="cell">
+    <div class="thumb t5">
+      <div class="nav"><span>Carlos Gordillo</span><span>Index 01 — 05</span></div>
+      <h1>Carlos<br>Gordillo</h1>
+      <div class="cols">
+        <div><b>06</b>proyectos desplegados</div>
+        <div><b>50k+</b>registros ETL</div>
+        <div><b>01</b>primer puesto DL</div>
+        <div><b>03</b>años construyendo</div>
+      </div>
+    </div>
+    <p class="cap"><b>05 · Suizo monocromo</b> — ruleta 19</p>
+  </div>
+
+  <div class="cell">
+    <div class="thumb t6">
+      <h1>Sistema<br>en estados.</h1>
+      <p>Un portafolio como espectro: cada proyecto ocupa un color en la escala.</p>
+      <div class="bands" id="bands"></div>
+    </div>
+    <p class="cap"><b>06 · Carta de colores</b> — ruleta Este 7</p>
+  </div>
+
+</div>
+<script>
+  // Pixel glyphs for the kinetic thumbnails
+  const letters = {
+    C: [[1,1,1,1],[1,0,0,0],[1,0,0,0],[1,0,0,0],[1,1,1,1]],
+    G: [[1,1,1,1],[1,0,0,0],[1,0,1,1],[1,0,0,1],[1,1,1,1]],
+  };
+  function fillGlyph(el, cols, rows, gap) {
+    for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) {
+      const i = document.createElement('i');
+      i.className = Math.random() > 0.55 ? '' : 'off';
+      if (Math.random() > 0.96) i.className = 'lime';
+      el.appendChild(i);
+    }
+  }
+  fillGlyph(document.getElementById('g2'), 9, 6);
+  fillGlyph(document.getElementById('g4'), 11, 8);
+
+  const palette = ['#7a3b2e','#a8563f','#c47a52','#d9a066','#e6c17a','#d7cba4','#b9b48a','#8f9a6b','#6b7d58','#4f6b4a','#3c5a4a','#2f4a44','#27403f','#223538','#1d2b30','#202b2f','#2a3130','#3a3a32','#4a4234','#5a4a38','#6b523a','#7d5b3e','#8f6542','#a06f46'];
+  const bands = document.getElementById('bands');
+  palette.forEach((c) => { const i = document.createElement('i'); i.style.background = c; bands.appendChild(i); });
+</script>
+</body>
+</html>

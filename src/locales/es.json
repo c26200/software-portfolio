@@ -1,0 +1,274 @@
+{
+  "site": {
+    "title": "Carlos Gordillo — Desarrollador Full Stack & IA",
+    "edition": "Carlos Gordillo · Edición 2026",
+    "footer": "Diseñado y desarrollado por Carlos Manuel Gordillo Mora — 2026"
+  },
+  "nav": {
+    "profile": "Perfil",
+    "hero": "Inicio",
+    "experience": "Experiencia",
+    "studies": "Estudios",
+    "skills": "Habilidades",
+    "projects": "Proyectos",
+    "contact": "Contacto",
+    "blog": "Blog",
+    "pipeline": "Pipeline"
+  },
+  "hero": {
+    "name": "Carlos Gordillo",
+    "subtitle": "Desarrollador Full Stack e IA. Diseño y despliego productos digitales completos sobre React, Node.js, Python y Docker, integrando modelos de aprendizaje profundo, pipelines ETL e infraestructura cloud.",
+    "meta": "Vol. 1 — 2026 — Puerto Boyacá, Boyacá, CO",
+    "photoAlt": "Carlos Manuel Gordillo Mora"
+  },
+  "kinetic": {
+    "kicker": "Desarrollador full stack, IA y DevOps",
+    "heroLead": "Del modelo al producto.",
+    "heroCopy": "Diseño y despliego productos digitales completos: frontend, APIs, datos e inteligencia artificial, con infraestructura propia.",
+    "ctaProjects": "Ver proyectos",
+    "ctaContact": "Contacto",
+    "scroll": "Scroll",
+    "aboutTitleA": "De los datos al",
+    "aboutTitleEm": "producto",
+    "aboutLead": "Sistemas completos, no capas sueltas.",
+    "statProjects": "Proyectos",
+    "statEtl": "Registros ETL",
+    "statAward": "1.er puesto DL",
+    "statYears": "Años",
+    "experienceTitleA": "Dónde he",
+    "experienceTitleEm": "construido",
+    "projectsTitleA": "Trabajo",
+    "projectsTitleEm": "reciente",
+    "projectsLead": "Cuatro productos, un mismo criterio: que se sientan bien.",
+    "dragHint": "Arrastra",
+    "others": "Otros proyectos",
+    "contactTitleA": "¿Construimos",
+    "contactTitleEm": "algo?",
+    "available": "Disponible",
+    "menu": "Menú",
+    "say": "Hablemos",
+    "marquee": [
+      "React",
+      "Node.js",
+      "Python",
+      "Docker",
+      "n8n",
+      "PostgreSQL",
+      "LSTM",
+      "Transformers",
+      "Cloudflare"
+    ],
+    "themeToDark": "Cambiar a modo oscuro",
+    "themeToLight": "Cambiar a modo claro",
+    "pipelineTitleA": "Del commit al",
+    "pipelineTitleEm": "deploy",
+    "pipelineLead": "Un cambio entra una vez y recorre el mismo camino: instalar, revisar, probar, construir, escanear y desplegar. Si algo falla, no llega a producción."
+  },
+  "sections": {
+    "about": {
+      "num": "01",
+      "title": "Sobre mí"
+    },
+    "experience": {
+      "num": "02",
+      "title": "Experiencia"
+    },
+    "studies": {
+      "num": "03",
+      "title": "Estudios"
+    },
+    "skills": {
+      "num": "04",
+      "title": "Habilidades"
+    },
+    "projects": {
+      "num": "05",
+      "title": "Proyectos"
+    }
+  },
+  "about": {
+    "paragraphs": [
+      "Desarrollador Full Stack e IA enfocado en construir productos completos: interfaces, APIs, datos y despliegue. Trabajo con React, TypeScript, Node.js y Python, e integro modelos de aprendizaje profundo — LSTM, Transformers y redes convolucionales — para convertir datos en decisiones.",
+      "Diseño y opero la infraestructura que sostiene esos productos: contenedores Docker sobre servidores Linux propios, PostgreSQL, pipelines ETL con n8n y exposición segura mediante Cloudflare Tunnel y políticas Zero Trust. He procesado más de 50.000 registros y desplegado dashboards de monitoreo en tiempo real.",
+      "Me interesa la intersección entre producto, datos e inteligencia artificial: modelos que se entrenan, se sirven y se explican. Cuando no estoy construyendo, exploro nuevas arquitecturas de automatización y formas de hacer que los sistemas complejos se sientan simples."
+    ],
+    "sidebar": {
+      "city": {
+        "label": "Ciudad",
+        "value": "Puerto Boyacá, Boyacá"
+      },
+      "career": {
+        "label": "Especialidad",
+        "value": "Desarrollo Full Stack & IA"
+      },
+      "institution": {
+        "label": "Institución",
+        "value": "Universidad de Pamplona"
+      },
+      "availability": {
+        "label": "Disponibilidad",
+        "value": "Inmediata · Reubicación"
+      },
+      "languages": {
+        "label": "Idiomas",
+        "value": "Español (Nativo) · Inglés (Técnico)"
+      },
+      "contact": {
+        "label": "Contacto",
+        "value": "cmgm26200@gmail.com"
+      }
+    }
+  },
+  "experience": {
+    "items": [
+      {
+        "year": "2026 — Presente",
+        "org": "SENA",
+        "role": "Instructor — Programación de Software",
+        "desc": "Docencia técnica en programación y desarrollo de software. Diseño curricular por competencias alineado con estándares SENA: guías de aprendizaje, talleres prácticos y rúbricas de evaluación. Implementación de metodologías activas — aprendizaje basado en proyectos y resolución de problemas reales — para desarrollar competencias tecnológicas medibles."
+      },
+      {
+        "year": "2025",
+        "org": "Universidad de Pamplona",
+        "role": "Gestor de Convenios · Automatización de Datos",
+        "desc": "Arquitectura e implementación Full Stack sobre servidor Linux propio con Docker: backend (Node.js/Express), frontend (React + TypeScript) y base de datos PostgreSQL. Diseño de pipelines ETL con n8n para ingesta masiva de hojas de cálculo — más de 50.000 registros — con transformación, validación y carga incremental. Exposición segura mediante Cloudflare Tunnel con TLS extremo a extremo y políticas de acceso Zero Trust."
+      },
+      {
+        "year": "2024 — Presente",
+        "org": "Consultoría Tecnológica Independiente",
+        "role": "Desarrollador Full Stack & IA",
+        "desc": "Desarrollo de productos con Next.js, Node.js y Docker sobre VPS Linux propio. Automatización de procesos con Python y n8n. Integración de modelos de machine learning — series temporales financieras con LSTM y Transformers, clasificación con redes convolucionales — y dashboards de monitoreo en tiempo real."
+      }
+    ]
+  },
+  "studies": {
+    "items": [
+      {
+        "year": "2019 — Presente",
+        "institution": "Universidad de Pamplona",
+        "program": "Ingeniería",
+        "note": "Pamplona, Norte de Santander · Formación en ingeniería con énfasis en sistemas y automatización"
+      }
+    ]
+  },
+  "skills": {
+    "categories": [
+      {
+        "name": "Desarrollo de Software & IA",
+        "tags": [
+          "React",
+          "Next.js",
+          "TypeScript",
+          "Node.js",
+          "Express",
+          "Python",
+          "Deep Learning",
+          "LSTM / Transformers",
+          "CNNs",
+          "Pandas / NumPy",
+          "Jupyter",
+          "HTML5 & CSS3"
+        ]
+      },
+      {
+        "name": "Backend & Datos",
+        "tags": [
+          "PostgreSQL",
+          "SQL",
+          "Pipelines ETL",
+          "n8n · Workflows",
+          "APIs REST",
+          "Excel Avanzado"
+        ]
+      },
+      {
+        "name": "Infraestructura & DevOps",
+        "tags": [
+          "Docker",
+          "Docker Compose",
+          "Cloudflare Tunnels",
+          "Zero Trust",
+          "Git / GitHub",
+          "Linux · VPS"
+        ]
+      }
+    ]
+  },
+  "projects": {
+    "folderLabel": "frontend-folio 2026",
+    "hintHover": "Pasa el cursor para abrir la carpeta",
+    "hintTouch": "Toca una tarjeta para ver el proyecto",
+    "open": "Abrir",
+    "close": "Cerrar",
+    "stack": "Stack",
+    "viewCode": "Ver código",
+    "other": "Otros proyectos",
+    "folder": {
+      "saas-landing-page": {
+        "title": "Nexus",
+        "category": "Landing SaaS",
+        "description": "Landing de producto de IA con tipografía a gran escala, acentos lima, bloques de métricas y animaciones. Diseño oscuro y directo."
+      },
+      "cinetrack": {
+        "title": "CineTrack",
+        "category": "Índice de cine",
+        "description": "Índice personal de cine con pósters reales, búsqueda en OMDB, vistas wall, kanban y lista, puntuación y notas. Persistencia local."
+      },
+      "kanban-task-manager": {
+        "title": "Kanban Flow",
+        "category": "Gestión de tareas",
+        "description": "Tablero con arrastrar y soltar entre zonas, edición en línea y persistencia en localStorage, con estética de plano técnico."
+      },
+      "dashloud": {
+        "title": "DashLoud",
+        "category": "Dashboard analítico",
+        "description": "Dashboard editorial de alto contraste con métricas, gráficas de ingresos y panel de transacciones. Tema claro y oscuro."
+      }
+    },
+    "items": [
+      {
+        "category": "Deep Learning · 1er Puesto",
+        "title": "Predicción Bursátil con LSTM y Transformers",
+        "link": "https://github.com/c26200/trading-predictor",
+        "featured": true
+      },
+      {
+        "category": "Full Stack · Docker · Cloudflare",
+        "title": "Sistema de Gestión de Convenios Interinstitucionales",
+        "featured": false,
+        "link": "https://github.com/c26200/convenios-dashboard"
+      }
+    ]
+  },
+  "contact": {
+    "headline": "¿Colaboramos?",
+    "email": "cmgm26200@gmail.com",
+    "links": {
+      "linkedin": "LinkedIn",
+      "github": "GitHub",
+      "phone": "+57 311 490 0238"
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "back": "← Volver",
+    "readMore": "Leer más",
+    "publishedOn": "Publicado el"
+  },
+  "pipeline": {
+    "demo": "github actions · demo",
+    "step": "Paso",
+    "replay": "Repetir",
+    "complete": "Pipeline completado",
+    "steps": {
+      "commit": "Cada push a main dispara el workflow.",
+      "install": "Dependencias reproducibles desde el lockfile.",
+      "lint": "ESLint y TypeScript sin errores.",
+      "test": "Pruebas unitarias y de integración.",
+      "build": "Build de producción optimizado.",
+      "scan": "La imagen Docker pasa por Trivy.",
+      "deploy": "Contenedor a producción con Cloudflare Tunnel.",
+      "monitor": "Comprobación de salud y logs en vivo."
+    }
+  }
+}

@@ -1,0 +1,352 @@
+/* ---------------------------------------------------------------------------
+   CI/CD pipeline — animated stepper for the pipeline section
+--------------------------------------------------------------------------- */
+
+:root {
+  --ok: #7fe0a8;
+}
+
+[data-theme='light'] {
+  --ok: #2f7a4f;
+}
+
+.pipeline-lead {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 62ch;
+  margin: -14px 0 26px;
+}
+
+.pipeline-panel {
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--panel);
+  overflow: hidden;
+}
+
+.pipeline-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 22px;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.pipeline-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ok);
+  white-space: nowrap;
+}
+
+.pipeline-status i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ok) 18%, transparent);
+}
+
+.pipeline-track {
+  display: flex;
+  align-items: flex-start;
+  padding: 28px 22px 20px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.pipeline-track::-webkit-scrollbar {
+  display: none;
+}
+
+.pipe-node {
+  flex: 0 0 auto;
+  width: 84px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.pipe-circle {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--dim);
+  background: transparent;
+  transition: border-color 0.3s, color 0.3s, background 0.3s;
+}
+
+.pipe-node.done .pipe-circle {
+  border-color: var(--ok);
+  color: var(--ok);
+  background: color-mix(in srgb, var(--ok) 12%, transparent);
+}
+
+.pipe-node.running .pipe-circle {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  animation: pipeRing 1.6s ease-out infinite;
+}
+
+.pipe-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.pipe-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.pipe-label {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--dim);
+  transition: color 0.3s;
+}
+
+.pipe-node.running .pipe-label,
+.pipe-node.done .pipe-label {
+  color: var(--fg);
+}
+
+.pipe-tool {
+  font-family: var(--mono);
+  font-size: 9px;
+  line-height: 1.3;
+  color: var(--dim);
+  opacity: 0.85;
+  max-width: 92px;
+}
+
+.pipe-link {
+  flex: 1 1 24px;
+  min-width: 18px;
+  height: 1px;
+  margin-top: 17px;
+  background: var(--line);
+  border-radius: 1px;
+  position: relative;
+  overflow: hidden;
+}
+
+.pipe-link i {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: var(--fill);
+  background: var(--accent);
+  transition: width 0.45s ease;
+}
+
+.pipeline-body {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  border-top: 1px solid var(--line);
+}
+
+.pipe-detail {
+  padding: 22px;
+  border-right: 1px solid var(--line);
+}
+
+.pipe-step {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.pipe-detail h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 34px;
+  line-height: 1;
+  margin: 8px 0 10px;
+}
+
+.pipe-detail p {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--text-muted);
+  max-width: 42ch;
+}
+
+.pipe-cmd {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 8px 11px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg);
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--fg);
+  overflow-wrap: anywhere;
+}
+
+.pipe-log {
+  background: var(--bg);
+  padding: 18px 20px;
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.85;
+  color: var(--dim);
+  max-height: 230px;
+  overflow-y: auto;
+}
+
+.pipe-log .cmd {
+  color: var(--fg);
+}
+
+.pipe-log .ok {
+  color: var(--ok);
+}
+
+.pipe-cursor {
+  display: inline-block;
+  width: 7px;
+  height: 14px;
+  background: var(--accent);
+  margin-top: 4px;
+  animation: pipeBlink 1s steps(1) infinite;
+}
+
+.pipeline-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 22px;
+  border-top: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.pipe-replay {
+  border: 1px solid var(--line-strong);
+  border-radius: 99px;
+  padding: 7px 13px;
+  background: transparent;
+  color: var(--fg);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.25s, color 0.25s;
+}
+
+.pipe-replay:hover {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+@keyframes pipeRing {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 40%, transparent);
+  }
+  70% {
+    box-shadow: 0 0 0 8px transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+@keyframes pipeBlink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .pipeline-track {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 20px 22px;
+    overflow: visible;
+  }
+
+  .pipe-node {
+    flex-direction: row;
+    width: auto;
+    align-items: center;
+    gap: 12px;
+    text-align: left;
+  }
+
+  .pipe-text {
+    align-items: flex-start;
+  }
+
+  .pipe-tool {
+    max-width: none;
+  }
+
+  .pipe-link {
+    width: 1px;
+    height: 20px;
+    min-width: 0;
+    flex: none;
+    margin: 0 0 0 17px;
+  }
+
+  .pipe-link i {
+    width: 1px;
+    height: var(--fill);
+    top: 0;
+    bottom: auto;
+    transition: height 0.45s ease;
+  }
+
+  .pipeline-body {
+    grid-template-columns: 1fr;
+  }
+
+  .pipe-detail {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .pipe-log {
+    max-height: 200px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pipe-node.running .pipe-circle {
+    animation: none;
+  }
+
+  .pipe-cursor {
+    animation: none;
+  }
+}

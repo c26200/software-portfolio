@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carlos Gordillo — Instrumento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0d2a46; --ink:#eef3f7; --dim:#a9bacb; --line:#ffffff24;
+    --sig:#ff6a3d; --paper:#0a2338;
+    --f-sans:"Archivo",system-ui,sans-serif;
+    --f-mono:"IBM Plex Mono",monospace;
+    --pad:clamp(20px,4vw,56px);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--f-sans);-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  ::selection{background:var(--sig);color:#fff}
+
+  .mono{font-family:var(--f-mono)}
+  .label{font-family:var(--f-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+
+  /* nav */
+  .bar{position:fixed;inset:0 0 auto;z-index:50;display:flex;align-items:center;justify-content:space-between;
+       padding:14px var(--pad);border-bottom:1px solid var(--line);background:#0d2a46e6;backdrop-filter:blur(12px)}
+  .bar .brand{font-weight:800;letter-spacing:-.03em;font-size:15px}
+  .bar .brand i{font-style:normal;color:var(--sig)}
+  .bar nav{display:flex;gap:28px;font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+  .bar nav a{position:relative;padding:4px 0}
+  .bar nav a::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:0;background:var(--ink);transition:width .3s}
+  .bar nav a:hover::after{width:100%}
+  .bar .status{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+  .dot{width:7px;height:7px;border-radius:50%;background:#17b26a;box-shadow:0 0 0 3px #17b26a22}
+
+  /* hero */
+  .hero{padding:calc(var(--pad) + 56px) var(--pad) 0;max-width:1440px;margin:0 auto}
+  .hero-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,300px);gap:clamp(24px,5vw,72px);align-items:end}
+  .eyebrow{display:flex;gap:14px;align-items:center;margin-bottom:26px}
+  .eyebrow .sig{width:34px;height:3px;background:var(--sig)}
+  h1.name{font-weight:900;font-size:clamp(58px,10.2vw,148px);line-height:.84;letter-spacing:-.055em}
+  h1.name .line{display:block;overflow:hidden}
+  h1.name .line span{display:block;transform:translateY(110%);transition:transform 1s cubic-bezier(.16,1,.3,1)}
+  body.loaded h1.name .line span{transform:translateY(0)}
+  h1.name .line:nth-child(2) span{transition-delay:.08s}
+  .hero-sub{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-top:30px;flex-wrap:wrap}
+  .hero-sub p{max-width:520px;font-size:15px;line-height:1.65;color:#c8d6e2}
+  .hero-sub p strong{font-weight:600}
+  .scroll-cue{font-family:var(--f-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);display:flex;align-items:center;gap:8px}
+  .scroll-cue::before{content:"";width:26px;height:1px;background:var(--dim);display:block}
+
+  .portrait{position:relative;border:1px solid var(--ink);background:#12304c}
+  .portrait::before,.portrait::after,.portrait .tick{content:"";position:absolute;width:10px;height:10px;border:1px solid var(--ink);background:var(--bg);z-index:2}
+  .portrait::before{left:-1px;top:-1px;border-right:0;border-bottom:0}
+  .portrait .tick{right:-1px;top:-1px;border-left:0;border-bottom:0}
+  .portrait::after{right:-1px;bottom:-1px;border-left:0;border-top:0}
+  .portrait .tick.b{left:-1px;bottom:-1px;border-right:0;border-top:0}
+  .portrait img{width:100%;aspect-ratio:3/4;object-fit:cover;filter:grayscale(1) contrast(1.05)}
+  .portrait figcaption{display:flex;justify-content:space-between;padding:8px 10px;border-top:1px solid var(--line);
+    font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+
+  .spec{margin-top:34px;border-top:1px solid var(--ink);display:grid;grid-template-columns:repeat(4,1fr)}
+  .spec div{padding:14px 16px 18px 0;border-right:1px solid var(--line)}
+  .spec div:last-child{border-right:0}
+  .spec dt{font-family:var(--f-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:7px}
+  .spec dd{font-size:14px;line-height:1.5;font-weight:500}
+
+  .metrics{border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);margin-top:24px;display:grid;grid-template-columns:repeat(4,1fr)}
+  .metric{padding:22px 18px 20px 0;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:4px}
+  .metric:last-child{border-right:0}
+  .metric b{font-weight:700;font-size:clamp(26px,3.4vw,44px);letter-spacing:-.045em;line-height:1}
+  .metric span{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+
+  /* section shell */
+  section{padding:clamp(56px,8vw,110px) var(--pad);max-width:1440px;margin:0 auto}
+  .sec-head{display:flex;align-items:baseline;gap:18px;margin-bottom:clamp(28px,4vw,52px)}
+  .sec-head .num{font-family:var(--f-mono);font-size:12px;color:#ff8a66;letter-spacing:.1em}
+  .sec-head h2{font-size:clamp(30px,4.2vw,56px);font-weight:800;letter-spacing:-.045em;line-height:1}
+  .sec-head .rule{flex:1;height:1px;background:var(--ink);opacity:.22;margin-left:8px}
+
+  /* about */
+  .about{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(32px,6vw,96px)}
+  .about p{font-size:clamp(17px,1.6vw,22px);line-height:1.6;letter-spacing:-.01em;color:#dbe6ef}
+  .about p+p{margin-top:1.1em}
+  .skills{display:grid;gap:22px}
+  .skill-group{border-top:1px solid var(--ink);padding-top:12px}
+  .skill-group h3{font-family:var(--f-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:10px}
+  .skill-group ul{list-style:none;display:flex;flex-wrap:wrap;gap:6px 8px}
+  .skill-group li{font-size:13px;line-height:1;border:1px solid var(--line);padding:7px 10px;background:#ffffff08}
+
+  /* experience */
+  .exp-row{display:grid;grid-template-columns:120px 1fr 1.4fr;gap:clamp(16px,3vw,48px);padding:26px 0;border-top:1px solid var(--line)}
+  .exp-row:last-child{border-bottom:1px solid var(--line)}
+  .exp-row .year{font-family:var(--f-mono);font-size:12px;color:var(--dim);letter-spacing:.06em;padding-top:4px}
+  .exp-row h3{font-size:clamp(18px,1.8vw,24px);font-weight:700;letter-spacing:-.02em;line-height:1.15}
+  .exp-row h3 small{display:block;font-family:var(--f-mono);font-size:12px;font-weight:400;letter-spacing:.04em;color:var(--dim);margin-top:7px}
+  .exp-row p{font-size:14px;line-height:1.7;color:#b4c4d3;max-width:56ch}
+
+  /* projects */
+  .proj-wrap{display:grid;grid-template-columns:1fr minmax(280px,420px);gap:clamp(24px,4vw,64px);align-items:start}
+  .proj-list{border-top:1px solid var(--ink)}
+  .proj-row{display:grid;grid-template-columns:44px 1fr 130px 22px;gap:16px;align-items:center;
+    padding:22px 8px 22px 0;border-bottom:1px solid var(--line);position:relative;transition:background .35s,color .35s,padding .35s}
+  .proj-row .idx{font-family:var(--f-mono);font-size:12px;color:var(--dim);transition:color .35s}
+  .proj-row .title{font-size:clamp(19px,2vw,28px);font-weight:700;letter-spacing:-.025em;line-height:1.15}
+  .proj-row .cat{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);transition:color .35s}
+  .proj-row .arrow{font-size:18px;justify-self:end;transition:transform .35s}
+  .proj-row:hover{background:var(--ink);color:var(--paper);padding-left:14px}
+  .proj-row:hover .idx,.proj-row:hover .cat{color:#53697f}
+  .proj-row:hover .arrow{transform:translate(3px,-3px)}
+  .proj-thumb{display:none}
+  .preview{position:sticky;top:96px;border:1px solid var(--ink);background:#12304c;overflow:hidden}
+  .preview img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;opacity:0;position:absolute;inset:0;transition:opacity .45s}
+  .preview img.on{opacity:1}
+  .preview .ph{width:100%;aspect-ratio:16/10;display:flex;align-items:flex-end;padding:18px;
+    background:repeating-linear-gradient(135deg,#0000 0 10px,#ffffff08 10px 11px),var(--bg)}
+  .preview .ph span{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);line-height:1.6}
+  .preview figcaption{display:flex;justify-content:space-between;padding:9px 12px;border-top:1px solid var(--ink);
+    font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;background:var(--paper);position:relative;z-index:2}
+
+  /* contact */
+  .contact{border-top:1px solid var(--ink);padding-top:clamp(40px,6vw,80px)}
+  .contact h2{font-size:clamp(52px,10vw,150px);font-weight:900;letter-spacing:-.055em;line-height:.85;margin-bottom:32px}
+  .contact h2 i{font-style:normal;color:var(--sig)}
+  .contact-mail{display:inline-block;font-size:clamp(20px,3vw,40px);font-weight:600;letter-spacing:-.02em;border-bottom:2px solid var(--ink);padding-bottom:4px;transition:color .3s,border-color .3s}
+  .contact-mail:hover{color:var(--sig);border-color:var(--sig)}
+  .contact-links{display:flex;gap:28px;margin-top:40px;flex-wrap:wrap}
+  .contact-links a{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--line);padding:12px 18px;transition:background .3s,color .3s}
+  .contact-links a:hover{background:var(--ink);color:var(--paper)}
+  footer{padding:24px var(--pad);border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+    font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);max-width:1440px;margin:0 auto}
+
+  /* reveals */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  @media (max-width:900px){
+    .bar nav{display:none}
+    .hero-top{grid-template-columns:1fr}
+    .portrait{max-width:260px}
+    .spec{grid-template-columns:repeat(2,1fr)}
+    .metrics{grid-template-columns:repeat(2,1fr)}
+    .metric:nth-child(2){border-right:0}
+    .metric:nth-child(-n+2){border-bottom:1px solid var(--line)}
+    .about{grid-template-columns:1fr}
+    .exp-row{grid-template-columns:90px 1fr}
+    .exp-row p{grid-column:2}
+    .proj-wrap{grid-template-columns:1fr}
+    .preview{display:none}
+    .proj-thumb{display:block;width:calc(100% + 8px);aspect-ratio:16/10;object-fit:cover;object-position:top;
+      margin:10px 0 0;border:1px solid var(--line)}
+    .proj-row{grid-template-columns:34px 1fr 22px;row-gap:6px}
+    .proj-row .cat{grid-column:2}
+  }
+  @media (max-width:520px){
+    .hero-sub{gap:16px}
+    .spec div{padding-right:10px}
+    .exp-row{grid-template-columns:1fr;gap:8px}
+    .exp-row p{grid-column:1}
+    .bar .status{display:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <a class="brand" href="#top">C.G.<i> /</i> 2026</a>
+  <nav>
+    <a href="#perfil">Perfil</a>
+    <a href="#experiencia">Experiencia</a>
+    <a href="#proyectos">Proyectos</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+  <span class="status"><i class="dot"></i>Disponible · Reubicación</span>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="hero-top">
+      <div>
+        <div class="eyebrow"><span class="sig"></span><span class="label">Ingeniero mecatrónico, full stack y DevOps</span></div>
+        <h1 class="name">
+          <span class="line"><span>CARLOS</span></span>
+          <span class="line"><span>GORDILLO</span></span>
+        </h1>
+      </div>
+      <figure class="portrait">
+        <span class="tick"></span><span class="tick b"></span>
+        <img src="../public/perfil.jpeg" alt="Carlos Gordillo">
+        <figcaption><span>Fig. 01</span><span>Puerto Boyacá, CO</span></figcaption>
+      </figure>
+    </div>
+
+    <div class="hero-sub">
+      <p><strong>Del PLC al contenedor.</strong> Diseño ecosistemas digitales que conectan sensores, APIs e infraestructura: React, Node.js, Docker, n8n y modelos de deep learning.</p>
+      <span class="scroll-cue">Desplázate para ver el sistema</span>
+    </div>
+
+    <dl class="spec">
+      <div><dt>Rol</dt><dd>Full Stack &amp; DevOps<br>Especialista IoT</dd></div>
+      <div><dt>Base</dt><dd>Puerto Boyacá<br>Boyacá, Colombia</dd></div>
+      <div><dt>Estado</dt><dd>Disponible<br>Reubicación inmediata</dd></div>
+      <div><dt>Idiomas</dt><dd>Español nativo<br>Inglés técnico</dd></div>
+    </dl>
+
+    <div class="metrics">
+      <div class="metric"><b data-count="6" data-pad="2">00</b><span>Proyectos</span></div>
+      <div class="metric"><b data-count="50" data-suffix="k+">0</b><span>Registros ETL</span></div>
+      <div class="metric"><b data-count="1" data-pad="2">00</b><span>1.er puesto DL</span></div>
+      <div class="metric"><b data-count="3" data-pad="2">00</b><span>Años construyendo</span></div>
+    </div>
+  </section>
+
+  <section id="perfil">
+    <div class="sec-head"><span class="num">01</span><h2>Perfil</h2><span class="rule"></span></div>
+    <div class="about">
+      <div class="reveal">
+        <p>Mi trabajo empieza en la señal y termina en producción: PLCs y microcontroladores por un lado; React, PostgreSQL y contenedores por el otro. Diseño el sistema completo, no una capa suelta.</p>
+        <p>Orquesto Docker sobre servidores Linux propios, expongo servicios con Cloudflare Tunnel y automatizo la ingesta con n8n. He procesado más de 50.000 registros en pipelines ETL y desplegado dashboards de monitoreo en tiempo real.</p>
+        <p>Cuando no estoy desplegando, estoy modelando en Fusion 360, imprimiendo en 3D o entrenando modelos LSTM y Transformers.</p>
+      </div>
+      <div class="skills reveal">
+        <div class="skill-group">
+          <h3>Software &amp; IA</h3>
+          <ul><li>React</li><li>Next.js</li><li>TypeScript</li><li>Node.js</li><li>Python</li><li>LSTM / Transformers</li><li>PostgreSQL</li></ul>
+        </div>
+        <div class="skill-group">
+          <h3>Automatización &amp; hardware</h3>
+          <ul><li>PLC · Ladder</li><li>SCADA / DCS</li><li>Arduino</li><li>ESP32</li><li>Fusion 360</li><li>Impresión 3D</li><li>IoT · MQTT</li></ul>
+        </div>
+        <div class="skill-group">
+          <h3>Infraestructura &amp; datos</h3>
+          <ul><li>Docker</li><li>n8n</li><li>Cloudflare Tunnel</li><li>Zero Trust</li><li>Linux · VPS</li><li>Pipelines ETL</li><li>Git</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experiencia">
+    <div class="sec-head"><span class="num">02</span><h2>Experiencia</h2><span class="rule"></span></div>
+    <div class="exp-list reveal">
+      <article class="exp-row">
+        <span class="year">2026 — hoy</span>
+        <h3>SENA<small>Instructor · Sistemas Teleinformáticos</small></h3>
+        <p>Docencia técnica en programación y desarrollo de software. Diseño curricular por competencias, laboratorios prácticos y metodologías activas con resultados medibles.</p>
+      </article>
+      <article class="exp-row">
+        <span class="year">2025</span>
+        <h3>Universidad de Pamplona<small>Gestor de Convenios · Automatización</small></h3>
+        <p>Arquitectura full stack en servidor Linux propio: React, Node.js y PostgreSQL en Docker. Pipeline ETL con n8n para más de 50.000 registros y despliegue seguro vía Cloudflare Tunnel.</p>
+      </article>
+      <article class="exp-row">
+        <span class="year">2024 — hoy</span>
+        <h3>Consultoría independiente<small>Full Stack &amp; IoT</small></h3>
+        <p>Productos con Next.js y Docker sobre VPS propio. Automatización con Python y n8n, modelos de series temporales y prototipado mecatrónico completo: CAD, impresión 3D y firmware.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="proyectos">
+    <div class="sec-head"><span class="num">03</span><h2>Proyectos</h2><span class="rule"></span></div>
+    <div class="proj-wrap">
+      <div class="proj-list reveal" id="projList">
+        <a class="proj-row" href="https://github.com/c26200/saas-landing-page" target="_blank" rel="noopener"
+           data-img="../public/projects/saas-landing-page.webp" data-cap="Nexus — Landing SaaS">
+          <span class="idx">01</span><span class="title">Nexus</span><span class="cat">Landing SaaS</span><span class="arrow">↗</span>
+          <img class="proj-thumb" src="../public/projects/saas-landing-page.webp" alt="Nexus">
+        </a>
+        <a class="proj-row" href="https://github.com/c26200/dashboard-glass-ui" target="_blank" rel="noopener"
+           data-img="../public/projects/dashboard-glass-ui.webp" data-cap="DashGlass — Dashboard">
+          <span class="idx">02</span><span class="title">DashGlass</span><span class="cat">Dashboard analítico</span><span class="arrow">↗</span>
+          <img class="proj-thumb" src="../public/projects/dashboard-glass-ui.webp" alt="DashGlass">
+        </a>
+        <a class="proj-row" href="https://github.com/c26200/cinetrack" target="_blank" rel="noopener"
+           data-img="../public/projects/cinetrack.webp" data-cap="CineTrack — Watchlist">
+          <span class="idx">03</span><span class="title">CineTrack</span><span class="cat">Watchlist · React 19</span><span class="arrow">↗</span>
+          <img class="proj-thumb" src="../public/projects/cinetrack.webp" alt="CineTrack">
+        </a>
+        <a class="proj-row" href="https://github.com/c26200/kanban-task-manager" target="_blank" rel="noopener"
+           data-img="../public/projects/kanban-task-manager.webp" data-cap="Kanban Flow — Tareas">
+          <span class="idx">04</span><span class="title">Kanban Flow</span><span class="cat">Gestión de tareas</span><span class="arrow">↗</span>
+          <img class="proj-thumb" src="../public/projects/kanban-task-manager.webp" alt="Kanban Flow">
+        </a>
+        <a class="proj-row" href="https://github.com/c26200/trading-predictor" target="_blank" rel="noopener"
+           data-img="" data-cap="Trading Predictor — 1.er puesto">
+          <span class="idx">05</span><span class="title">Trading Predictor</span><span class="cat">Deep Learning</span><span class="arrow">↗</span>
+        </a>
+        <a class="proj-row" href="#contacto" data-img="" data-cap="Convenios — Plataforma privada">
+          <span class="idx">06</span><span class="title">Gestión de Convenios</span><span class="cat">Full Stack · Docker</span><span class="arrow">→</span>
+        </a>
+      </div>
+      <figure class="preview reveal" aria-hidden="true">
+        <div class="ph" id="ph"><span id="phTxt">Selecciona un proyecto<br>para ver la captura</span></div>
+        <img id="previewImg" alt="">
+        <figcaption><span id="previewCap">FIG. 02</span><span>Interfaz real</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="contacto" class="contact">
+    <span class="label">04 — Contacto</span>
+    <h2>HABLEMOS<i>.</i></h2>
+    <a class="contact-mail" href="mailto:cmgm26200@gmail.com">cmgm26200@gmail.com</a>
+    <div class="contact-links">
+      <a href="https://www.linkedin.com/in/cmgordillo26/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="https://github.com/c26200" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="tel:+573114900238">+57 311 490 0238</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>Carlos Manuel Gordillo Mora — 2026</span>
+  <span>Diseñado y construido en Colombia</span>
+</footer>
+
+<script>
+  document.body.classList.add('loaded');
+
+  // Reveals
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+  // Count-up metrics
+  const counters = document.querySelectorAll('[data-count]');
+  const cio = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      const end = Number(el.dataset.count);
+      const pad = Number(el.dataset.pad || 0);
+      const suffix = el.dataset.suffix || '';
+      const t0 = performance.now();
+      const dur = 1200;
+      const tick = (now) => {
+        const p = Math.min(1, (now - t0) / dur);
+        const eased = 1 - Math.pow(1 - p, 3);
+        let v = String(Math.round(end * eased));
+        if (pad) v = v.padStart(pad, '0');
+        el.textContent = v + suffix;
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+      cio.unobserve(el);
+    });
+  }, { threshold: 0.6 });
+  counters.forEach((c) => cio.observe(c));
+
+  // Project preview
+  const previewImg = document.getElementById('previewImg');
+  const previewCap = document.getElementById('previewCap');
+  const ph = document.getElementById('ph');
+  const rows = document.querySelectorAll('.proj-row');
+  rows.forEach((row) => {
+    row.addEventListener('mouseenter', () => {
+      const src = row.dataset.img;
+      previewCap.textContent = row.dataset.cap || 'FIG. 02';
+      if (src) {
+        previewImg.src = src;
+        previewImg.classList.add('on');
+        ph.style.display = 'none';
+      } else {
+        previewImg.classList.remove('on');
+        ph.style.display = 'flex';
+        document.getElementById('phTxt').innerHTML = (row.dataset.cap || '') + '<br><span style="opacity:.6">Sin captura pública</span>';
+      }
+    });
+  });
+</script>
+</body>
+</html>

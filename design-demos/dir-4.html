@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carlos Gordillo — Editorial cinético</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#0a0a0a; --cream:#f2efe8; --dim:#8f8f87; --line:#ffffff1f;
+    --red:#d64524;
+    --serif:"Fraunces",Georgia,serif; --sans:"Space Grotesk",system-ui,sans-serif; --mono:"JetBrains Mono",monospace;
+    --pad:clamp(20px,4vw,60px);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--black);color:var(--cream);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  ::selection{background:var(--red);color:#fff}
+
+  .bar{position:fixed;inset:0 0 auto;z-index:60;display:flex;justify-content:space-between;align-items:center;
+    padding:18px var(--pad);mix-blend-mode:difference}
+  .bar .brand{font-family:var(--serif);font-size:22px}
+  .bar nav{display:flex;gap:26px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+  .bar nav a{opacity:.7;transition:opacity .3s}
+  .bar nav a:hover{opacity:1}
+
+  /* hero */
+  .hero{min-height:100svh;position:relative;display:flex;flex-direction:column;justify-content:space-between;padding:110px var(--pad) 0}
+  .mark-wrap{position:absolute;inset:0;display:flex;align-items:flex-start;justify-content:center;padding-top:132px;pointer-events:none}
+  .mark{display:grid;grid-template-columns:repeat(13,1fr);gap:5px;width:min(48vw,470px);pointer-events:auto}
+  .mark i{aspect-ratio:1;background:#f2efe80d;transition:background .45s,transform .45s}
+  .mark i.on{background:var(--cream)}
+  .mark i.hot{background:var(--red)}
+  .hero-top{position:relative;z-index:2;display:flex;justify-content:space-between;gap:20px;padding-top:20px}
+  .hero-top p{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);max-width:280px;line-height:1.7}
+  .hero-bottom{position:relative;z-index:2;padding-bottom:38px}
+  h1{font-family:var(--serif);font-weight:300;font-size:clamp(72px,16vw,230px);line-height:.8;letter-spacing:-.035em}
+  h1 em{font-style:italic;font-weight:300;color:#f2efe8a6}
+  .hero-foot{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;border-top:1px solid var(--line);margin-top:26px;padding-top:16px;flex-wrap:wrap}
+  .hero-foot p{font-size:14px;line-height:1.6;max-width:44ch;color:#c9c9c1}
+  .hero-foot a{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;border-bottom:1px solid var(--cream);padding-bottom:3px;transition:color .3s,border-color .3s}
+  .hero-foot a:hover{color:var(--red);border-color:var(--red)}
+
+  .marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;white-space:nowrap;background:var(--black)}
+  .marquee div{display:inline-flex;animation:marq 30s linear infinite;padding:14px 0;font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#bdbdb5}
+  .marquee span{padding-right:38px}
+  .marquee b{color:var(--red);font-weight:400;padding-right:38px}
+  @keyframes marq{to{transform:translateX(-50%)}}
+
+  /* cream band */
+  .cream{background:var(--cream);color:var(--black)}
+  .cream .dim{color:#5f5f58}
+
+  section{padding:clamp(72px,9vw,130px) var(--pad)}
+  .wrap{max-width:1400px;margin:0 auto}
+  .label{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+  h2{font-family:var(--serif);font-weight:300;font-size:clamp(40px,7vw,104px);line-height:.92;letter-spacing:-.03em}
+  h2 em{font-style:italic;font-weight:300}
+
+  .manifesto p.big{font-family:var(--serif);font-weight:300;font-size:clamp(34px,5.4vw,78px);line-height:1.02;letter-spacing:-.025em;max-width:18ch}
+  .manifesto .cols{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(30px,6vw,100px);margin-top:clamp(40px,6vw,80px);border-top:1px solid #0a0a0a24;padding-top:26px}
+  .manifesto .cols p{font-size:15px;line-height:1.7;color:#3f3f38;max-width:52ch}
+  .manifesto .cols p+p{margin-top:1em}
+  .manifesto .facts{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+  .fact b{display:block;font-family:var(--serif);font-size:clamp(36px,4vw,58px);font-weight:300;line-height:.95}
+  .fact span{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#5f5f58}
+
+  .work-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:clamp(34px,5vw,64px)}
+  .work{padding-bottom:0}
+  .project{border-top:1px solid var(--line);padding:clamp(26px,4vw,48px) 0;display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(20px,5vw,80px);align-items:center}
+  .project.rev .txt{order:2}
+  .project.rev .shot{order:1}
+  .project .idx{font-family:var(--mono);font-size:12px;color:var(--dim);margin-bottom:14px;display:block}
+  .project h3{font-family:var(--serif);font-weight:300;font-size:clamp(38px,5vw,72px);line-height:.95;letter-spacing:-.03em}
+  .project .cat{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin:12px 0 18px}
+  .project p.desc{font-size:14.5px;line-height:1.7;color:#bcbcb4;max-width:44ch;margin-bottom:22px}
+  .project .stack{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:24px}
+  .project .stack span{font-family:var(--mono);font-size:12px;border:1px solid #ffffff2b;border-radius:99px;padding:6px 11px;color:#cfcfc7}
+  .project .go{display:inline-flex;gap:8px;align-items:center;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;border-bottom:1px solid var(--cream);padding-bottom:3px;transition:color .3s,border-color .3s}
+  .project .go:hover{color:var(--red);border-color:var(--red)}
+  .shot{position:relative;overflow:hidden;border:1px solid var(--line);background:#111}
+  .shot img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;transform:scale(1.06);transition:transform 1.2s cubic-bezier(.16,1,.3,1)}
+  .shot::after{content:"";position:absolute;inset:0;background:var(--black);transform:scaleY(1);transform-origin:bottom;transition:transform 1s cubic-bezier(.16,1,.3,1)}
+  .shot.in::after{transform:scaleY(0)}
+  .shot.in img{transform:scale(1)}
+  .project:hover .shot img{transform:scale(1.03)}
+
+  /* exp */
+  .exp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,4vw,50px);margin-top:clamp(34px,5vw,60px)}
+  .exp-card{border-top:1px solid #0a0a0a33;padding-top:16px}
+  .exp-card .yr{font-family:var(--mono);font-size:12px;color:#5f5f58}
+  .exp-card h3{font-family:var(--serif);font-weight:400;font-size:clamp(24px,2.6vw,34px);line-height:1.02;margin:10px 0 4px}
+  .exp-card .role{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#5f5f58;margin-bottom:12px}
+  .exp-card p{font-size:14px;line-height:1.7;color:#3f3f38}
+
+  /* contact */
+  .contact{padding-bottom:clamp(60px,8vw,100px)}
+  .contact h2{font-size:clamp(64px,15vw,220px)}
+  .contact h2 em{color:#f2efe866}
+  .contact-row{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;margin-top:30px}
+  .mail{font-family:var(--serif);font-size:clamp(20px,2.6vw,34px);border-bottom:1px solid #ffffff66;padding-bottom:4px;transition:color .3s,border-color .3s}
+  .mail:hover{color:var(--red);border-color:var(--red)}
+  .socials{display:flex;gap:10px;flex-wrap:wrap}
+  .socials a{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--line);border-radius:99px;padding:10px 15px;transition:background .3s,color .3s}
+  .socials a:hover{background:var(--cream);color:var(--black)}
+  footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#7e7e76}
+
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  @media (max-width:900px){
+    .bar nav{display:none}
+    .project{grid-template-columns:1fr;gap:20px}
+    .project.rev .txt,.project.rev .shot{order:0}
+    .manifesto .cols{grid-template-columns:1fr}
+    .exp-grid{grid-template-columns:1fr}
+    .mark{width:76vw}
+    .hero-top p{max-width:220px}
+  }
+  @media (max-width:520px){
+    h1{font-size:clamp(60px,18vw,90px)}
+    .hero-foot p{font-size:13px}
+    .project p.desc{font-size:13.5px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .marquee div{animation:none}
+    .reveal{opacity:1;transform:none;transition:none}
+    .shot::after{display:none}
+    .shot img{transform:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <a class="brand" href="#top">Carlos Gordillo©</a>
+  <nav><a href="#perfil">Perfil</a><a href="#trabajo">Trabajo</a><a href="#experiencia">Experiencia</a><a href="#contacto">Contacto</a></nav>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="mark-wrap"><div class="mark" id="mark" aria-hidden="true"></div></div>
+    <div class="hero-top">
+      <p>Ingeniero mecatrónico<br>Full stack · DevOps</p>
+      <p style="text-align:right">Puerto Boyacá, CO<br>2026</p>
+    </div>
+    <div class="hero-bottom">
+      <h1>Carlos<br><em>Gordillo</em></h1>
+      <div class="hero-foot">
+        <p>Del PLC al contenedor. Diseño hardware, software e infraestructura como un solo sistema y lo llevo hasta producción.</p>
+        <a href="#trabajo">Ver trabajo ↓</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div>
+      <span>Mecatrónica</span><b>—</b><span>Full stack</span><b>—</b><span>Docker</span><b>—</b><span>Automatización</span><b>—</b><span>IoT</span><b>—</b>
+      <span>Mecatrónica</span><b>—</b><span>Full stack</span><b>—</b><span>Docker</span><b>—</b><span>Automatización</span><b>—</b><span>IoT</span><b>—</b>
+    </div>
+  </div>
+
+  <section class="cream" id="perfil">
+    <div class="wrap manifesto">
+      <p class="label dim reveal">01 — Perfil</p>
+      <p class="big reveal">Un ingeniero que entiende la señal del sensor y la consulta a la base de datos.</p>
+      <div class="cols">
+        <div class="reveal">
+          <p>Mi trabajo empieza en la señal y termina en producción. Diseño PLCs, firmware y prototipos mecatrónicos; al otro lado, React, PostgreSQL y contenedores en servidores Linux propios.</p>
+          <p>He automatizado la ingesta de más de 50.000 registros con pipelines ETL en n8n, desplegado servicios con Cloudflare Tunnel y llevado proyectos frontend de cero a producción.</p>
+        </div>
+        <div class="facts reveal">
+          <div class="fact"><b>06</b><span>Proyectos</span></div>
+          <div class="fact"><b>50k+</b><span>Registros ETL</span></div>
+          <div class="fact"><b>1.º</b><span>Puesto DL</span></div>
+          <div class="fact"><b>3</b><span>Años</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="trabajo" class="work">
+    <div class="wrap">
+      <div class="work-head">
+        <div><p class="label reveal">02 — Trabajo</p><h2 class="reveal">Cuatro piezas,<br><em>un criterio.</em></h2></div>
+        <p class="label reveal">2025 — 2026</p>
+      </div>
+
+      <article class="project">
+        <div class="txt reveal">
+          <span class="idx">01 / 04</span>
+          <h3>Nexus</h3>
+          <p class="cat">Landing SaaS · React</p>
+          <p class="desc">Landing de producto de IA con bento grid, animaciones al hacer scroll y navbar glassmorphism. Diseño oscuro con acentos violeta.</p>
+          <div class="stack"><span>React</span><span>Tailwind</span><span>Framer Motion</span></div>
+          <a class="go" href="https://github.com/c26200/saas-landing-page" target="_blank" rel="noopener">Ver código ↗</a>
+        </div>
+        <a class="shot" href="https://github.com/c26200/saas-landing-page" target="_blank" rel="noopener"><img src="../public/projects/saas-landing-page.webp" alt="Nexus"></a>
+      </article>
+
+      <article class="project rev">
+        <div class="txt reveal">
+          <span class="idx">02 / 04</span>
+          <h3>DashGlass</h3>
+          <p class="cat">Dashboard analítico</p>
+          <p class="desc">Panel glassmorphism con ingresos, usuarios activos, gráficas de Recharts y panel de transacciones. Tema claro y oscuro.</p>
+          <div class="stack"><span>React</span><span>Recharts</span><span>Tailwind</span></div>
+          <a class="go" href="https://github.com/c26200/dashboard-glass-ui" target="_blank" rel="noopener">Ver código ↗</a>
+        </div>
+        <a class="shot" href="https://github.com/c26200/dashboard-glass-ui" target="_blank" rel="noopener"><img src="../public/projects/dashboard-glass-ui.webp" alt="DashGlass"></a>
+      </article>
+
+      <article class="project">
+        <div class="txt reveal">
+          <span class="idx">03 / 04</span>
+          <h3>CineTrack</h3>
+          <p class="cat">Watchlist · React 19</p>
+          <p class="desc">Watchlist personal con búsqueda en OMDB, vistas kanban, grid y lista, puntuación por estrellas y notas. Persistencia local sin backend.</p>
+          <div class="stack"><span>React 19</span><span>Vite</span><span>OMDB API</span></div>
+          <a class="go" href="https://github.com/c26200/cinetrack" target="_blank" rel="noopener">Ver código ↗</a>
+        </div>
+        <a class="shot" href="https://github.com/c26200/cinetrack" target="_blank" rel="noopener"><img src="../public/projects/cinetrack.webp" alt="CineTrack"></a>
+      </article>
+
+      <article class="project rev">
+        <div class="txt reveal">
+          <span class="idx">04 / 04</span>
+          <h3>Kanban Flow</h3>
+          <p class="cat">Gestión de tareas</p>
+          <p class="desc">Tablero con arrastrar y soltar entre columnas, edición en línea y persistencia en localStorage. Interfaz oscura minimalista.</p>
+          <div class="stack"><span>React</span><span>@dnd-kit</span><span>Tailwind</span></div>
+          <a class="go" href="https://github.com/c26200/kanban-task-manager" target="_blank" rel="noopener">Ver código ↗</a>
+        </div>
+        <a class="shot" href="https://github.com/c26200/kanban-task-manager" target="_blank" rel="noopener"><img src="../public/projects/kanban-task-manager.webp" alt="Kanban Flow"></a>
+      </article>
+    </div>
+  </section>
+
+  <section class="cream" id="experiencia">
+    <div class="wrap">
+      <p class="label dim reveal">03 — Experiencia</p>
+      <h2 class="reveal">Dónde he <em>construido.</em></h2>
+      <div class="exp-grid">
+        <article class="exp-card reveal">
+          <span class="yr">2026 — hoy</span>
+          <h3>SENA</h3>
+          <p class="role">Instructor · Sistemas Teleinformáticos</p>
+          <p>Docencia en programación y desarrollo. Diseño curricular por competencias, laboratorios y metodologías activas.</p>
+        </article>
+        <article class="exp-card reveal">
+          <span class="yr">2025</span>
+          <h3>Universidad de Pamplona</h3>
+          <p class="role">Gestor de Convenios · Automatización</p>
+          <p>Full stack en Linux propio con Docker. Pipeline ETL para 50.000 registros y despliegue seguro con Cloudflare Tunnel.</p>
+        </article>
+        <article class="exp-card reveal">
+          <span class="yr">2024 — hoy</span>
+          <h3>Consultoría independiente</h3>
+          <p class="role">Full Stack &amp; IoT</p>
+          <p>Next.js y Docker sobre VPS propio, automatización con Python y n8n, modelos de series temporales y prototipado mecatrónico.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto" class="contact">
+    <div class="wrap">
+      <p class="label reveal">04 — Contacto</p>
+      <h2 class="reveal">Hablemos<em>.</em></h2>
+      <div class="contact-row">
+        <a class="mail" href="mailto:cmgm26200@gmail.com">cmgm26200@gmail.com</a>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/cmgordillo26/" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a href="https://github.com/c26200" target="_blank" rel="noopener">GitHub ↗</a>
+          <a href="tel:+573114900238">+57 311 490 0238</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>Carlos Manuel Gordillo Mora — 2026</span>
+  <span>Puerto Boyacá, Colombia</span>
+</footer>
+
+<script>
+  // Pixel mark: C G in an 13 x 6 bitmap
+  const bitmap = [
+    '0111000001110',
+    '1000100010001',
+    '1000000010000',
+    '1000000010111',
+    '1000100010001',
+    '0111000001110',
+  ];
+  const mark = document.getElementById('mark');
+  const cells = [];
+  bitmap.forEach((row) => {
+    for (const bit of row) {
+      const cell = document.createElement('i');
+      if (bit === '1') cell.classList.add('on');
+      mark.appendChild(cell);
+      cells.push(cell);
+    }
+  });
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce) {
+    window.addEventListener('pointermove', (e) => {
+      const rect = mark.getBoundingClientRect();
+      const relX = (e.clientX - rect.left) / rect.width;
+      const relY = (e.clientY - rect.top) / rect.height;
+      if (relX < -0.2 || relX > 1.2 || relY < -0.3 || relY > 1.3) return;
+      const col = Math.floor(relX * 13);
+      const row = Math.floor(relY * 6);
+      cells.forEach((c, i) => {
+        const x = i % 13, y = Math.floor(i / 13);
+        if (Math.hypot(x - col, y - row) < 1.6) {
+          c.classList.add('hot');
+          setTimeout(() => c.classList.remove('hot'), 500);
+        }
+      });
+    }, { passive: true });
+
+    setInterval(() => {
+      const i = Math.floor(Math.random() * cells.length);
+      cells[i].classList.add('hot');
+      setTimeout(() => cells[i].classList.remove('hot'), 700);
+    }, 1600);
+  }
+
+  // Reveals + image wipes
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.14, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal, .shot').forEach((el) => io.observe(el));
+</script>
+</body>
+</html>
