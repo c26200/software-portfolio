@@ -17,8 +17,8 @@ export default function Hero() {
               <br />
               <em>Gordillo</em>
             </span>
+            <span className="hero-role">{t('kinetic.h1Role')}</span>
           </h1>
-          <p className="hero-role">{t('kinetic.h1Role')}</p>
           <p className="kicker hero-location">
             <i aria-hidden="true" />
             {t('kinetic.location')}
