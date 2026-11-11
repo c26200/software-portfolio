@@ -8,11 +8,24 @@ export default function Contact() {
       <div className="sec-top">
         <span>06 — {t('nav.contact')}</span>
       </div>
-      <h2>
-        {t('kinetic.contactTitleA')}
-        <br />
-        <em>{t('kinetic.contactTitleEm')}</em>
-      </h2>
+      <div className="contact-top">
+        <h2>
+          {t('kinetic.contactTitleA')}
+          <br />
+          <em>{t('kinetic.contactTitleEm')}</em>
+        </h2>
+        <figure className="contact-portrait">
+          <img
+            src="/img/carlos-gordillo-cut.webp"
+            alt={t('portrait.alt')}
+            width={800}
+            height={800}
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption>{t('portrait.captionShort')}</figcaption>
+        </figure>
+      </div>
       <div className="contact-row">
         <a className="mail" href={`mailto:${t('contact.email')}`}>
           {t('contact.email')}

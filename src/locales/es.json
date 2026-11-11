@@ -134,12 +134,30 @@
     "lead": "Ingeniero mecatrónico de la Universidad de Pamplona y desarrollador full stack e IA. Construyo productos completos y opero la infraestructura que los sostiene.",
     "photoAlt": "Carlos Gordillo, ingeniero mecatrónico y desarrollador full stack e IA",
     "facts": [
-      { "label": "Nombre completo", "value": "Carlos Manuel Gordillo Mora" },
-      { "label": "Ciudad", "value": "Puerto Boyacá, Boyacá, Colombia" },
-      { "label": "Especialidad", "value": "Desarrollo Full Stack e IA" },
-      { "label": "Formación", "value": "Ingeniería Mecatrónica, Universidad de Pamplona" },
-      { "label": "Idiomas", "value": "Español nativo · Inglés técnico" },
-      { "label": "Disponibilidad", "value": "Abierto a proyectos y posiciones" }
+      {
+        "label": "Nombre completo",
+        "value": "Carlos Manuel Gordillo Mora"
+      },
+      {
+        "label": "Ciudad",
+        "value": "Puerto Boyacá, Boyacá, Colombia"
+      },
+      {
+        "label": "Especialidad",
+        "value": "Desarrollo Full Stack e IA"
+      },
+      {
+        "label": "Formación",
+        "value": "Ingeniería Mecatrónica, Universidad de Pamplona"
+      },
+      {
+        "label": "Idiomas",
+        "value": "Español nativo · Inglés técnico"
+      },
+      {
+        "label": "Disponibilidad",
+        "value": "Abierto a proyectos y posiciones"
+      }
     ],
     "bioTitle": "Cómo llegué aquí",
     "bio": [
@@ -372,5 +390,10 @@
       "deploy": "Contenedor a producción con Cloudflare Tunnel.",
       "monitor": "Comprobación de salud y logs en vivo."
     }
+  },
+  "portrait": {
+    "alt": "Retrato de Carlos Gordillo, ingeniero mecatrónico y desarrollador full stack e IA",
+    "caption": "Carlos Gordillo · Puerto Boyacá, Boyacá · 2026",
+    "captionShort": "Puerto Boyacá · 2026"
   }
 }

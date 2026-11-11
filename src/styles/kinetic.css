@@ -912,3 +912,34 @@ html.has-cursor * {
   .sobre-row { grid-template-columns: 1fr; gap: 4px; }
   .sobre-row .yr { padding-top: 0; }
 }
+
+/* --- contacto: retrato pequeño ------------------------------------------ */
+.contact-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: clamp(24px, 5vw, 64px);
+  align-items: end;
+}
+.contact-portrait {
+  margin: 0;
+  width: clamp(150px, 17vw, 220px);
+}
+.contact-portrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+  -webkit-mask-image: linear-gradient(to bottom, #000 82%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 82%, transparent 100%);
+}
+.contact-portrait figcaption {
+  margin-top: 8px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+@media (max-width: 760px) {
+  .contact-top { grid-template-columns: 1fr; }
+  .contact-portrait { width: 150px; }
+}

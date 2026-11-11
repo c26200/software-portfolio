@@ -134,12 +134,30 @@
     "lead": "Mechatronics engineer from Universidad de Pamplona and full stack and AI developer. I build complete products and operate the infrastructure behind them.",
     "photoAlt": "Carlos Gordillo, mechatronics engineer and full stack and AI developer",
     "facts": [
-      { "label": "Full name", "value": "Carlos Manuel Gordillo Mora" },
-      { "label": "Location", "value": "Puerto Boyacá, Boyacá, Colombia" },
-      { "label": "Focus", "value": "Full Stack & AI development" },
-      { "label": "Education", "value": "Mechatronics Engineering, Universidad de Pamplona" },
-      { "label": "Languages", "value": "Spanish native · English technical" },
-      { "label": "Availability", "value": "Open to projects and positions" }
+      {
+        "label": "Full name",
+        "value": "Carlos Manuel Gordillo Mora"
+      },
+      {
+        "label": "Location",
+        "value": "Puerto Boyacá, Boyacá, Colombia"
+      },
+      {
+        "label": "Focus",
+        "value": "Full Stack & AI development"
+      },
+      {
+        "label": "Education",
+        "value": "Mechatronics Engineering, Universidad de Pamplona"
+      },
+      {
+        "label": "Languages",
+        "value": "Spanish native · English technical"
+      },
+      {
+        "label": "Availability",
+        "value": "Open to projects and positions"
+      }
     ],
     "bioTitle": "How I got here",
     "bio": [
@@ -372,5 +390,10 @@
       "deploy": "Container to production via Cloudflare Tunnel.",
       "monitor": "Health check and live logs."
     }
+  },
+  "portrait": {
+    "alt": "Portrait of Carlos Gordillo, mechatronics engineer and full stack and AI developer",
+    "caption": "Carlos Gordillo · Puerto Boyacá, Boyacá · 2026",
+    "captionShort": "Puerto Boyacá · 2026"
   }
 }
