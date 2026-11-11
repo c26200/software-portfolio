@@ -991,8 +991,8 @@ html.has-cursor * {
    la izquierda y se desactiva la partición de palabras. */
 @media (max-width: 900px) {
   :root {
-    --prose-align: justify;
-    --prose-hyphens: auto;
+    --prose-align: left;
+    --prose-hyphens: manual;
   }
 }
 
@@ -1137,4 +1137,211 @@ html.has-cursor * {
 .marquee:hover .marquee-track { animation-play-state: paused; }
 @media (prefers-reduced-motion: reduce) {
   .marquee:hover .marquee-track { animation-play-state: running; }
+}
+
+/* --- móvil: barra de control del carrusel centrada ---------------------- */
+@media (max-width: 900px) {
+  .rail-foot {
+    justify-content: center;
+    gap: 14px;
+    margin-top: 18px;
+  }
+  .rail-line { display: none; }
+  .rail-toggle { min-height: 40px; }
+}
+
+/* --- móvil: cajas que deben ocupar el ancho para centrar de verdad ------ */
+@media (max-width: 900px) {
+  .hero-role {
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  /* La flecha de la tarjeta está oculta: su margen reservado descuadra el texto */
+  .latest-card h3 { margin-right: 0; }
+}
+
+/* --- móvil: leads cortos centrados, párrafos largos a la izquierda ------ */
+@media (max-width: 900px) {
+  .hero-copy p,
+  .pipeline-lead,
+  .latest-lead {
+    text-align: center;
+    hyphens: manual;
+  }
+  /* Evita que quede una sola palabra en la segunda línea */
+  .exp-row h3 small,
+  .latest-card h3,
+  .blog-title,
+  .blog-post-title,
+  .sec-top h2 {
+    text-wrap: balance;
+  }
+}
+
+/* --- móvil: firma del artículo en dos líneas ---------------------------- */
+@media (max-width: 900px) {
+  .blog-byline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .blog-byline > span[aria-hidden="true"] { display: none; }
+  .sobre-lead { text-align: center; }
+}
+
+/* --- móvil: etiquetas con punto alineadas al centro --------------------- */
+@media (max-width: 900px) {
+  .sobre-head .kicker,
+  .blog-section .kicker {
+    justify-content: center;
+  }
+  .sobre-head .kicker i,
+  .blog-section .kicker i {
+    position: static;
+    transform: none;
+    margin-right: 9px;
+  }
+}
+
+/* --- ficha de proyecto (modal) ------------------------------------------ */
+.preview-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(8, 8, 8, 0.82);
+  backdrop-filter: blur(4px);
+  animation: previewFade 0.22s ease;
+}
+.preview-panel {
+  position: relative;
+  width: min(940px, 100%);
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  background: var(--panel);
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+  box-shadow: 0 40px 90px -30px #000000cc;
+  animation: previewRise 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.preview-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 56vh;
+  object-fit: cover;
+  object-position: top;
+  border-bottom: 1px solid var(--line);
+}
+.preview-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(8, 8, 8, 0.72);
+  color: var(--fg);
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.25s, border-color 0.25s;
+}
+.preview-close:hover {
+  background: var(--bg);
+  border-color: var(--lime);
+  color: var(--lime);
+}
+.preview-meta {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 18px 32px;
+  align-items: start;
+  padding: 26px 28px 30px;
+}
+.preview-cat {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 8px;
+}
+.preview-title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(24px, 3.2vw, 36px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+  margin-bottom: 12px;
+}
+.preview-desc {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 58ch;
+  margin-bottom: 18px;
+}
+.preview-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.preview-stack li {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  padding: 5px 10px;
+  color: var(--dim);
+}
+.preview-code {
+  justify-self: start;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg);
+  border-bottom: 1px solid var(--lime);
+  padding-bottom: 3px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.25s;
+}
+.preview-code:hover { color: var(--lime); }
+
+@keyframes previewFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes previewRise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (max-width: 700px) {
+  .preview-modal { padding: 10px; }
+  .preview-panel { max-height: calc(100vh - 20px); }
+  .preview-meta {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 18px 18px 22px;
+  }
+  .preview-title { font-size: 26px; }
+  .preview-media img { max-height: 42vh; }
 }
