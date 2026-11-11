@@ -5,6 +5,10 @@ export interface ShowcaseProject {
   stack: string[];
 }
 
+/** Responsive variants generated from the 1440 px captures. */
+export const projectImageSrcSet = (image: string) =>
+  `${image.replace(/\.webp$/, '-480.webp')} 480w, ${image.replace(/\.webp$/, '-960.webp')} 960w, ${image.replace(/\.webp$/, '-1200.webp')} 1200w, ${image} 1440w`;
+
 /**
  * Projects with a real UI that can be previewed in the folder.
  * Copy lives in `locales/{es,en}.json` under `projects.folder.<slug>`.

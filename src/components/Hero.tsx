@@ -16,7 +16,7 @@ export default function Hero() {
               Carlos{' '}
               <br />
               <em>Gordillo</em>
-            </span>
+            </span>{' '}
             <span className="hero-role">{t('kinetic.h1Role')}</span>
           </h1>
           <p className="kicker hero-location">

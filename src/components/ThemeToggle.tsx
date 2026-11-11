@@ -1,18 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 type Theme = 'light' | 'dark';
 
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
+
 export default function ThemeToggle() {
   const { t } = useTranslation();
-  const [theme, setTheme] = useState<Theme>(() =>
-    typeof document !== 'undefined' &&
-    document.documentElement.getAttribute('data-theme') === 'light'
-      ? 'light'
-      : 'dark',
-  );
+  // Arranca en oscuro para que servidor y cliente coincidan; el tema real se
+  // lee del atributo que fija el script inline, antes del primer pintado.
+  const [theme, setTheme] = useState<Theme>('dark');
+  const firstRun = useRef(true);
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
+    const current =
+      document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+
+    if (firstRun.current) {
+      firstRun.current = false;
+      if (current !== theme) setTheme(current);
+      return;
+    }
+
     document.documentElement.setAttribute('data-theme', theme);
     try {
       localStorage.setItem('kinetic-theme', theme);

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { showcaseProjects, type ShowcaseProject } from '../content/projects';
+import { showcaseProjects, projectImageSrcSet, type ShowcaseProject } from '../content/projects';
 import Reveal from './Reveal';
 import ProjectPreviewModal from './ProjectPreviewModal';
 
@@ -254,6 +254,8 @@ export default function Projects() {
                 <div className="shot">
                   <img
                     src={project.image}
+                    srcSet={projectImageSrcSet(project.image)}
+                    sizes="(max-width: 720px) 72vw, 520px"
                     alt=""
                     width={1440}
                     height={900}

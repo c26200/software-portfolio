@@ -17,6 +17,8 @@ export default function Contact() {
         <figure className="contact-portrait">
           <img
             src="/img/carlos-gordillo-cut.webp"
+            srcSet="/img/carlos-gordillo-cut-400.webp 400w, /img/carlos-gordillo-cut.webp 800w"
+            sizes="(max-width: 760px) 200px, 320px"
             alt={t('portrait.alt')}
             width={800}
             height={800}

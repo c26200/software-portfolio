@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import type { ShowcaseProject } from '../content/projects';
+import { projectImageSrcSet } from '../content/projects';
 
 interface ProjectPreviewModalProps {
   project: ShowcaseProject;
@@ -70,7 +71,12 @@ export default function ProjectPreviewModal({ project, onClose }: ProjectPreview
           ✕
         </button>
         <div className="preview-media">
-          <img src={project.image} alt={copy.title} />
+          <img
+            src={project.image}
+            srcSet={projectImageSrcSet(project.image)}
+            sizes="(max-width: 1040px) 92vw, 980px"
+            alt={copy.title}
+          />
         </div>
         <div className="preview-meta">
           <div>

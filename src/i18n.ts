@@ -13,6 +13,9 @@ i18n.use(initReactI18next).init({
   resources: { es: { translation: es }, en: { translation: en } },
   lng: initialLanguage(),
   fallbackLng: 'es',
+  // Init síncrono: el cliente debe tener las traducciones en su primer render
+  // para que la hidratación coincida con el HTML prerenderizado.
+  initImmediate: false,
   interpolation: { escapeValue: false },
 });
 
