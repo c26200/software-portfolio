@@ -209,6 +209,19 @@ button { font: inherit; }
 }
 .hero h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(64px, 12.5vw, 190px); line-height: 0.82; letter-spacing: -0.02em; }
 .hero h1 em { font-style: italic; color: color-mix(in srgb, var(--fg) 62%, transparent); }
+.hero-name { display: block; }
+.hero-h1-role {
+  display: block;
+  max-width: 42ch;
+  margin-top: 18px;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: clamp(12px, 1.15vw, 16px);
+  font-style: normal;
+  letter-spacing: 0.12em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
 .hero-copy { max-width: 340px; padding-bottom: 12px; }
 .hero-copy p { font-size: 15px; line-height: 1.65; color: var(--text-muted); margin-bottom: 22px; }
 .hero-copy p b { color: var(--fg); font-weight: 500; }

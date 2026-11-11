@@ -22,7 +22,8 @@
     "photoAlt": "Carlos Manuel Gordillo Mora"
   },
   "kinetic": {
-    "kicker": "Desarrollador full stack, IA y DevOps",
+    "kicker": "Puerto Boyacá · Colombia",
+    "h1Role": "Desarrollador Full Stack e IA en Colombia",
     "heroLead": "Del modelo al producto.",
     "heroCopy": "Diseño y despliego productos digitales completos: frontend, APIs, datos e inteligencia artificial, con infraestructura propia.",
     "ctaProjects": "Ver proyectos",
@@ -268,9 +269,27 @@
     "back": "← Volver al inicio"
   },
   "seo": {
-    "homeTitle": "Carlos Gordillo — Ingeniero Full Stack & IA",
-    "homeDescription": "Portafolio de Carlos Gordillo, ingeniero full stack e IA en Colombia. Proyectos de React, Node.js, Python, Docker e inteligencia artificial. Contáctame.",
-    "jobTitle": "Ingeniero Full Stack & IA",
+    "homeTitle": "Carlos Gordillo — Full Stack & IA | Colombia",
+    "homeDescription": "Carlos Gordillo, ingeniero full stack e IA en Colombia. Construyo y despliego productos completos con React, Node.js, Python, Docker y deep learning.",
+    "jobTitle": "Ingeniero Full Stack e IA",
+    "personDescription": "Ingeniero full stack e IA colombiano. Construyo y opero productos completos: interfaces, APIs, datos y despliegue, con modelos de deep learning sobre infraestructura propia.",
+    "knowsAbout": [
+      "Desarrollo full stack",
+      "React",
+      "TypeScript",
+      "Node.js",
+      "Python",
+      "Inteligencia artificial",
+      "Deep Learning",
+      "LSTM",
+      "Transformers",
+      "Docker",
+      "DevOps",
+      "PostgreSQL",
+      "n8n",
+      "Cloudflare"
+    ],
+    "breadcrumbHome": "Inicio",
     "blogDescription": "Artículos sobre inteligencia artificial, series temporales, Docker y desarrollo full stack por Carlos Gordillo.",
     "notFoundTitle": "Página no encontrada — Carlos Gordillo",
     "notFoundDescription": "La página que buscas no existe o se ha movido."

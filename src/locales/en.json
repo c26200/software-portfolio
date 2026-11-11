@@ -22,7 +22,8 @@
     "photoAlt": "Carlos Manuel Gordillo Mora"
   },
   "kinetic": {
-    "kicker": "Full stack developer, AI and DevOps",
+    "kicker": "Puerto Boyacá · Colombia",
+    "h1Role": "Full Stack & AI Developer in Colombia",
     "heroLead": "From model to product.",
     "heroCopy": "I design and ship complete digital products: frontend, APIs, data and artificial intelligence, on my own infrastructure.",
     "ctaProjects": "See projects",
@@ -268,9 +269,27 @@
     "back": "← Back to home"
   },
   "seo": {
-    "homeTitle": "Carlos Gordillo — Full Stack & AI Engineer",
-    "homeDescription": "Portfolio of Carlos Gordillo, full stack and AI engineer based in Colombia. React, Node.js, Python, Docker and machine learning projects. Get in touch.",
+    "homeTitle": "Carlos Gordillo — Full Stack & AI | Colombia",
+    "homeDescription": "Carlos Gordillo, full stack and AI engineer in Colombia. I build and ship complete products with React, Node.js, Python, Docker and deep learning.",
     "jobTitle": "Full Stack & AI Engineer",
+    "personDescription": "Colombian full stack and AI engineer. I build and operate complete products — interfaces, APIs, data and deployment — with deep learning models on my own infrastructure.",
+    "knowsAbout": [
+      "Full stack development",
+      "React",
+      "TypeScript",
+      "Node.js",
+      "Python",
+      "Artificial intelligence",
+      "Deep Learning",
+      "LSTM",
+      "Transformers",
+      "Docker",
+      "DevOps",
+      "PostgreSQL",
+      "n8n",
+      "Cloudflare"
+    ],
+    "breadcrumbHome": "Home",
     "blogDescription": "Articles on artificial intelligence, time series, Docker and full stack development by Carlos Gordillo.",
     "notFoundTitle": "Page not found — Carlos Gordillo",
     "notFoundDescription": "The page you are looking for does not exist or has moved."

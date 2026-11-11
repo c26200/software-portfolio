@@ -16,9 +16,12 @@ export default function Hero() {
             {t('kinetic.kicker')}
           </p>
           <h1>
-            Carlos
-            <br />
-            <em>Gordillo</em>
+            <span className="hero-name">
+              Carlos
+              <br />
+              <em>Gordillo</em>
+            </span>
+            <span className="hero-h1-role">{t('kinetic.h1Role')}</span>
           </h1>
         </div>
 

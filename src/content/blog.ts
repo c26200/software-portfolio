@@ -19,6 +19,172 @@ export interface TocItem {
 
 export const posts: BlogPost[] = [
   {
+    slug: 'etl-n8n-postgresql',
+    date: '2026-11-11',
+    es: {
+      title: 'ETL con n8n y PostgreSQL',
+      excerpt:
+        'Diseña un flujo ETL con n8n y PostgreSQL para procesar hojas de cálculo con validación, cargas idempotentes, reintentos y monitoreo. Incluye ejemplos.',
+      html: `<p class="blog-summary">Mover una hoja de cálculo a una base de datos parece sencillo hasta que llegan encabezados distintos, filas duplicadas, fechas ambiguas o una ejecución que se interrumpe a mitad. Un flujo ETL confiable separa la recepción, la validación y la carga; registra qué pasó y puede procesar de nuevo el mismo archivo sin duplicar información. Esta guía presenta un patrón práctico con n8n y PostgreSQL, aplicable a importaciones periódicas y a cargas puntuales.</p>
+<h2>Qué debe resolver el flujo ETL</h2>
+<p>ETL significa extraer, transformar y cargar. En este caso, n8n coordina la recepción de un archivo, la validación y las llamadas a PostgreSQL. La base de datos conserva los registros y el historial de importaciones. Separar esas responsabilidades permite investigar una fila rechazada sin volver a revisar todo el workflow.</p>
+<p>Antes de crear nodos, define el contrato de entrada: formatos permitidos, nombres de columnas, campos obligatorios, tipos, zona horaria y regla para identificar de forma única cada registro. También decide qué ocurre si un archivo se repite, si trae una fila inválida o si el proceso falla después de insertar parte de los datos. Esas decisiones determinan la arquitectura más que el número de nodos.</p>
+<h2>Una arquitectura sencilla y auditable</h2>
+<p>Un flujo mantenible suele tener etapas explícitas: recibir el archivo, registrar el lote, leer filas, normalizar valores, validar, cargar datos temporales, aplicar cambios a las tablas de negocio y cerrar el lote con un resultado. En n8n conviene que cada etapa tenga entradas y salidas previsibles, con nombres que expliquen su propósito. Evita un único bloque de código que lea, transforme y escriba todo sin dejar puntos de control.</p>
+<p>Para cargas que necesitan validación o revisión, usa una tabla de staging. Las filas llegan allí con un identificador de lote y conservan suficiente información de origen para diagnosticar errores. Solo después de validar el conjunto se aplican las filas aceptadas a las tablas finales. Para una sincronización pequeña y simple, staging puede ser innecesario; elige el diseño según el coste de una carga parcial o incorrecta.</p>
+<h2>Define el esquema y la identidad de cada fila</h2>
+<p>Una base de datos necesita saber qué representa cada columna. Evita guardar todo como texto solo porque el origen es una hoja: fechas, cantidades e identificadores deben tener tipos adecuados en PostgreSQL. Define también la clave natural o técnica que permite reconocer la misma entidad en dos importaciones. Sin una clave estable, el flujo no puede distinguir una actualización de un duplicado.</p>
+<pre><code class="language-sql">CREATE TABLE registros (
+  source_id text PRIMARY KEY,
+  amount numeric NOT NULL,
+  source_updated_at timestamptz,
+  imported_at timestamptz NOT NULL DEFAULT now()
+);</code></pre>
+<p>El ejemplo es deliberadamente pequeño: adapta los nombres y restricciones al dominio real. Si un identificador solo es único dentro de una entidad, crea una clave compuesta; si el archivo no trae una clave fiable, define cómo generarla y documenta sus límites. No uses el número de fila como identidad: cambia cuando alguien ordena o inserta filas en la hoja.</p>
+<h2>Normaliza los datos antes de validarlos</h2>
+<p>La normalización convierte variantes de representación a una forma consistente: quitar espacios, normalizar mayúsculas cuando el dominio lo permite, convertir números y fechas, y representar valores vacíos de una sola manera. Mantén el valor original cuando sea útil para explicar una transformación. No conviertas silenciosamente un dato inválido en cero o en la fecha actual: eso transforma un error visible en un dato incorrecto que parece legítimo.</p>
+<p>La validación debe distinguir errores de fila y errores del lote. Una fila con un correo mal formado puede quedar en cuarentena mientras el resto sigue, si el negocio lo permite. Un archivo sin las columnas mínimas, con una codificación ilegible o con un encabezado desconocido debería detenerse antes de escribir en las tablas finales. Devuelve un motivo concreto, como <code>amount_not_numeric</code>, en vez de un genérico «fila inválida».</p>
+<h2>Haz que repetir una importación sea seguro</h2>
+<p>Una ejecución puede terminar después de escribir en PostgreSQL pero antes de confirmar a n8n que tuvo éxito. Si el workflow vuelve a intentarlo, una carga que solo inserta puede duplicar filas. Diseña la operación para que procesar dos veces el mismo registro produzca el mismo estado que procesarlo una sola vez. A esta propiedad se le suele llamar idempotencia.</p>
+<p>Con una clave única, PostgreSQL permite insertar o actualizar de forma atómica:</p>
+<pre><code class="language-sql">INSERT INTO registros (source_id, amount, source_updated_at)
+VALUES ($1, $2, $3)
+ON CONFLICT (source_id) DO UPDATE
+SET amount = EXCLUDED.amount,
+    source_updated_at = EXCLUDED.source_updated_at,
+    imported_at = now();</code></pre>
+<p>Usa parámetros del nodo PostgreSQL en lugar de concatenar valores dentro del SQL. Decide además si debe ganar siempre el archivo más reciente, si solo se actualizan columnas cambiadas o si una fila antigua debe rechazarse. La regla de conflicto es una decisión de negocio y debe estar cubierta por pruebas.</p>
+<h2>Procesa por lotes sin perder trazabilidad</h2>
+<p>Leer y escribir miles de filas en una sola operación puede elevar el consumo de memoria y hacer difícil localizar el registro que falla. Procesar en lotes controlados permite limitar el tamaño de cada operación y registrar cuántas filas se aceptaron, rechazaron y cargaron. El tamaño adecuado depende del volumen, los límites del servicio y la latencia de la base; mídelo con datos representativos en lugar de asumir que el lote más grande siempre es mejor.</p>
+<p>Guarda un registro de importación con un identificador de lote, nombre o huella del archivo, hora de inicio, estado, cantidades y mensaje de error. Si el mismo archivo no debería aplicarse dos veces, una huella criptográfica puede ayudar a detectarlo, pero no reemplaza la clave por fila: dos archivos distintos pueden contener las mismas entidades y un mismo archivo puede necesitar reprocesarse tras corregir una regla.</p>
+<h2>Diseña fallos, reintentos y recuperación</h2>
+<p>No todos los errores se resuelven reintentando. Un timeout temporal puede justificar un número limitado de reintentos con espera; un valor que no cumple el esquema requiere corregir o poner en cuarentena la fila. Evita reintentos infinitos y registra el identificador del lote en cada mensaje para poder seguir la ejecución de punta a punta.</p>
+<p>Piensa también en el límite de la transacción. Si una importación debe ser todo o nada, las validaciones y escrituras finales tienen que ocurrir dentro de una estrategia transaccional compatible con los nodos y conexiones que uses. Si se aceptan cargas parciales, deja ese comportamiento explícito en el estado del lote y en el resumen que recibe quien opera el proceso. No informes «éxito» si quedaron filas pendientes sin explicar.</p>
+<h2>Monitorea el resultado, no solo la ejecución</h2>
+<p>Un workflow verde solo indica que sus pasos terminaron según su lógica; no demuestra que los datos tengan sentido. Registra métricas como filas recibidas, válidas, rechazadas, insertadas y actualizadas, duración, último lote procesado y antigüedad de los datos. Una alerta por ausencia de una importación esperada puede ser más útil que recibir una notificación por cada ejecución exitosa.</p>
+<p>Los logs deben ayudar a diagnosticar sin exponer secretos ni datos personales innecesarios. Guarda errores con el identificador de fila o lote y un código estable; limita o enmascara el contenido sensible. Define quién recibe alertas y qué acción se espera: reintentar, corregir el archivo o revisar el esquema.</p>
+<h2>Prueba el flujo antes de automatizarlo</h2>
+<p>Prepara archivos de prueba con casos normales y casos límite: encabezado cambiado, fila vacía, duplicado, fecha con zona horaria, número decimal, caracteres acentuados y una fila incompleta. Verifica que un archivo válido genere el estado esperado, que el inválido no contamine las tablas finales y que ejecutar el mismo lote dos veces no duplique datos.</p>
+<p>Prueba también una interrupción durante la carga y la recuperación posterior. La prueba debe comprobar el estado final de PostgreSQL, no solo que n8n muestre una marca verde. Mantén una muestra anonimizada como regresión cuando cambies el mapeo o las reglas de validación.</p>
+<h2>Ejemplo de ejecución, del archivo a la tabla</h2>
+<p>Imagina un archivo periódico con identificadores de proveedor, código de producto, cantidad y fecha de actualización. Al recibirlo, el workflow registra un lote y comprueba que estén presentes las columnas requeridas. Después convierte cantidades y fechas a tipos definidos, elimina espacios en claves y valida que la cantidad no sea negativa. Las filas correctas pasan a staging; las demás quedan asociadas al lote con un código de rechazo.</p>
+<p>Cuando termina la validación, el flujo aplica las filas aceptadas mediante la clave de proveedor y producto. Si vuelve a ejecutarse el mismo archivo, la restricción única y la regla de conflicto actualizan el registro en vez de crear otro. El cierre del lote guarda conteos, duración y estado. El resumen puede indicar, por ejemplo, «98 aceptadas, 2 rechazadas» e incluir el motivo, sin copiar datos sensibles al mensaje. Es un ejemplo genérico: cada sistema debe adaptar claves, reglas y política de carga a su proceso.</p>
+<h2>Lista de verificación</h2>
+<ul>
+<li>Contrato de archivo, columnas, tipos y zona horaria documentado.</li>
+<li>Clave estable para identificar registros y regla de conflicto definida.</li>
+<li>Validación diferenciada para filas y para el lote completo.</li>
+<li>Staging cuando se requiere inspección o carga atómica.</li>
+<li>Reintentos limitados para errores transitorios, no para datos inválidos.</li>
+<li>Historial de lotes con conteos, duración, estado y errores.</li>
+<li>Pruebas de repetición, interrupción y recuperación.</li>
+<li>Credenciales gestionadas fuera del contenido del workflow y del repositorio.</li>
+</ul>
+<h2>Errores frecuentes</h2>
+<ul>
+<li>Usar el número de fila como clave y crear duplicados al reordenar la hoja.</li>
+<li>Convertir errores de formato en valores por defecto sin avisar.</li>
+<li>Reintentar errores de validación como si fueran fallos temporales.</li>
+<li>Marcar el lote como exitoso aunque algunas filas no se hayan cargado.</li>
+<li>Guardar todo el archivo en los logs y exponer datos sensibles.</li>
+<li>Usar una consulta SQL construida por concatenación en lugar de parámetros.</li>
+</ul>
+<h2>Preguntas frecuentes</h2>
+<h3>¿Necesito una tabla de staging para cada flujo ETL?</h3>
+<p>No siempre. Es útil cuando necesitas validar el conjunto antes de publicarlo, investigar rechazos o recuperarte de cargas parciales. Para una sincronización pequeña, con esquema y clave bien definidos, una carga directa puede ser suficiente.</p>
+<h3>¿Cómo evito duplicados si n8n reintenta una ejecución?</h3>
+<p>Define una clave única que represente al registro y usa una operación de inserción o actualización basada en esa clave. Registra además el lote para auditar reintentos. La huella del archivo por sí sola no reemplaza la identidad de cada fila.</p>
+<h3>¿Debo detener todo el lote por una fila inválida?</h3>
+<p>Depende del impacto de aceptar una carga parcial. Si una fila incorrecta puede cambiar un total o una decisión, detén el lote y corrígelo. Si las filas son independientes, puedes poner las inválidas en cuarentena, siempre que el resultado informe claramente cuántas quedaron fuera.</p>
+<h3>¿Cómo elijo el tamaño del lote?</h3>
+<p>Mide memoria, duración, límites de conexión y facilidad de recuperación con volúmenes representativos. Un lote menor suele facilitar el diagnóstico; uno mayor puede reducir viajes a la base. El equilibrio depende de la carga y no conviene fijarlo sin pruebas.</p>
+<h2>Para seguir</h2>
+<p>La documentación de <a href="https://docs.n8n.io/" target="_blank" rel="noopener noreferrer">n8n</a> y de <a href="https://www.postgresql.org/docs/current/sql-insert.html" target="_blank" rel="noopener noreferrer">PostgreSQL INSERT</a> detalla las opciones de cada herramienta. Para la parte de contenedores y operación, puedes continuar con <a href="/blog/docker-fundamentals">Docker para Desarrolladores</a>. Si estás diseñando un proceso similar, <a href="/#contacto">hablemos</a>.</p>
+`,
+    },
+    en: {
+      title: 'ETL with n8n and PostgreSQL',
+      excerpt:
+        'Build an n8n ETL workflow with PostgreSQL for spreadsheets: validation, idempotent imports, retries and monitoring, with practical examples.',
+      html: `<p class="blog-summary">Moving a spreadsheet into a database sounds simple until headers change, rows repeat, dates become ambiguous or a run stops halfway through. A reliable ETL workflow separates intake, validation and loading; records what happened; and can process the same file again without duplicating data. This guide presents a practical n8n and PostgreSQL pattern for recurring imports and one-off loads.</p>
+<h2>What the ETL workflow needs to solve</h2>
+<p>ETL stands for extract, transform and load. In this pattern, n8n coordinates file intake, validation and calls to PostgreSQL. The database stores records and import history. Keeping those responsibilities separate makes it possible to investigate a rejected row without reviewing the entire workflow.</p>
+<p>Before adding nodes, define the input contract: accepted formats, column names, required fields, types, time zone and the rule used to identify each record uniquely. Also decide what happens when a file is repeated, a row is invalid or the process fails after writing some data. Those decisions shape the architecture more than the number of nodes.</p>
+<h2>A simple, auditable architecture</h2>
+<p>A maintainable workflow usually has explicit stages: receive the file, register the batch, read rows, normalize values, validate, load staging data, apply accepted changes to business tables and close the batch with a result. In n8n, give each stage predictable inputs and outputs and names that explain its purpose. Avoid one large code block that reads, transforms and writes everything without checkpoints.</p>
+<p>For loads that need validation or review, use a staging table. Rows arrive there with a batch identifier and enough source information to diagnose errors. Only after validation are accepted rows applied to final tables. For a small, simple sync, staging may be unnecessary; choose the design based on the cost of a partial or incorrect load.</p>
+<h2>Define the schema and row identity</h2>
+<p>A database needs to know what each column represents. Do not store everything as text just because the source is a spreadsheet: dates, amounts and identifiers should have suitable PostgreSQL types. Also define a natural or technical key that recognizes the same entity across imports. Without a stable key, the workflow cannot distinguish an update from a duplicate.</p>
+<pre><code class="language-sql">CREATE TABLE records (
+  source_id text PRIMARY KEY,
+  amount numeric NOT NULL,
+  source_updated_at timestamptz,
+  imported_at timestamptz NOT NULL DEFAULT now()
+);</code></pre>
+<p>The example is intentionally small: adapt names and constraints to the real domain. If an identifier is unique only within a parent entity, use a composite key; if the file has no reliable key, define how one is generated and document its limits. Do not use the row number as identity: it changes when someone sorts or inserts rows.</p>
+<h2>Normalize data before validating it</h2>
+<p>Normalization converts representation variants into a consistent form: trimming whitespace, normalizing case when the domain permits, converting numbers and dates, and representing empty values consistently. Keep the original value when it helps explain a transformation. Do not silently turn invalid data into zero or the current date: that changes a visible error into incorrect data that looks legitimate.</p>
+<p>Validation should distinguish row errors from batch errors. A malformed email may be quarantined while the rest continues, if the business allows it. A file missing required columns, using unreadable encoding or containing an unknown header should stop before writing to final tables. Return a specific reason such as <code>amount_not_numeric</code>, not a generic “invalid row.”</p>
+<h2>Make reprocessing safe</h2>
+<p>A run can finish writing to PostgreSQL but stop before n8n records success. If the workflow retries, an insert-only load may duplicate rows. Design the operation so that processing the same record twice produces the same state as processing it once. This property is commonly called idempotency.</p>
+<p>With a unique key, PostgreSQL can insert or update atomically:</p>
+<pre><code class="language-sql">INSERT INTO records (source_id, amount, source_updated_at)
+VALUES ($1, $2, $3)
+ON CONFLICT (source_id) DO UPDATE
+SET amount = EXCLUDED.amount,
+    source_updated_at = EXCLUDED.source_updated_at,
+    imported_at = now();</code></pre>
+<p>Use the PostgreSQL node’s query parameters instead of concatenating values into SQL. Also decide whether the newest file always wins, only changed columns are updated or an older row is rejected. Conflict handling is a business rule and should be covered by tests.</p>
+<h2>Process batches without losing traceability</h2>
+<p>Reading and writing thousands of rows in one operation can increase memory use and make failures hard to locate. Controlled batches limit the size of each operation and make it possible to record how many rows were accepted, rejected and loaded. The right size depends on volume, service limits and database latency; measure it with representative data instead of assuming the biggest batch is always best.</p>
+<p>Keep an import record with a batch identifier, file name or fingerprint, start time, status, counts and error message. If the same file must not be applied twice, a cryptographic fingerprint can help detect it, but it does not replace the per-row key: two different files may contain the same entities, and one file may need reprocessing after a rule is fixed.</p>
+<h2>Design failures, retries and recovery</h2>
+<p>Not every error should be retried. A temporary timeout may justify a limited number of retries with a delay; a value that violates the schema needs correction or quarantine. Avoid infinite retries and include the batch identifier in every message so an operator can trace a run end to end.</p>
+<p>Think about the transaction boundary too. If an import must be all-or-nothing, validation and final writes need to follow a transaction strategy compatible with the nodes and connections in use. If partial loads are acceptable, make that behavior explicit in the batch status and in the summary sent to the operator. Do not report success while leaving unexplained rows pending.</p>
+<h2>Monitor outcomes, not just executions</h2>
+<p>A green workflow only means its steps completed according to their logic; it does not prove that the data makes sense. Track measures such as rows received, valid, rejected, inserted and updated; duration; last processed batch; and data freshness. An alert for a missing expected import may be more useful than a notification for every successful run.</p>
+<p>Logs should help diagnose problems without exposing secrets or unnecessary personal data. Store errors with a row or batch identifier and a stable code; limit or mask sensitive content. Define who receives alerts and what action is expected: retry, fix the file or review the schema.</p>
+<h2>Test before automating the workflow</h2>
+<p>Prepare test files with normal and edge cases: changed header, blank row, duplicate, time-zone date, decimal number, accented characters and a missing field. Verify that a valid file produces the expected state, an invalid file does not contaminate final tables and running the same batch twice does not duplicate data.</p>
+<p>Also test an interruption during loading and the recovery afterward. Check PostgreSQL’s final state, not only whether n8n displays a green mark. Keep an anonymized sample as a regression test when changing mappings or validation rules.</p>
+<h2>Example run, from file to table</h2>
+<p>Imagine a recurring file with supplier ID, product code, quantity and update date. When it arrives, the workflow registers a batch and checks that required columns are present. It then converts quantities and dates to defined types, trims key fields and verifies that quantity is not negative. Valid rows move to staging; invalid rows remain associated with the batch and a rejection code.</p>
+<p>After validation, the workflow applies accepted rows using the supplier and product key. If the same file runs again, the unique constraint and conflict rule update the record instead of creating another one. Closing the batch stores counts, duration and status. A summary can say, for example, “98 accepted, 2 rejected” and include reasons without copying sensitive data into the message. This is a generic example: each system must adapt keys, rules and load policy to its own process.</p>
+<h2>Checklist</h2>
+<ul>
+<li>Documented file contract, columns, types and time zone.</li>
+<li>Stable record key and conflict rule defined.</li>
+<li>Separate validation for individual rows and the full batch.</li>
+<li>Staging where inspection or atomic loading is required.</li>
+<li>Limited retries for transient errors, not invalid data.</li>
+<li>Batch history with counts, duration, status and errors.</li>
+<li>Tests for reprocessing, interruption and recovery.</li>
+<li>Credentials kept outside workflow content and source control.</li>
+</ul>
+<h2>Common mistakes</h2>
+<ul>
+<li>Using the row number as a key and duplicating data after sorting the sheet.</li>
+<li>Turning format errors into default values without reporting them.</li>
+<li>Retrying validation errors as if they were temporary failures.</li>
+<li>Marking a batch successful while rows were not loaded.</li>
+<li>Writing entire files to logs and exposing sensitive data.</li>
+<li>Building SQL through string concatenation instead of parameters.</li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>Does every ETL workflow need a staging table?</h3>
+<p>Not always. It helps when you need to validate the full set before publishing it, investigate rejected rows or recover from partial loads. For a small sync with a well-defined schema and key, a direct load may be enough.</p>
+<h3>How do I prevent duplicates when n8n retries a run?</h3>
+<p>Define a unique key for each record and use an insert-or-update operation based on that key. Keep a batch record for auditing retries as well. A file fingerprint alone does not replace row identity.</p>
+<h3>Should one invalid row stop the whole batch?</h3>
+<p>It depends on the impact of accepting a partial load. If one bad row can change a total or decision, stop and correct the batch. If rows are independent, invalid ones can be quarantined as long as the result clearly reports how many were excluded.</p>
+<h3>How should I choose batch size?</h3>
+<p>Measure memory, duration, connection limits and recovery effort with representative volumes. Smaller batches often make diagnosis easier; larger ones may reduce database round trips. The right balance depends on the workload and should be tested.</p>
+<h2>Further reading</h2>
+<p>The <a href="https://docs.n8n.io/" target="_blank" rel="noopener noreferrer">n8n documentation</a> and <a href="https://www.postgresql.org/docs/current/sql-insert.html" target="_blank" rel="noopener noreferrer">PostgreSQL INSERT documentation</a> cover each tool’s options. For containers and operations, continue with <a href="/en/blog/docker-fundamentals">Docker for Developers</a>. If you are designing a similar workflow, <a href="/en#contacto">let’s talk</a>.</p>
+`,
+    },
+  },
+  {
     slug: 'series-temporales-producto',
     date: '2026-05-01',
     updated: '2026-11-11',
