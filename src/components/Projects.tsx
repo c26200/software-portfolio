@@ -123,11 +123,13 @@ export default function Projects() {
     };
     raf = requestAnimationFrame(loop);
 
-    const onEnter = () => {
-      hovering = true;
+    // En táctil el puntero es transitorio: pointerleave nunca llega y el relevo
+    // se quedaría pausado para siempre. Solo el ratón implica hover real.
+    const onEnter = (event: PointerEvent) => {
+      if (event.pointerType === 'mouse') hovering = true;
     };
-    const onLeave = () => {
-      hovering = false;
+    const onLeave = (event: PointerEvent) => {
+      if (event.pointerType === 'mouse') hovering = false;
     };
     const onFocusIn = () => {
       focused = true;

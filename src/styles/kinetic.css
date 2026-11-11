@@ -318,6 +318,8 @@ section[id], article[id] { scroll-margin-top: 96px; }
   display: flex;
   gap: 22px;
   overflow-x: auto;
+  overflow-anchor: none;
+  scroll-behavior: auto;
   scroll-snap-type: none;
   padding-bottom: 18px;
   cursor: grab;
@@ -989,8 +991,8 @@ html.has-cursor * {
    la izquierda y se desactiva la partición de palabras. */
 @media (max-width: 900px) {
   :root {
-    --prose-align: left;
-    --prose-hyphens: manual;
+    --prose-align: justify;
+    --prose-hyphens: auto;
   }
 }
 
@@ -1021,4 +1023,90 @@ html.has-cursor * {
     align-items: center;
     min-height: 44px;
   }
+}
+
+/* --- móvil: composición centrada ---------------------------------------- */
+@media (max-width: 900px) {
+  /* Cabeceras de sección */
+  .sec-top { align-items: center; text-align: center; }
+  .sec-top span,
+  .sec-top h2 { text-align: center; }
+
+  /* Héroe */
+  .hero-inner > :first-child { text-align: center; }
+  .hero-role,
+  .hero-location {
+    margin-left: 0;
+    justify-content: center;
+    text-align: center;
+  }
+  .hero-links { justify-content: center; }
+
+  /* Citas y bloques destacados */
+  .big-line,
+  .about-copy .big-line,
+  .contact h2 { text-align: center; margin-inline: auto; }
+
+  /* Cifras */
+  .stats { text-align: center; }
+  .stat { padding-left: 0; text-align: center; }
+
+  /* Experiencia */
+  .exp-row .yr,
+  .exp-row h3 { text-align: center; }
+
+  /* Últimos artículos */
+  .latest-head { align-items: center; text-align: center; }
+
+  /* Proyectos */
+  .rail-head { justify-content: center; text-align: center; }
+  .others-label { text-align: center; }
+  .others li { flex-direction: column; align-items: center; text-align: center; }
+
+  /* Contacto */
+  .contact-top { justify-items: center; text-align: center; }
+  .contact-portrait { margin-inline: auto; }
+  .contact-row { justify-content: center; text-align: center; }
+  .socials { justify-content: center; }
+
+  /* Pie */
+  .footer { justify-content: center; text-align: center; }
+  .footer-links { justify-content: center; }
+
+  /* Página sobre */
+  .sobre-head { text-align: center; }
+  .sobre-title { margin-inline: auto; }
+  .sobre-lead { margin-inline: auto; }
+  .sobre-block > h2,
+  .sobre-body h2,
+  .sobre-cta h2 { text-align: center; }
+  .sobre-cards { text-align: center; }
+  .sobre-cta-links { justify-content: center; }
+
+  /* Blog */
+  .blog-index-title,
+  .blog-post-title,
+  .blog-byline,
+  .blog-toc-toggle { text-align: center; justify-content: center; }
+  .blog-back { display: block; text-align: center; }
+  .blog-card { text-align: center; }
+}
+
+/* --- móvil: cabeceras de listas centradas ------------------------------- */
+@media (max-width: 900px) {
+  .rail-head {
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+  .rail-hint { text-align: center; }
+  .others-label { display: block; text-align: center; }
+  .others ul { text-align: center; }
+  .latest-head {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .latest-card { text-align: center; }
+  .latest-card .latest-arrow { display: none; }
 }
