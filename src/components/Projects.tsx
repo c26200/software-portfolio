@@ -9,35 +9,90 @@ interface ProjectCopy {
   category: string;
 }
 
+const SPEED = 45; // px per second
+const INITIAL_ORDER = showcaseProjects.map((_, index) => index);
+
 export default function Projects() {
   const { t } = useTranslation();
   const railRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
   const [preview, setPreview] = useState<ShowcaseProject | null>(null);
+  const [order, setOrder] = useState<number[]>(INITIAL_ORDER);
+  const orderRef = useRef<number[]>(INITIAL_ORDER);
+  const positionRef = useRef(0);
+  const stepRef = useRef(0);
   const draggedRef = useRef(false);
+  const previewOpenRef = useRef(false);
 
-  // Drag to scroll
+  useEffect(() => {
+    previewOpenRef.current = preview !== null;
+  }, [preview]);
+
+  // Bucle infinito reciclando las mismas tarjetas: al salir una por la izquierda
+  // se reordena al final de la pista, así nunca hay copias duplicadas.
   useEffect(() => {
     const rail = railRef.current;
-    if (!rail) return;
+    const track = trackRef.current;
+    if (!rail || !track) return;
 
+    const apply = () => {
+      track.style.transform = `translate3d(${-positionRef.current}px, 0, 0)`;
+    };
+
+    const measure = () => {
+      const first = track.children[0] as HTMLElement | undefined;
+      const second = track.children[1] as HTMLElement | undefined;
+      const step = first && second ? second.offsetLeft - first.offsetLeft : 0;
+      if (step > 0) stepRef.current = step;
+    };
+
+    const rotateOrder = (direction: 1 | -1) => {
+      const current = orderRef.current;
+      const next =
+        direction === 1
+          ? [...current.slice(1), current[0]]
+          : [current[current.length - 1], ...current.slice(0, -1)];
+      orderRef.current = next;
+      setOrder(next);
+    };
+
+    const normalize = () => {
+      const step = stepRef.current;
+      if (step <= 0) return;
+      while (positionRef.current >= step) {
+        positionRef.current -= step;
+        rotateOrder(1);
+      }
+      while (positionRef.current < 0) {
+        positionRef.current += step;
+        rotateOrder(-1);
+      }
+      apply();
+    };
+
+    measure();
+    const resizeObserver = new ResizeObserver(measure);
+    resizeObserver.observe(track);
+
+    let hovering = false;
+    let focused = false;
     let down = false;
     let moved = false;
+    let visible = false;
     let startX = 0;
-    let startLeft = 0;
-    let pointerId = -1;
+    let startPosition = 0;
+    let resumeAt = 0;
 
-    const onDown = (event: PointerEvent) => {
-      // En táctil manda el scroll nativo del navegador
-      if (event.pointerType !== 'mouse' || event.button !== 0) return;
+    const onPointerDown = (event: PointerEvent) => {
+      if (event.pointerType === 'mouse' && event.button !== 0) return;
       down = true;
       moved = false;
       draggedRef.current = false;
       startX = event.clientX;
-      startLeft = rail.scrollLeft;
-      pointerId = event.pointerId;
+      startPosition = positionRef.current;
     };
 
-    const onMove = (event: PointerEvent) => {
+    const onPointerMove = (event: PointerEvent) => {
       if (!down) return;
       const dx = event.clientX - startX;
       if (!moved) {
@@ -46,38 +101,103 @@ export default function Projects() {
         draggedRef.current = true;
         rail.classList.add('drag');
       }
-      event.preventDefault();
-      rail.scrollLeft = startLeft - dx;
+      if (event.cancelable) event.preventDefault();
+      positionRef.current = startPosition - dx;
+      normalize();
     };
 
-    const onEnd = () => {
-      if (pointerId >= 0) {
-        try {
-          if (rail.hasPointerCapture(pointerId)) rail.releasePointerCapture(pointerId);
-        } catch {
-          /* la captura puede no existir si el evento fue sintético */
-        }
-      }
+    const onPointerUp = () => {
+      if (!down) return;
       down = false;
       moved = false;
-      pointerId = -1;
+      // Deja la pista quieta un momento tras el gesto para poder tocar una tarjeta
+      resumeAt = performance.now() + 2200;
       rail.classList.remove('drag');
     };
 
-    rail.addEventListener('pointerdown', onDown);
+    // Trackpads y ruedas horizontales siguen moviendo la pista
+    const onWheel = (event: WheelEvent) => {
+      if (Math.abs(event.deltaX) <= Math.abs(event.deltaY)) return;
+      event.preventDefault();
+      positionRef.current += event.deltaX;
+      normalize();
+    };
+
+    // En táctil el puntero es transitorio: pointerleave nunca llega y el relevo
+    // se quedaría pausado para siempre. Solo el ratón implica hover real.
+    const onEnter = (event: PointerEvent) => {
+      if (event.pointerType === 'mouse') hovering = true;
+    };
+    const onLeave = (event: PointerEvent) => {
+      if (event.pointerType === 'mouse') hovering = false;
+    };
+    const onFocusIn = () => {
+      focused = true;
+    };
+    const onFocusOut = () => {
+      focused = false;
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        visible = entry.isIntersecting;
+      },
+      { threshold: 0.15 },
+    );
+    observer.observe(rail);
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let raf = 0;
+    let last = performance.now();
+
+    const loop = (now: number) => {
+      const delta = Math.min(64, now - last);
+      last = now;
+
+      if (
+        !reduced &&
+        visible &&
+        !hovering &&
+        !focused &&
+        !down &&
+        !document.hidden &&
+        !previewOpenRef.current &&
+        now >= resumeAt
+      ) {
+        positionRef.current += (SPEED * delta) / 1000;
+        normalize();
+      }
+
+      raf = requestAnimationFrame(loop);
+    };
+    raf = requestAnimationFrame(loop);
+
+    rail.addEventListener('pointerdown', onPointerDown);
     // Escuchar en window permite arrastrar fuera del carril sin perder el gesto
-    window.addEventListener('pointermove', onMove);
-    window.addEventListener('pointerup', onEnd);
-    window.addEventListener('pointercancel', onEnd);
+    window.addEventListener('pointermove', onPointerMove);
+    window.addEventListener('pointerup', onPointerUp);
+    window.addEventListener('pointercancel', onPointerUp);
+    rail.addEventListener('wheel', onWheel, { passive: false });
+    rail.addEventListener('pointerenter', onEnter);
+    rail.addEventListener('pointerleave', onLeave);
+    rail.addEventListener('focusin', onFocusIn);
+    rail.addEventListener('focusout', onFocusOut);
 
     return () => {
-      rail.removeEventListener('pointerdown', onDown);
-      window.removeEventListener('pointermove', onMove);
-      window.removeEventListener('pointerup', onEnd);
-      window.removeEventListener('pointercancel', onEnd);
+      cancelAnimationFrame(raf);
+      resizeObserver.disconnect();
+      observer.disconnect();
+      rail.removeEventListener('pointerdown', onPointerDown);
+      window.removeEventListener('pointermove', onPointerMove);
+      window.removeEventListener('pointerup', onPointerUp);
+      window.removeEventListener('pointercancel', onPointerUp);
+      rail.removeEventListener('wheel', onWheel);
+      rail.removeEventListener('pointerenter', onEnter);
+      rail.removeEventListener('pointerleave', onLeave);
+      rail.removeEventListener('focusin', onFocusIn);
+      rail.removeEventListener('focusout', onFocusOut);
     };
   }, []);
-
 
   return (
     <section id="proyectos">
@@ -99,51 +219,54 @@ export default function Projects() {
       </div>
 
       <div className="rail" ref={railRef}>
-        {showcaseProjects.map((project) => {
-          const copy = t(`projects.folder.${project.slug}`, { returnObjects: true }) as ProjectCopy;
-          return (
-            <a
-              className="card"
-              key={project.slug}
-              href={project.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-haspopup="dialog"
-              draggable={false}
-              onDragStart={(event) => event.preventDefault()}
-              onClick={(event) => {
-                // Un arrastre no debe abrir la ficha
-                if (draggedRef.current) {
+        <div className="rail-track" ref={trackRef}>
+          {order.map((projectIndex) => {
+            const project = showcaseProjects[projectIndex];
+            const copy = t(`projects.folder.${project.slug}`, { returnObjects: true }) as ProjectCopy;
+            return (
+              <a
+                className="card"
+                key={project.slug}
+                href={project.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-haspopup="dialog"
+                draggable={false}
+                onDragStart={(event) => event.preventDefault()}
+                onClick={(event) => {
+                  // Un arrastre no debe abrir la ficha
+                  if (draggedRef.current) {
+                    event.preventDefault();
+                    draggedRef.current = false;
+                    return;
+                  }
+                  // El clic abre la ficha en el sitio; el enlace queda como respaldo
+                  if (event.metaKey || event.ctrlKey || event.shiftKey) return;
                   event.preventDefault();
-                  draggedRef.current = false;
-                  return;
-                }
-                // El clic abre la ficha en el sitio; el enlace queda como respaldo
-                if (event.metaKey || event.ctrlKey || event.shiftKey) return;
-                event.preventDefault();
-                setPreview(project);
-              }}
-            >
-              <span className="go" aria-hidden="true">
-                →
-              </span>
-              <div className="shot">
-                <img
-                  src={project.image}
-                  alt=""
-                  width={1440}
-                  height={900}
-                  loading="lazy"
-                  draggable={false}
-                />
-              </div>
-              <div className="meta">
-                <h3>{copy.title}</h3>
-                <span className="cat">{copy.category}</span>
-              </div>
-            </a>
-          );
-        })}
+                  setPreview(project);
+                }}
+              >
+                <span className="go" aria-hidden="true">
+                  →
+                </span>
+                <div className="shot">
+                  <img
+                    src={project.image}
+                    alt=""
+                    width={1440}
+                    height={900}
+                    loading="lazy"
+                    draggable={false}
+                  />
+                </div>
+                <div className="meta">
+                  <h3>{copy.title}</h3>
+                  <span className="cat">{copy.category}</span>
+                </div>
+              </a>
+            );
+          })}
+        </div>
       </div>
 
       <div className="rail-foot">

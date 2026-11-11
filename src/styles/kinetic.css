@@ -315,23 +315,19 @@ section[id], article[id] { scroll-margin-top: 96px; }
 .rail-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; margin-bottom: 26px; }
 .rail-hint { font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); }
 .rail {
-  display: flex;
-  gap: 22px;
-  overflow-x: auto;
-  overflow-anchor: none;
-  scroll-behavior: auto;
-  scroll-snap-type: none;
+  overflow: hidden;
+  touch-action: pan-y;
   padding-bottom: 18px;
   cursor: pointer;
-  scrollbar-width: none;
   margin: 0 calc(var(--pad) * -1);
   padding-left: var(--pad);
   padding-right: var(--pad);
   -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 var(--pad), #000 calc(100% - var(--pad)), transparent 100%);
   mask-image: linear-gradient(90deg, transparent 0, #000 var(--pad), #000 calc(100% - var(--pad)), transparent 100%);
 }
-.rail::-webkit-scrollbar { display: none; }
-.rail.drag { cursor: grabbing; scroll-snap-type: none; user-select: none; }
+/* La pista se desplaza por transform; las tarjetas se reciclan al final */
+.rail-track { display: flex; gap: 22px; width: max-content; will-change: transform; }
+.rail.drag { cursor: grabbing; user-select: none; }
 .card {
   flex: 0 0 min(520px, 72vw);
   scroll-snap-align: start;
