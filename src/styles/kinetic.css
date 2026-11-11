@@ -1346,3 +1346,13 @@ html.has-cursor * {
   .preview-title { font-size: 26px; }
   .preview-media img { max-height: 42vh; }
 }
+
+/* --- móvil: nombre y categoría apilados --------------------------------- */
+@media (max-width: 900px) {
+  .card .meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  .card .cat { padding-bottom: 0; }
+}
