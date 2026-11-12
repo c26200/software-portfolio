@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { getPageMeta, SITE_NAME, SITE_ORIGIN, type PageAlternate } from '../seo';
+import { getPageMeta, SITE_NAME, SITE_ORIGIN, TWITTER_HANDLE, type PageAlternate } from '../seo';
 
 function setMeta(attr: 'name' | 'property', key: string, content: string) {
   let el = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);
@@ -73,9 +73,11 @@ export default function PageMeta() {
     setMeta('property', 'og:locale', lang === 'en' ? 'en_US' : 'es_CO');
     setMeta('property', 'og:locale:alternate', lang === 'en' ? 'es_CO' : 'en_US');
     setMeta('name', 'twitter:card', 'summary_large_image');
+    setMeta('name', 'twitter:site', TWITTER_HANDLE);
     setMeta('name', 'twitter:title', page.title);
     setMeta('name', 'twitter:description', page.description);
     setMeta('name', 'twitter:image', page.ogImage);
+    setMeta('name', 'twitter:image:alt', page.title);
     setCanonical(page.canonical);
     setAlternates(page.alternates);
 
@@ -85,6 +87,12 @@ export default function PageMeta() {
     } else {
       removeMeta('property', 'article:published_time');
       removeMeta('property', 'article:author');
+    }
+
+    if (page.type === 'article' && page.lastModified) {
+      setMeta('property', 'article:modified_time', page.lastModified);
+    } else {
+      removeMeta('property', 'article:modified_time');
     }
 
     const id = 'page-jsonld';

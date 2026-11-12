@@ -28,6 +28,7 @@ export default function BlogPost() {
 
   const related = posts.filter((item) => item.slug !== post.slug);
   const { html, toc } = buildToc(copy.html);
+  const showUpdated = Boolean(post.updated && post.updated !== post.date);
 
   return (
     <section className="blog-section">
@@ -40,6 +41,14 @@ export default function BlogPost() {
           <time dateTime={post.date}>
             {t('blog.publishedOn')} {formatPostDate(post.date, language)}
           </time>
+          {showUpdated && (
+            <>
+              <span aria-hidden="true"> · </span>
+              <time dateTime={post.updated}>
+                {t('blog.updatedOn')} {formatPostDate(post.updated!, language)}
+              </time>
+            </>
+          )}
         </p>
         <h1 className="blog-post-title">{copy.title}</h1>
         {toc.length > 0 && (

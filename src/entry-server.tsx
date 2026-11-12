@@ -4,7 +4,7 @@ import { StaticRouter } from 'react-router';
 import App from './App';
 import i18n from './i18n';
 
-export { getPageMeta } from './seo';
+export { getPageMeta, TWITTER_HANDLE } from './seo';
 export { posts } from './content/blog';
 
 /**

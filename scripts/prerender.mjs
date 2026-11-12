@@ -6,7 +6,7 @@ const root = process.cwd();
 const dist = path.join(root, 'dist');
 const ssrEntry = path.join(root, 'dist-ssr', 'entry-server.js');
 
-const { render, getPageMeta, posts } = await import(pathToFileURL(ssrEntry).href);
+const { render, getPageMeta, posts, TWITTER_HANDLE } = await import(pathToFileURL(ssrEntry).href);
 
 const template = await fs.readFile(path.join(dist, 'index.html'), 'utf8');
 
@@ -39,13 +39,20 @@ function inject(html, body, meta, lang) {
   out = setMeta(out, 'property', 'og:image:alt', meta.title);
   out = setMeta(out, 'property', 'og:locale', lang === 'en' ? 'en_US' : 'es_CO');
   out = setMeta(out, 'property', 'og:locale:alternate', lang === 'en' ? 'es_CO' : 'en_US');
+  out = setMeta(out, 'name', 'twitter:card', 'summary_large_image');
+  out = setMeta(out, 'name', 'twitter:site', TWITTER_HANDLE);
   out = setMeta(out, 'name', 'twitter:title', meta.title);
   out = setMeta(out, 'name', 'twitter:description', meta.description);
   out = setMeta(out, 'name', 'twitter:image', meta.ogImage);
+  out = setMeta(out, 'name', 'twitter:image:alt', meta.title);
 
   if (meta.type === 'article' && meta.publishedTime) {
     out = setMeta(out, 'property', 'article:published_time', meta.publishedTime);
     out = setMeta(out, 'property', 'article:author', 'Carlos Gordillo');
+  }
+
+  if (meta.type === 'article' && meta.lastModified) {
+    out = setMeta(out, 'property', 'article:modified_time', meta.lastModified);
   }
 
   if (meta.canonical) {

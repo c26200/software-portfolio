@@ -11,12 +11,43 @@ export const OG_IMAGE_EN = `${SITE_ORIGIN}/og-image-en.png`;
 /** Stable entity identifiers. Referenced from every page so Google can resolve one Person. */
 export const PERSON_ID = `${SITE_ORIGIN}/#person`;
 export const SITE_ID = `${SITE_ORIGIN}/#website`;
+export const ORG_ID = `${SITE_ORIGIN}/#organization`;
 export const PORTRAIT = `${SITE_ORIGIN}/img/carlos-gordillo.jpg`;
+export const LOGO = `${SITE_ORIGIN}/favicon-512.png`;
+
+/** Manual content revision date for the static pages, used by the sitemap. */
+export const SITE_LAST_MODIFIED = '2026-11-11';
 
 export const SAME_AS = [
   'https://github.com/c26200',
   'https://www.linkedin.com/in/cmgordillo26/',
+  'https://x.com/gord17494',
 ];
+
+/** X/Twitter handle used for twitter:site. */
+export const TWITTER_HANDLE = '@gord17494';
+
+/** One social card per article and language, generated into public/og. */
+export function ogImageForPost(slug: string, lang: 'es' | 'en') {
+  return `${SITE_ORIGIN}/og/${slug}-${lang}.png`;
+}
+
+function organizationNode(): Record<string, unknown> {
+  return {
+    '@type': 'Organization',
+    '@id': ORG_ID,
+    name: SITE_NAME,
+    url: `${SITE_ORIGIN}/`,
+    logo: {
+      '@type': 'ImageObject',
+      url: LOGO,
+      width: 512,
+      height: 512,
+    },
+    founder: { '@id': PERSON_ID },
+    sameAs: SAME_AS,
+  };
+}
 
 function personNode(seo: typeof es.seo): Record<string, unknown> {
   return {
@@ -99,12 +130,14 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
       description: seo.homeDescription,
       canonical,
       type: 'website',
+      lastModified: SITE_LAST_MODIFIED,
       ogImage,
       alternates,
       jsonLd: {
         '@context': 'https://schema.org',
         '@graph': [
           personNode(seo),
+          organizationNode(),
           {
             '@type': 'WebSite',
             '@id': SITE_ID,
@@ -133,11 +166,13 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
       description: seo.aboutDescription,
       canonical,
       type: 'website',
+      lastModified: SITE_LAST_MODIFIED,
       ogImage,
       alternates,
       jsonLd: {
         '@context': 'https://schema.org',
         '@graph': [
+          organizationNode(),
           {
             '@type': 'ProfilePage',
             '@id': `${canonical}#webpage`,
@@ -177,17 +212,23 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
       description: seo.blogDescription,
       canonical,
       type: 'website',
+      lastModified: SITE_LAST_MODIFIED,
       ogImage,
       alternates,
       jsonLd: {
         '@context': 'https://schema.org',
-        '@type': 'Blog',
-        name: `Blog — ${SITE_NAME}`,
-        url: canonical,
-        description: seo.blogDescription,
-        inLanguage: lang,
-        author: { '@id': PERSON_ID },
-        publisher: { '@id': PERSON_ID },
+        '@graph': [
+          organizationNode(),
+          {
+            '@type': 'Blog',
+            name: `Blog — ${SITE_NAME}`,
+            url: canonical,
+            description: seo.blogDescription,
+            inLanguage: lang,
+            author: { '@id': PERSON_ID },
+            publisher: { '@id': ORG_ID },
+          },
+        ],
       },
     };
   }
@@ -195,6 +236,7 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
   if (post) {
     const content = getPostContent(post, lang);
     const faq = extractFaq(content.html);
+    const articleImage = ogImageForPost(post.slug, lang);
     const article = {
       '@type': 'BlogPosting',
       '@id': `${canonical}#article`,
@@ -203,9 +245,10 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
       datePublished: post.date,
       dateModified: post.updated ?? post.date,
       inLanguage: lang,
-      image: ogImage,
+      image: articleImage,
       author: { '@id': PERSON_ID },
-      publisher: { '@id': PERSON_ID },
+      publisher: { '@id': ORG_ID },
+      isPartOf: { '@id': SITE_ID },
       mainEntityOfPage: {
         '@type': 'WebPage',
         '@id': canonical,
@@ -214,6 +257,7 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
 
     const blogPath = localizePath('/blog', lang);
     const graph: Record<string, unknown>[] = [
+      organizationNode(),
       article,
       {
         '@type': 'BreadcrumbList',
@@ -261,7 +305,7 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
       type: 'article',
       publishedTime: post.date,
       lastModified: post.updated ?? post.date,
-      ogImage,
+      ogImage: articleImage,
       alternates,
       jsonLd: {
         '@context': 'https://schema.org',
