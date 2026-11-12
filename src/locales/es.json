@@ -7,10 +7,7 @@
   },
   "nav": {
     "profile": "Perfil",
-    "hero": "Inicio",
     "experience": "Experiencia",
-    "studies": "Estudios",
-    "skills": "Habilidades",
     "projects": "Proyectos",
     "contact": "Contacto",
     "blog": "Blog",
@@ -74,28 +71,6 @@
     "pauseLabel": "Pausar",
     "playLabel": "Reanudar",
     "repoOf": "Repositorio de"
-  },
-  "sections": {
-    "about": {
-      "num": "01",
-      "title": "Sobre mí"
-    },
-    "experience": {
-      "num": "02",
-      "title": "Experiencia"
-    },
-    "studies": {
-      "num": "03",
-      "title": "Estudios"
-    },
-    "skills": {
-      "num": "04",
-      "title": "Habilidades"
-    },
-    "projects": {
-      "num": "05",
-      "title": "Proyectos"
-    }
   },
   "about": {
     "photoAlt": "Carlos Gordillo, ingeniero full stack e IA, en Puerto Boyacá, Colombia",
@@ -226,16 +201,6 @@
         "org": "Consultoría Tecnológica Independiente",
         "role": "Desarrollador Full Stack & IA",
         "desc": "Desarrollo de productos con Next.js, Node.js y Docker sobre VPS Linux propio. Automatización de procesos con Python y n8n. Integración de modelos de machine learning — series temporales financieras con LSTM y Transformers, clasificación con redes convolucionales — y dashboards de monitoreo en tiempo real."
-      }
-    ]
-  },
-  "studies": {
-    "items": [
-      {
-        "year": "2019 — Presente",
-        "institution": "Universidad de Pamplona",
-        "program": "Ingeniería",
-        "note": "Pamplona, Norte de Santander · Formación en ingeniería con énfasis en sistemas y automatización"
       }
     ]
   },
