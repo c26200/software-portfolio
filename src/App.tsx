@@ -1,17 +1,23 @@
+import { Suspense, type ComponentType } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import CustomCursor from './components/CustomCursor';
 import Footer from './components/Footer';
 import PageMeta from './components/PageMeta';
 import LanguageSync from './components/LanguageSync';
-import Home from './pages/Home';
-import Blog from './pages/Blog';
-import BlogPost from './pages/BlogPost';
-import CaseStudy from './pages/CaseStudy';
-import Sobre from './pages/Sobre';
-import NotFound from './pages/NotFound';
 
-export default function App() {
+export interface PageComponents {
+  Home: ComponentType;
+  Sobre: ComponentType;
+  Blog: ComponentType;
+  BlogPost: ComponentType;
+  CaseStudy: ComponentType;
+  NotFound: ComponentType;
+}
+
+export default function App({ pages }: { pages: PageComponents }) {
+  const { Home, Sobre, Blog, BlogPost, CaseStudy, NotFound } = pages;
+
   return (
     <>
       <LanguageSync />
@@ -19,19 +25,21 @@ export default function App() {
       <CustomCursor />
       <Header />
       <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/en" element={<Home />} />
-          <Route path="/sobre" element={<Sobre />} />
-          <Route path="/en/sobre" element={<Sobre />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/en/blog" element={<Blog />} />
-          <Route path="/blog/:slug" element={<BlogPost />} />
-          <Route path="/en/blog/:slug" element={<BlogPost />} />
-          <Route path="/proyectos/:slug" element={<CaseStudy />} />
-          <Route path="/en/proyectos/:slug" element={<CaseStudy />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <Suspense fallback={null}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/en" element={<Home />} />
+            <Route path="/sobre" element={<Sobre />} />
+            <Route path="/en/sobre" element={<Sobre />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/en/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/en/blog/:slug" element={<BlogPost />} />
+            <Route path="/proyectos/:slug" element={<CaseStudy />} />
+            <Route path="/en/proyectos/:slug" element={<CaseStudy />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
       </main>
       <Footer />
     </>

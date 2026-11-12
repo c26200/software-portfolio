@@ -1,5 +1,5 @@
 import { useState, type CSSProperties } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from '../i18n';
 import { showcaseProjects, type ShowcaseProject } from '../content/projects';
 import ProjectPreviewModal from './ProjectPreviewModal';
 

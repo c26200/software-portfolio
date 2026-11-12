@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from '../i18n';
 import { localizePath, pathLanguage } from '../i18n-paths';
 
 interface Fact {

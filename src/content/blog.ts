@@ -720,11 +720,4 @@ export function extractFaq(html: string): FaqItem[] {
     .filter((item) => item.question.length > 0 && item.answer.length > 0);
 }
 
-export function formatPostDate(date: string, language: string) {
-  return new Intl.DateTimeFormat(language.startsWith('en') ? 'en-US' : 'es-CO', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-    timeZone: 'UTC',
-  }).format(new Date(`${date}T12:00:00Z`));
-}
+export { formatPostDate } from './format';

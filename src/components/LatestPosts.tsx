@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import { formatPostDate, getPostContent, posts } from '../content/blog';
+import { useTranslation } from '../i18n';
+import { formatPostDate } from '../content/format';
+import { getPostSummary, postIndex } from '../content/blog-index';
 import { localizePath, pathLanguage } from '../i18n-paths';
 import Reveal from './Reveal';
 
@@ -28,8 +29,8 @@ export default function LatestPosts() {
       </div>
 
       <div className="latest-list">
-        {posts.map((post) => {
-          const copy = getPostContent(post, language);
+        {postIndex.map((post) => {
+          const copy = getPostSummary(post, language);
           return (
             <Link
               key={post.slug}

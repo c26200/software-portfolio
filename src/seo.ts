@@ -1,7 +1,7 @@
 import es from './locales/es.json';
 import en from './locales/en.json';
-import { extractFaq, getPostContent, posts } from './content/blog';
-import { getCaseContent, getCaseStudy } from './content/caseStudies';
+import { getPostSummary, postIndex } from './content/blog-index';
+import { getCaseSummary, caseStudyIndex } from './content/case-studies-index';
 import { localizePath, stripLocale } from './i18n-paths';
 
 export const SITE_ORIGIN = 'https://carlosgordillo.com';
@@ -127,10 +127,10 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
     { hreflang: 'x-default', href: `${SITE_ORIGIN}${esPath}` },
   ];
   const post = logical.startsWith('/blog/')
-    ? posts.find((item) => item.slug === logical.slice('/blog/'.length))
+    ? postIndex.find((item) => item.slug === logical.slice('/blog/'.length))
     : undefined;
   const study = logical.startsWith('/proyectos/')
-    ? getCaseStudy(logical.slice('/proyectos/'.length))
+    ? caseStudyIndex.find((item) => item.slug === logical.slice('/proyectos/'.length))
     : undefined;
 
   if (logical === '/') {
@@ -243,8 +243,8 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
   }
 
   if (post) {
-    const content = getPostContent(post, lang);
-    const faq = extractFaq(content.html);
+    const content = getPostSummary(post, lang);
+    const faq = content.faq;
     const articleImage = ogImageForPost(post.slug, lang);
     const article = {
       '@type': 'BlogPosting',
@@ -324,7 +324,7 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
   }
 
   if (study) {
-    const content = getCaseContent(study, lang);
+    const content = getCaseSummary(study, lang);
     const caseImage = ogImageForCase(study.slug, lang);
     const article = {
       '@type': 'Article',

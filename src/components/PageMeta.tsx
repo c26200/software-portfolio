@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from '../i18n';
 import { getPageMeta, SITE_NAME, SITE_ORIGIN, TWITTER_HANDLE, type PageAlternate } from '../seo';
 
 function setMeta(attr: 'name' | 'property', key: string, content: string) {

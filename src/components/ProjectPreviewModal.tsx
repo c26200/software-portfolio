@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { Link, useLocation } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from '../i18n';
 import type { ShowcaseProject } from '../content/projects';
 import { projectImageSrcSet } from '../content/projects';
 import { localizePath, pathLanguage } from '../i18n-paths';

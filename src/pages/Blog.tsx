@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import { formatPostDate, getPostContent, posts } from '../content/blog';
+import { useTranslation } from '../i18n';
+import { formatPostDate } from '../content/format';
+import { getPostSummary, postIndex } from '../content/blog-index';
 import { localizePath, pathLanguage } from '../i18n-paths';
 
 export default function Blog() {
@@ -18,11 +19,11 @@ export default function Blog() {
         <h1 className="blog-index-title">{t('blog.title')}</h1>
 
         <div className="blog-list">
-          {posts.length === 0 ? (
+          {postIndex.length === 0 ? (
             <p className="blog-empty">{t('blog.empty')}</p>
           ) : (
-            posts.map((post) => {
-              const copy = getPostContent(post, language);
+            postIndex.map((post) => {
+              const copy = getPostSummary(post, language);
               return (
                 <article className="blog-card" key={post.slug}>
                   <p className="blog-date">

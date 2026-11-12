@@ -6,9 +6,59 @@ const root = process.cwd();
 const dist = path.join(root, 'dist');
 const ssrEntry = path.join(root, 'dist-ssr', 'entry-server.js');
 
-const { render, getPageMeta, posts, caseStudies, TWITTER_HANDLE } = await import(
-  pathToFileURL(ssrEntry).href,
-);
+const {
+  render,
+  getPageMeta,
+  posts,
+  caseStudies,
+  postIndex,
+  caseStudyIndex,
+  extractFaq,
+  TWITTER_HANDLE,
+} = await import(pathToFileURL(ssrEntry).href);
+
+// The client imports the lightweight indexes; the full content is the source
+// of truth. Fail the build if they drift.
+function assertIndexesMatch() {
+  const problems = [];
+  for (const post of posts) {
+    const summary = postIndex.find((item) => item.slug === post.slug);
+    if (!summary) {
+      problems.push(`missing post index for ${post.slug}`);
+      continue;
+    }
+    for (const lang of ['es', 'en']) {
+      const full = post[lang];
+      const meta = summary[lang];
+      if (full.title !== meta.title) problems.push(`${post.slug} ${lang} title`);
+      if (full.excerpt !== meta.excerpt) problems.push(`${post.slug} ${lang} excerpt`);
+      if (JSON.stringify(extractFaq(full.html)) !== JSON.stringify(meta.faq)) {
+        problems.push(`${post.slug} ${lang} faq`);
+      }
+    }
+  }
+  for (const study of caseStudies) {
+    const summary = caseStudyIndex.find((item) => item.slug === study.slug);
+    if (!summary) {
+      problems.push(`missing case index for ${study.slug}`);
+      continue;
+    }
+    for (const lang of ['es', 'en']) {
+      for (const key of ['title', 'subtitle', 'category', 'summary']) {
+        if (study[lang][key] !== summary[lang][key]) {
+          problems.push(`${study.slug} ${lang} ${key}`);
+        }
+      }
+    }
+  }
+  if (problems.length) {
+    throw new Error(
+      `Content indexes are stale (run node scripts/build-indexes.mjs after building dist-ssr):\n- ${problems.join('\n- ')}`,
+    );
+  }
+}
+
+assertIndexesMatch();
 
 const template = await fs.readFile(path.join(dist, 'index.html'), 'utf8');
 
@@ -91,11 +141,11 @@ const routes = [
   { path: '/en/sobre', lang: 'en' },
   { path: '/blog', lang: 'es' },
   { path: '/en/blog', lang: 'en' },
-  ...posts.flatMap((post) => [
+  ...postIndex.flatMap((post) => [
     { path: `/blog/${post.slug}`, lang: 'es' },
     { path: `/en/blog/${post.slug}`, lang: 'en' },
   ]),
-  ...caseStudies.flatMap((study) => [
+  ...caseStudyIndex.flatMap((study) => [
     { path: `/proyectos/${study.slug}`, lang: 'es' },
     { path: `/en/proyectos/${study.slug}`, lang: 'en' },
   ]),

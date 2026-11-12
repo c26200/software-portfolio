@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from '../i18n';
 import { buildToc, formatPostDate, getPostContent, posts } from '../content/blog';
 import { localizePath, pathLanguage } from '../i18n-paths';
 

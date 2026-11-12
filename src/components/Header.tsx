@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from '../i18n';
 import LanguageSwitch from './LanguageSwitch';
 import ThemeToggle from './ThemeToggle';
 import MobileMenu from './MobileMenu';

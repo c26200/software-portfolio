@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from '../i18n';
 import { showcaseProjects, projectImageSrcSet, type ShowcaseProject } from '../content/projects';
 import Reveal from './Reveal';
 import ProjectPreviewModal from './ProjectPreviewModal';

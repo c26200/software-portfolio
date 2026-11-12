@@ -1,7 +1,7 @@
 import { Link, useLocation, useParams } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import { caseStudies, getCaseContent, getCaseStudy } from '../content/caseStudies';
-import { getPostContent, posts } from '../content/blog';
+import { useTranslation } from '../i18n';
+import { caseStudies, getCaseContent } from '../content/caseStudies';
+import { getPostSummary, postIndex } from '../content/blog-index';
 import { projectImageSrcSet } from '../content/projects';
 import { localizePath, pathLanguage } from '../i18n-paths';
 
@@ -10,7 +10,7 @@ export default function CaseStudy() {
   const { t } = useTranslation();
   const { pathname } = useLocation();
   const language = pathLanguage(pathname);
-  const study = slug ? getCaseStudy(slug) : undefined;
+  const study = slug ? caseStudies.find((item) => item.slug === slug) : undefined;
 
   if (!study) {
     return (
@@ -27,7 +27,7 @@ export default function CaseStudy() {
 
   const copy = getCaseContent(study, language);
   const related = study.relatedPosts
-    .map((postSlug) => posts.find((post) => post.slug === postSlug))
+    .map((postSlug) => postIndex.find((post) => post.slug === postSlug))
     .filter((post): post is NonNullable<typeof post> => Boolean(post));
   const otherStudies = caseStudies.filter((item) => item.slug !== study.slug).slice(0, 3);
 
@@ -95,7 +95,7 @@ export default function CaseStudy() {
             <p className="blog-related-label">{t('caseStudy.related')}</p>
             <ul>
               {related.map((post) => {
-                const postCopy = getPostContent(post, language);
+                const postCopy = getPostSummary(post, language);
                 return (
                   <li key={post.slug}>
                     <Link to={localizePath(`/blog/${post.slug}`, language)}>

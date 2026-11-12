@@ -6,13 +6,12 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "indexes": "node scripts/build-indexes.mjs"
   },
   "dependencies": {
-    "i18next": "^25.6.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "react-i18next": "^16.2.0",
     "react-router-dom": "^7.9.0"
   },
   "devDependencies": {

@@ -12,7 +12,8 @@ projects with real screenshots, an animated CI/CD pipeline and a bilingual blog.
 - Bilingual Spanish/English site with separate URLs (`/` and `/en`), `hreflang` alternates
   and prerendered HTML for both
 - Light and dark themes, switchable from the header and persisted per visitor
-- Draggable project rail with screenshots of four deployed apps, linked to their repositories
+- Draggable project rail with screenshots of six deployed apps, linked to their repositories
+  and to a full case study for each one
 - Latest articles section on the home page, with links to the full blog
 - Animated CI/CD pipeline demo with eight stages, pause on scroll and reduced-motion support
 - Blog with bilingual pillar guides, table of contents, FAQ schema and related posts, plus a
@@ -21,7 +22,11 @@ projects with real screenshots, an animated CI/CD pipeline and a bilingual blog.
 
 ## Stack
 
-React 19 · TypeScript · Vite 7 · react-router-dom 7 · i18next · CSS variables
+React 19 · TypeScript · Vite 7 · react-router-dom 7 · CSS variables
+
+The UI is bilingual through a small in-house i18n module (`src/i18n.ts`); there is no i18n
+runtime dependency. Article bodies load only on blog routes, and the app shell imports
+lightweight content indexes (`blog-index.ts`, `case-studies-index.ts`) instead of full text.
 
 ## Run locally
 
@@ -29,31 +34,37 @@ React 19 · TypeScript · Vite 7 · react-router-dom 7 · i18next · CSS variabl
 npm install
 npm run dev       # http://localhost:5173
 npm run build     # generates dist/
+npm run indexes   # regenerates the content indexes after editing content
 npm run preview
 ```
 
 ## Structure
 
 ```
-public/               favicon, OG image, project screenshots, robots.txt, 404.html
+public/               favicon, OG images, project screenshots, robots.txt, 404.html
 scripts/              prerender.mjs — renders each route and the sitemap at build
+                      build-indexes.mjs — generates the lightweight content indexes
 src/
 ├── components/       Hero, KineticCanvas, Marquee, About, Stat, Experience,
 │                     Pipeline, Projects, LatestPosts, Contact, Header,
 │                     LanguageSwitch, ThemeToggle, MobileMenu, Footer, Reveal
-├── pages/            Home, Blog, BlogPost, NotFound
+├── pages/            Home, Blog, BlogPost, CaseStudy, Sobre, NotFound
 ├── locales/          es.json, en.json — all editable copy
-├── content/          blog.ts, projects.ts, pipeline.ts
+├── content/          blog.ts, blog-extra.ts, caseStudies.ts (full text),
+│                     blog-index.ts, case-studies-index.ts (generated metadata)
 ├── seo.ts            per-route metadata and JSON-LD
+├── page-loaders.ts   one lazy chunk per route for the client
+├── i18n.ts           minimal translation store and useTranslation hook
 ├── entry-server.tsx  SSR entry used only by the prerenderer
 └── styles/           kinetic.css (visual system) and pipeline.css
 ```
 
 ## Deployment
 
-`npm run build` creates the client bundle, renders the four Spanish routes and the four
-English routes to their own `index.html`, injects the route metadata into each file and
-generates `sitemap.xml` with both language versions and their alternates. Crawlers and social
+`npm run build` creates the client bundle, renders the 30 Spanish and English routes to their
+own `index.html`, injects the route metadata into each file and generates `sitemap.xml` with
+both language versions and their alternates. The build fails if the generated content indexes
+drift from the full text, so `npm run indexes` is the only manual step after editing content. Crawlers and social
 previews receive the full page without running JavaScript; unknown paths return a real 404
 through `public/404.html`.
 
