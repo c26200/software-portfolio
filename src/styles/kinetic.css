@@ -988,7 +988,7 @@ html.has-cursor * {
    la izquierda y se desactiva la partición de palabras. */
 @media (max-width: 900px) {
   :root {
-    --prose-align: center;
+    --prose-align: left;
     --prose-hyphens: manual;
   }
 }
@@ -1321,6 +1321,159 @@ html.has-cursor * {
   transition: color 0.25s;
 }
 .preview-code:hover { color: var(--lime); }
+.preview-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  justify-self: start;
+}
+.preview-case {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--lime);
+  border-bottom: 1px solid var(--lime);
+  padding-bottom: 3px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    color 0.25s,
+    border-color 0.25s;
+}
+.preview-case:hover { color: var(--fg); border-color: var(--fg); }
+
+/* --- casos de estudio --------------------------------------------------- */
+.case-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(120px, 15vh, 180px) var(--pad) clamp(70px, 9vw, 120px);
+}
+.case-container { max-width: 860px; margin: 0 auto; }
+.case-title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(40px, 6vw, 76px);
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+  margin: 8px 0 18px;
+}
+.case-subtitle {
+  font-size: clamp(17px, 2vw, 21px);
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 62ch;
+  margin-bottom: 28px;
+}
+.case-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 18px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 16px 0;
+  margin-bottom: 34px;
+}
+.case-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.case-stack li { border: 1px solid var(--line); padding: 4px 9px; }
+.case-code {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg);
+  border-bottom: 1px solid var(--lime);
+  padding-bottom: 2px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.case-code:hover { color: var(--lime); }
+.case-media {
+  margin: 0 0 34px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+}
+.case-media img { display: block; width: 100%; height: auto; }
+.case-summary {
+  border-left: 2px solid var(--lime);
+  padding-left: 18px;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--fg);
+  margin-bottom: 34px;
+}
+.case-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  margin: 0 0 44px;
+}
+.case-metrics > div { background: var(--bg); padding: 18px 20px; }
+.case-metrics dt {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 6px;
+}
+.case-metrics dd {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(18px, 2.4vw, 26px);
+  line-height: 1.1;
+  color: var(--fg);
+}
+.case-prose section { padding: 0; max-width: none; margin: 0; }
+.case-prose section + section { margin-top: 8px; }
+.case-lessons { list-style: none; padding: 0; }
+.case-lessons li { position: relative; padding-left: 22px; margin-bottom: 8px; }
+.case-lessons li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--lime);
+  font-family: var(--mono);
+}
+.case-others {
+  margin-top: 56px;
+  border-top: 1px solid var(--line);
+  padding-top: 24px;
+}
+.case-others ul { list-style: none; margin: 0; padding: 0; }
+.case-others li + li { margin-top: 10px; }
+.case-others a {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-family: var(--serif);
+  font-size: clamp(20px, 2.6vw, 28px);
+  line-height: 1.15;
+  color: var(--fg);
+  text-decoration: none;
+}
+.case-others a:hover { color: var(--lime); }
+
+@media (max-width: 700px) {
+  .case-metrics { grid-template-columns: 1fr; }
+}
 
 @keyframes previewFade {
   from { opacity: 0; }

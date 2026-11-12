@@ -1,8 +1,10 @@
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import type { ShowcaseProject } from '../content/projects';
 import { projectImageSrcSet } from '../content/projects';
+import { localizePath, pathLanguage } from '../i18n-paths';
 
 interface ProjectPreviewModalProps {
   project: ShowcaseProject;
@@ -17,6 +19,8 @@ interface ProjectCopy {
 
 export default function ProjectPreviewModal({ project, onClose }: ProjectPreviewModalProps) {
   const { t } = useTranslation();
+  const { pathname } = useLocation();
+  const language = pathLanguage(pathname);
   const panelRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const copy = t(`projects.folder.${project.slug}`, { returnObjects: true }) as ProjectCopy;
@@ -91,9 +95,18 @@ export default function ProjectPreviewModal({ project, onClose }: ProjectPreview
               ))}
             </ul>
           </div>
-          <a className="preview-code" href={project.href} target="_blank" rel="noopener noreferrer">
-            {t('projects.viewCode')} ↗
-          </a>
+          <div className="preview-actions">
+            <Link
+              className="preview-case"
+              to={localizePath(`/proyectos/${project.slug}`, language)}
+              onClick={onClose}
+            >
+              {t('projects.viewCase')} →
+            </Link>
+            <a className="preview-code" href={project.href} target="_blank" rel="noopener noreferrer">
+              {t('projects.viewCode')} ↗
+            </a>
+          </div>
         </div>
       </div>
     </div>,

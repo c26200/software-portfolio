@@ -6,6 +6,7 @@ import i18n from './i18n';
 
 export { getPageMeta, TWITTER_HANDLE } from './seo';
 export { posts } from './content/blog';
+export { caseStudies } from './content/caseStudies';
 
 /**
  * Renders one route to static HTML at build time.

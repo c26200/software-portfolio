@@ -290,6 +290,7 @@
     "close": "Close",
     "stack": "Stack",
     "viewCode": "View code",
+    "viewCase": "Read the case study",
     "other": "Other projects",
     "folder": {
       "saas-landing-page": {
@@ -361,6 +362,13 @@
   "notFound": {
     "text": "The page you are looking for does not exist or has moved.",
     "back": "← Back to home"
+  },
+  "caseStudy": {
+    "kicker": "Case study",
+    "viewCode": "View repository",
+    "lessons": "What I took away",
+    "related": "Related articles",
+    "back": "← Back to projects"
   },
   "seo": {
     "homeTitle": "Carlos Gordillo — Full Stack & AI | Colombia",

@@ -1,3 +1,5 @@
+import { extraPosts } from './blog-extra';
+
 export interface BlogContent {
   title: string;
   excerpt: string;
@@ -17,7 +19,7 @@ export interface TocItem {
   text: string;
 }
 
-export const posts: BlogPost[] = [
+const corePosts: BlogPost[] = [
   {
     slug: 'etl-n8n-postgresql',
     date: '2026-11-11',
@@ -265,7 +267,7 @@ SET amount = EXCLUDED.amount,
 <h3>¿Cuándo debo reentrenar?</h3>
 <p>Cuando el error o la distribución de los datos cambie de forma sostenida. Combina un calendario con disparadores por drift; reentrenar cada día sin evidencia solo añade riesgo operativo.</p>
 <h2>Para seguir</h2>
-<p>El código y la arquitectura están en <a href="https://github.com/c26200/trading-predictor" target="_blank" rel="noopener noreferrer">TradeScope AI</a>. Si estás montando algo parecido, el orden que me funcionó fue: datos, validación, baseline, modelo y solo después interfaz. La parte de infraestructura está en <a href="/blog/docker-fundamentals">Docker para Desarrolladores</a>, y si quieres discutir el enfoque puedes escribirme desde la <a href="/#contacto">página de contacto</a>.</p>
+<p>El código está en <a href="https://github.com/c26200/trading-predictor" target="_blank" rel="noopener noreferrer">GitHub</a> y el recorrido completo, con las decisiones de producto, en el caso de estudio <a href="/proyectos/trading-predictor">TradeScope AI</a>. Si estás montando algo parecido, el orden que me funcionó fue: datos, validación, baseline, modelo y solo después interfaz. La parte de infraestructura está en <a href="/blog/docker-fundamentals">Docker para Desarrolladores</a>, y si quieres discutir el enfoque puedes escribirme desde la <a href="/#contacto">página de contacto</a>.</p>
 `,
     },
     en: {
@@ -346,7 +348,7 @@ SET amount = EXCLUDED.amount,
 <h3>When should I retrain?</h3>
 <p>When error or data distribution changes persistently. Combine a schedule with drift triggers; retraining daily without evidence only adds operational risk.</p>
 <h2>Further reading</h2>
-<p>The code and architecture are in <a href="https://github.com/c26200/trading-predictor" target="_blank" rel="noopener noreferrer">TradeScope AI</a>. If you are building something similar, the order that worked for me was: data, validation, baseline, model and only then interface. The infrastructure side is in <a href="/en/blog/docker-fundamentals">Docker for Developers</a>, and if you want to discuss the approach you can write to me from the <a href="/en#contacto">contact page</a>.</p>
+<p>The code is on <a href="https://github.com/c26200/trading-predictor" target="_blank" rel="noopener noreferrer">GitHub</a> and the full walkthrough, including the product decisions, is in the <a href="/en/proyectos/trading-predictor">TradeScope AI</a> case study. If you are building something similar, the order that worked for me was: data, validation, baseline, model and only then interface. The infrastructure side is in <a href="/en/blog/docker-fundamentals">Docker for Developers</a>, and if you want to discuss the approach you can write to me from the <a href="/en#contacto">contact page</a>.</p>
 `,
     },
   },
@@ -646,6 +648,9 @@ volumes:
     },
   },
 ];
+
+/** Core articles first, then the Phase 4 additions. */
+export const posts: BlogPost[] = [...corePosts, ...extraPosts];
 
 export function getPostContent(post: BlogPost, language: string): BlogContent {
   return language.startsWith('en') ? post.en : post.es;

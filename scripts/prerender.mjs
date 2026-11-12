@@ -6,7 +6,9 @@ const root = process.cwd();
 const dist = path.join(root, 'dist');
 const ssrEntry = path.join(root, 'dist-ssr', 'entry-server.js');
 
-const { render, getPageMeta, posts, TWITTER_HANDLE } = await import(pathToFileURL(ssrEntry).href);
+const { render, getPageMeta, posts, caseStudies, TWITTER_HANDLE } = await import(
+  pathToFileURL(ssrEntry).href,
+);
 
 const template = await fs.readFile(path.join(dist, 'index.html'), 'utf8');
 
@@ -92,6 +94,10 @@ const routes = [
   ...posts.flatMap((post) => [
     { path: `/blog/${post.slug}`, lang: 'es' },
     { path: `/en/blog/${post.slug}`, lang: 'en' },
+  ]),
+  ...caseStudies.flatMap((study) => [
+    { path: `/proyectos/${study.slug}`, lang: 'es' },
+    { path: `/en/proyectos/${study.slug}`, lang: 'en' },
   ]),
 ];
 

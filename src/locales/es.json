@@ -290,6 +290,7 @@
     "close": "Cerrar",
     "stack": "Stack",
     "viewCode": "Ver código",
+    "viewCase": "Ver caso completo",
     "other": "Otros proyectos",
     "folder": {
       "saas-landing-page": {
@@ -361,6 +362,13 @@
   "notFound": {
     "text": "La página que buscas no existe o fue movida.",
     "back": "← Volver al inicio"
+  },
+  "caseStudy": {
+    "kicker": "Caso de estudio",
+    "viewCode": "Ver repositorio",
+    "lessons": "Lo que me llevo",
+    "related": "Artículos relacionados",
+    "back": "← Volver a proyectos"
   },
   "seo": {
     "homeTitle": "Carlos Gordillo — Full Stack & IA | Colombia",

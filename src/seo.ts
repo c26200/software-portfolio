@@ -1,6 +1,7 @@
 import es from './locales/es.json';
 import en from './locales/en.json';
 import { extractFaq, getPostContent, posts } from './content/blog';
+import { getCaseContent, getCaseStudy } from './content/caseStudies';
 import { localizePath, stripLocale } from './i18n-paths';
 
 export const SITE_ORIGIN = 'https://carlosgordillo.com';
@@ -30,6 +31,11 @@ export const TWITTER_HANDLE = '@gord17494';
 /** One social card per article and language, generated into public/og. */
 export function ogImageForPost(slug: string, lang: 'es' | 'en') {
   return `${SITE_ORIGIN}/og/${slug}-${lang}.png`;
+}
+
+/** One social card per case study and language, generated into public/og. */
+export function ogImageForCase(slug: string, lang: 'es' | 'en') {
+  return `${SITE_ORIGIN}/og/proyecto-${slug}-${lang}.png`;
 }
 
 function organizationNode(): Record<string, unknown> {
@@ -122,6 +128,9 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
   ];
   const post = logical.startsWith('/blog/')
     ? posts.find((item) => item.slug === logical.slice('/blog/'.length))
+    : undefined;
+  const study = logical.startsWith('/proyectos/')
+    ? getCaseStudy(logical.slice('/proyectos/'.length))
     : undefined;
 
   if (logical === '/') {
@@ -310,6 +319,64 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
       jsonLd: {
         '@context': 'https://schema.org',
         '@graph': graph,
+      },
+    };
+  }
+
+  if (study) {
+    const content = getCaseContent(study, lang);
+    const caseImage = ogImageForCase(study.slug, lang);
+    const article = {
+      '@type': 'Article',
+      '@id': `${canonical}#article`,
+      headline: content.title,
+      description: content.summary,
+      datePublished: study.date,
+      dateModified: study.date,
+      inLanguage: lang,
+      image: caseImage,
+      keywords: study.stack.join(', '),
+      author: { '@id': PERSON_ID },
+      publisher: { '@id': ORG_ID },
+      isPartOf: { '@id': SITE_ID },
+      mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': canonical,
+      },
+    };
+
+    return {
+      title: `${content.title} — ${SITE_NAME}`,
+      description: content.summary,
+      canonical,
+      type: 'article',
+      publishedTime: study.date,
+      lastModified: study.date,
+      ogImage: caseImage,
+      alternates,
+      jsonLd: {
+        '@context': 'https://schema.org',
+        '@graph': [
+          organizationNode(),
+          article,
+          {
+            '@type': 'BreadcrumbList',
+            '@id': `${canonical}#breadcrumb`,
+            itemListElement: [
+              {
+                '@type': 'ListItem',
+                position: 1,
+                name: seo.breadcrumbHome,
+                item: `${SITE_ORIGIN}${localizePath('/', lang)}`,
+              },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: content.title,
+              },
+            ],
+          },
+        ],
       },
     };
   }

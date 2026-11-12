@@ -7,6 +7,7 @@ import LanguageSync from './components/LanguageSync';
 import Home from './pages/Home';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
+import CaseStudy from './pages/CaseStudy';
 import Sobre from './pages/Sobre';
 import NotFound from './pages/NotFound';
 
@@ -27,6 +28,8 @@ export default function App() {
           <Route path="/en/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/en/blog/:slug" element={<BlogPost />} />
+          <Route path="/proyectos/:slug" element={<CaseStudy />} />
+          <Route path="/en/proyectos/:slug" element={<CaseStudy />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
