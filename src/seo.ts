@@ -2,7 +2,7 @@ import es from './locales/es.json';
 import en from './locales/en.json';
 import { getPostSummary, postIndex } from './content/blog-index';
 import { getCaseSummary, caseStudyIndex } from './content/case-studies-index';
-import { localizePath, stripLocale } from './i18n-paths';
+import { canonicalPath, localizePath, stripLocale } from './i18n-paths';
 
 export const SITE_ORIGIN = 'https://carlosgordillo.com';
 export const SITE_NAME = 'Carlos Gordillo';
@@ -125,12 +125,11 @@ export interface PageMetadata {
 export function getPageMeta(pathname: string, language: string): PageMetadata {
   const lang = language.startsWith('en') ? 'en' : 'es';
   const seo = lang === 'en' ? en.seo : es.seo;
-  const logicalRaw = stripLocale(pathname);
-  const logical = logicalRaw === '/' ? '/' : logicalRaw.replace(/\/+$/, '') || '/';
+  const logical = canonicalPath(stripLocale(pathname));
   const esPath = localizePath(logical, 'es');
   const enPath = localizePath(logical, 'en');
-  const canonicalPath = lang === 'en' ? enPath : esPath;
-  const canonical = `${SITE_ORIGIN}${canonicalPath}`;
+  const canonicalLogical = lang === 'en' ? enPath : esPath;
+  const canonical = `${SITE_ORIGIN}${canonicalLogical}`;
   const ogImage = lang === 'en' ? OG_IMAGE_EN : OG_IMAGE;
   const alternates: PageAlternate[] = [
     { hreflang: 'es', href: `${SITE_ORIGIN}${esPath}` },

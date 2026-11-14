@@ -10,7 +10,9 @@ export default function CaseStudy() {
   const { t } = useTranslation();
   const { pathname } = useLocation();
   const language = pathLanguage(pathname);
-  const study = slug ? caseStudies.find((item) => item.slug === slug) : undefined;
+  const study = slug
+    ? caseStudies.find((item) => item.slug === slug || item.slugEn === slug)
+    : undefined;
 
   if (!study) {
     return (

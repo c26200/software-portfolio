@@ -7,6 +7,7 @@ import type { BlogPost } from './blog';
 export const extraPosts: BlogPost[] = [
   {
     slug: 'estado-local-react',
+    slugEn: 'local-state-react',
     date: '2026-11-11',
     es: {
       title: 'Estado local en React: persistir datos sin backend',
@@ -183,12 +184,13 @@ export function save(store: Store): boolean {
 <h3>Do I need a state library?</h3>
 <p>Not to start. A typed module and well-placed React state are enough. A library helps with many concurrent writes or complex synchronization, but it does not replace understanding the model.</p>
 <h2>Further reading</h2>
-<p>You can see these principles at work in the <a href="/en/proyectos/cinetrack">CineTrack</a>, <a href="/en/proyectos/kanban-task-manager">Kanban Flow</a> and <a href="/en/proyectos/portfolio-mecatronica">Mechatronics Portfolio</a> case studies. If your next step is shipping the app, read <a href="/en/blog/docker-fundamentals">Docker for Developers</a>.</p>
+<p>You can see these principles at work in the <a href="/en/projects/cinetrack">CineTrack</a>, <a href="/en/projects/kanban-task-manager">Kanban Flow</a> and <a href="/en/projects/mechatronics-portfolio">Mechatronics Portfolio</a> case studies. If your next step is shipping the app, read <a href="/en/blog/docker-fundamentals">Docker for Developers</a>.</p>
 `,
     },
   },
   {
     slug: 'diseno-dashboards-react',
+    slugEn: 'readable-dashboards-react',
     date: '2026-11-11',
     es: {
       title: 'Dashboards que se leen: jerarquía y datos en React',
@@ -289,12 +291,13 @@ export function save(store: Store): boolean {
 <h3>How do I make the panel accessible?</h3>
 <p>Enough contrast in both themes, information that does not rely on color alone and a table or textual summary as an alternative to each chart. Tooltips must be reachable by keyboard.</p>
 <h2>Further reading</h2>
-<p>These decisions are applied in the <a href="/en/proyectos/dashloud">DashLoud</a> case study and, for hierarchy and typography, in <a href="/en/proyectos/saas-landing-page">Nexus</a>. To ship the panel, read <a href="/en/blog/docker-fundamentals">Docker for Developers</a>.</p>
+<p>These decisions are applied in the <a href="/en/projects/dashloud">DashLoud</a> case study and, for hierarchy and typography, in <a href="/en/projects/saas-landing-page">Nexus</a>. To ship the panel, read <a href="/en/blog/docker-fundamentals">Docker for Developers</a>.</p>
 `,
     },
   },
   {
     slug: 'ia-en-tiempo-real',
+    slugEn: 'real-time-ai',
     date: '2026-11-11',
     es: {
       title: 'IA en tiempo real: servir un modelo sin romper la interfaz',
@@ -389,7 +392,7 @@ export function save(store: Store): boolean {
 <h3>Which operational metric matters most?</h3>
 <p>End-to-end p95 latency and the age of the last datum. With those two you can detect most incidents that affect the user.</p>
 <h2>Further reading</h2>
-<p>The full case study is <a href="/en/proyectos/trading-predictor">TradeScope AI</a>. For the data and validation side, read <a href="/en/blog/series-temporales-producto">From Time Series to Product</a>; for container operations, <a href="/en/blog/docker-fundamentals">Docker for Developers</a>.</p>
+<p>The full case study is <a href="/en/projects/trading-predictor">TradeScope AI</a>. For the data and validation side, read <a href="/en/blog/time-series-to-product">From Time Series to Product</a>; for container operations, <a href="/en/blog/docker-fundamentals">Docker for Developers</a>.</p>
 `,
     },
   },

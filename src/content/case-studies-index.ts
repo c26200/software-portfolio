@@ -6,6 +6,7 @@
 
 export interface CaseSummary {
   slug: string;
+  slugEn: string;
   href: string;
   image: string;
   stack: string[];
@@ -18,6 +19,7 @@ export interface CaseSummary {
 export const caseStudyIndex: CaseSummary[] = [
   {
     "slug": "saas-landing-page",
+    "slugEn": "saas-landing-page",
     "href": "https://github.com/c26200/saas-landing-page",
     "image": "/projects/saas-landing-page.webp",
     "stack": [
@@ -44,6 +46,7 @@ export const caseStudyIndex: CaseSummary[] = [
   },
   {
     "slug": "cinetrack",
+    "slugEn": "cinetrack",
     "href": "https://github.com/c26200/cinetrack",
     "image": "/projects/cinetrack.webp",
     "stack": [
@@ -71,6 +74,7 @@ export const caseStudyIndex: CaseSummary[] = [
   },
   {
     "slug": "kanban-task-manager",
+    "slugEn": "kanban-task-manager",
     "href": "https://github.com/c26200/kanban-task-manager",
     "image": "/projects/kanban-task-manager.webp",
     "stack": [
@@ -98,6 +102,7 @@ export const caseStudyIndex: CaseSummary[] = [
   },
   {
     "slug": "dashloud",
+    "slugEn": "dashloud",
     "href": "https://github.com/c26200/dashloud",
     "image": "/projects/dashloud.webp",
     "stack": [
@@ -125,6 +130,7 @@ export const caseStudyIndex: CaseSummary[] = [
   },
   {
     "slug": "trading-predictor",
+    "slugEn": "trading-predictor",
     "href": "https://github.com/c26200/trading-predictor",
     "image": "/projects/trading-predictor.webp",
     "stack": [
@@ -155,6 +161,7 @@ export const caseStudyIndex: CaseSummary[] = [
   },
   {
     "slug": "portfolio-mecatronica",
+    "slugEn": "mechatronics-portfolio",
     "href": "https://github.com/c26200/mechatronics-portfolio",
     "image": "/projects/portfolio-mecatronica.webp",
     "stack": [

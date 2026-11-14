@@ -20,6 +20,8 @@ export interface CaseStudyContent {
 
 export interface CaseStudy {
   slug: string;
+  /** English URL slug, under /en/projects/. */
+  slugEn: string;
   href: string;
   image: string;
   stack: string[];
@@ -37,6 +39,7 @@ export interface CaseStudy {
 export const caseStudies: CaseStudy[] = [
   {
     slug: 'saas-landing-page',
+    slugEn: 'saas-landing-page',
     href: 'https://github.com/c26200/saas-landing-page',
     image: '/projects/saas-landing-page.webp',
     stack: ['React', 'Tailwind CSS', 'Framer Motion'],
@@ -125,6 +128,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: 'cinetrack',
+    slugEn: 'cinetrack',
     href: 'https://github.com/c26200/cinetrack',
     image: '/projects/cinetrack.webp',
     stack: ['React 19', 'Vite', 'OMDB API', 'localStorage'],
@@ -213,6 +217,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: 'kanban-task-manager',
+    slugEn: 'kanban-task-manager',
     href: 'https://github.com/c26200/kanban-task-manager',
     image: '/projects/kanban-task-manager.webp',
     stack: ['React', '@dnd-kit', 'Tailwind CSS', 'localStorage'],
@@ -300,6 +305,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: 'dashloud',
+    slugEn: 'dashloud',
     href: 'https://github.com/c26200/dashloud',
     image: '/projects/dashloud.webp',
     stack: ['React', 'Tailwind CSS', 'Recharts', 'Framer Motion'],
@@ -388,6 +394,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: 'trading-predictor',
+    slugEn: 'trading-predictor',
     href: 'https://github.com/c26200/trading-predictor',
     image: '/projects/trading-predictor.webp',
     stack: ['Python', 'PyTorch', 'LSTM', 'Transformers', 'FastAPI', 'WebSocket'],
@@ -476,6 +483,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: 'portfolio-mecatronica',
+    slugEn: 'mechatronics-portfolio',
     href: 'https://github.com/c26200/mechatronics-portfolio',
     image: '/projects/portfolio-mecatronica.webp',
     stack: ['Astro', 'TypeScript', 'CSS Grid', 'Drag & drop'],

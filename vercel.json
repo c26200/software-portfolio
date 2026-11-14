@@ -2,6 +2,35 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "trailingSlash": false,
   "cleanUrls": true,
+  "redirects": [
+    { "source": "/en/sobre", "destination": "/en/about", "permanent": true },
+    {
+      "source": "/en/proyectos/portfolio-mecatronica",
+      "destination": "/en/projects/mechatronics-portfolio",
+      "permanent": true
+    },
+    { "source": "/en/proyectos/:slug", "destination": "/en/projects/:slug", "permanent": true },
+    {
+      "source": "/en/blog/series-temporales-producto",
+      "destination": "/en/blog/time-series-to-product",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/estado-local-react",
+      "destination": "/en/blog/local-state-react",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/diseno-dashboards-react",
+      "destination": "/en/blog/readable-dashboards-react",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/ia-en-tiempo-real",
+      "destination": "/en/blog/real-time-ai",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/assets/(.*)",
