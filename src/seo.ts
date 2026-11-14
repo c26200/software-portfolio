@@ -70,8 +70,8 @@ function personNode(seo: typeof es.seo): Record<string, unknown> {
   return {
     '@type': 'Person',
     '@id': PERSON_ID,
-    name: SITE_NAME,
-    alternateName: ['Carlos Manuel Gordillo Mora', 'Carlos Gordillo Mora'],
+    name: 'Carlos Manuel Gordillo Mora',
+    alternateName: ['Carlos Gordillo', 'Carlos Gordillo Mora'],
     url: `${SITE_ORIGIN}/`,
     image: PORTRAIT,
     description: seo.personDescription,
@@ -124,6 +124,7 @@ export interface PageMetadata {
  */
 export function getPageMeta(pathname: string, language: string): PageMetadata {
   const lang = language.startsWith('en') ? 'en' : 'es';
+  const schemaLanguage = lang === 'en' ? 'en' : 'es-CO';
   const seo = lang === 'en' ? en.seo : es.seo;
   const logical = canonicalPath(stripLocale(pathname));
   const esPath = localizePath(logical, 'es');
@@ -162,7 +163,7 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
             '@id': SITE_ID,
             url: `${SITE_ORIGIN}/`,
             name: SITE_NAME,
-            inLanguage: lang === 'en' ? 'en' : 'es-CO',
+            inLanguage: schemaLanguage,
             publisher: { '@id': PERSON_ID },
           },
           {
@@ -170,7 +171,7 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
             '@id': `${SITE_ORIGIN}/#webpage`,
             url: canonical,
             name: seo.homeTitle,
-            inLanguage: lang,
+            inLanguage: schemaLanguage,
             isPartOf: { '@id': SITE_ID },
             mainEntity: { '@id': PERSON_ID },
           },
@@ -199,7 +200,7 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
             url: canonical,
             name: seo.aboutTitle,
             description: seo.aboutDescription,
-            inLanguage: lang,
+            inLanguage: schemaLanguage,
             isPartOf: { '@id': SITE_ID },
             mainEntity: { '@id': PERSON_ID },
             breadcrumb: { '@id': `${canonical}#breadcrumb` },
@@ -245,9 +246,26 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
             name: `Blog — ${SITE_NAME}`,
             url: canonical,
             description: seo.blogDescription,
-            inLanguage: lang,
+            inLanguage: schemaLanguage,
             author: { '@id': PERSON_ID },
             publisher: { '@id': ORG_ID },
+          },
+          {
+            '@type': 'BreadcrumbList',
+            '@id': `${canonical}#breadcrumb`,
+            itemListElement: [
+              {
+                '@type': 'ListItem',
+                position: 1,
+                name: seo.breadcrumbHome,
+                item: `${SITE_ORIGIN}${localizePath('/', lang)}`,
+              },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: 'Blog',
+              },
+            ],
           },
         ],
       },
@@ -265,7 +283,7 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
       description: content.excerpt,
       datePublished: post.date,
       dateModified: post.updated ?? post.date,
-      inLanguage: lang,
+      inLanguage: schemaLanguage,
       image: articleImage,
       author: { '@id': PERSON_ID },
       publisher: { '@id': ORG_ID },
@@ -346,7 +364,7 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
       description: content.summary,
       datePublished: study.date,
       dateModified: study.date,
-      inLanguage: lang,
+      inLanguage: schemaLanguage,
       image: caseImage,
       keywords: study.stack.join(', '),
       author: { '@id': PERSON_ID },
