@@ -69,9 +69,19 @@ export const caseStudies: CaseStudy[] = [
 <p>Las imágenes van con dimensiones explícitas para evitar saltos de layout, y las animaciones respetan <code>prefers-reduced-motion</code>. El objetivo de rendimiento era que la primera pantalla se leyera de inmediato: poco JavaScript, fuentes controladas y nada bloqueando el render.</p>`,
         },
         {
+          heading: 'Restricciones y compensaciones',
+          html: `<p>Una página única impone límites claros: no hay espacio para explicar cada función ni para responder todas las objeciones. La compensación fue priorizar la promesa del producto y una prueba verificable, y dejar el detalle para una conversación. También renuncié a las animaciones de scroll pesadas: cuestan JavaScript, retrasan la primera lectura y en móvil compiten con el gesto de desplazamiento. Cada componente añadido tenía que justificar qué pregunta respondía.</p>
+<p>Sin testimonios reales ni métricas de negocio, la prueba debía salir de la propia interfaz: capturas que muestran el producto y bloques de datos que se leen como evidencia, no como decoración.</p>
+<p>El presupuesto de rendimiento también condicionó el contenido: cada bloque de prueba añade peso, así que las capturas se recortaron y los iconos se resolvieron con SVG en línea. La página no carga una librería completa de componentes para usar tres botones.</p>`,
+        },
+        {
           heading: 'El resultado',
           html: `<p>El resultado es una landing que se recorre como un argumento: qué es, qué demuestra y qué hacer. La misma estructura sirve como plantilla para otros productos porque el sistema de tokens y los componentes están separados del contenido.</p>
 <p>La lección que me llevo es que una landing no se diseña llenando secciones, sino decidiendo qué pregunta responde cada una. El diseño llega después, cuando la estructura ya funciona sin estilos.</p>`,
+        },
+        {
+          heading: 'Qué haría distinto',
+          html: `<p>Volvería a empezar por la estructura, pero dedicaría más tiempo a la versión móvil antes que a la de escritorio: en pantallas pequeñas la jerarquía tipográfica cambia y algunas secciones que en escritorio respiran terminan compitiendo. También separaría el contenido de los componentes desde el primer día, con un archivo de datos que permita cambiar el copy sin tocar JSX. Y mediría la primera pantalla con red real antes de cerrar el diseño; la percepción de velocidad depende más de cuándo aparece el mensaje principal que del peso total de la página.</p>`,
         },
       ],
       metrics: [
@@ -109,9 +119,19 @@ export const caseStudies: CaseStudy[] = [
 <p>Images ship with explicit dimensions to avoid layout shifts, and animations respect <code>prefers-reduced-motion</code>. The performance goal was an immediately readable first screen: little JavaScript, controlled fonts and nothing blocking the render.</p>`,
         },
         {
+          heading: 'Constraints and trade-offs',
+          html: `<p>A single page imposes clear limits: there is no room to explain every feature or answer every objection. The trade-off was to prioritize the product promise and one verifiable piece of proof, leaving detail for a conversation. I also gave up heavy scroll animations: they cost JavaScript, delay the first read and compete with the scroll gesture on mobile. Every component had to justify which question it answered.</p>
+<p>Without real testimonials or business metrics, the proof had to come from the interface itself: screenshots that show the product and data blocks that read as evidence, not decoration.</p>
+<p>The performance budget shaped the content too: every proof block adds weight, so screenshots were cropped and icons were solved with inline SVG. The page does not load a full component library to render three buttons.</p>`,
+        },
+        {
           heading: 'The result',
           html: `<p>The result is a landing page you read as an argument: what it is, what it proves and what to do. The same structure works as a template for other products because the token system and components are separated from the content.</p>
 <p>The lesson is that a landing page is not designed by filling sections, but by deciding which question each one answers. Design comes later, once the structure works without styles.</p>`,
+        },
+        {
+          heading: 'What I would do differently',
+          html: `<p>I would start from structure again, but spend more time on mobile before desktop: on small screens the typographic hierarchy changes and sections that breathe on desktop end up competing. I would also separate content from components from day one, with a data file that lets copy change without touching JSX. And I would measure the first screen on a real network before closing the design; perceived speed depends more on when the main message appears than on total page weight.</p>`,
         },
       ],
       metrics: [
@@ -158,9 +178,19 @@ export const caseStudies: CaseStudy[] = [
 <p>La búsqueda aplica un retardo corto para no lanzar una petición por tecla y muestra estados de carga y error explícitos. Los pósters usan dimensiones fijas para que el muro no salte mientras llegan las imágenes.</p>`,
         },
         {
+          heading: 'Restricciones y compensaciones',
+          html: `<p>La búsqueda depende de una API externa: tiene límites de uso, latencia y resultados que no siempre coinciden con el título que el usuario recuerda. La app compensa con debounce, estados de carga explícitos y mensajes distintos para “sin resultados” y “error de red”, en lugar de mostrar una lista vacía que parece un fallo. Guardar en localStorage también impone un techo: la colección debe ser pequeña y exportable, y cada cambio de esquema necesita una migración que no borre lo que ya existe.</p>
+<p>Sin servidor no hay sincronización entre dispositivos ni copia remota. Es una decisión de producto: la colección vive donde el usuario la creó, y exportarla es la salida cuando quiere moverla.</p>
+<p>La clave de la API viaja en el cliente, y eso obliga a asumir que cualquiera puede verla. Para un proyecto personal es aceptable; para un producto habría que pasar las búsquedas por un proxy propio y aplicar límites por usuario.</p>`,
+        },
+        {
           heading: 'El resultado',
           html: `<p>CineTrack funciona sin conexión para consultar y editar lo ya guardado; solo la búsqueda de títulos nuevos necesita red. No hay cuentas, no hay servidor y el usuario puede exportar su colección si quiere moverla.</p>
 <p>La lección fue que “local-first” no significa improvisar: exige un esquema, migraciones y una separación estricta entre lo que se guarda y cómo se muestra.</p>`,
+        },
+        {
+          heading: 'Qué haría distinto',
+          html: `<p>Cambiaría localStorage por IndexedDB cuando la colección crezca: el límite de tamaño y el acceso síncrono de localStorage dejan de ser cómodos con miles de elementos. También añadiría una caché de metadatos para que la vista de detalle no dependa de la red, y un modo de importación que valide el archivo antes de reemplazar la colección. La lección de fondo se mantiene: la interfaz debe leer siempre del almacenamiento local, incluso cuando la red responde.</p>`,
         },
       ],
       metrics: [
@@ -198,9 +228,19 @@ export const caseStudies: CaseStudy[] = [
 <p>Search applies a short delay to avoid one request per keystroke and shows explicit loading and error states. Posters use fixed dimensions so the wall does not jump while images load.</p>`,
         },
         {
+          heading: 'Constraints and trade-offs',
+          html: `<p>Search depends on an external API: it has rate limits, latency and results that do not always match the title the user remembers. The app compensates with debounce, explicit loading states and different messages for “no results” and “network error”, instead of showing an empty list that looks like a failure. localStorage also imposes a ceiling: the collection must stay small and exportable, and every schema change needs a migration that does not erase what already exists.</p>
+<p>With no server there is no sync across devices and no remote copy. That is a product decision: the collection lives where the user created it, and export is the way out when they want to move it.</p>
+<p>The API key ships to the client, which means assuming anyone can read it. For a personal project that is acceptable; for a product, searches would go through an owned proxy with per-user limits.</p>`,
+        },
+        {
           heading: 'The result',
           html: `<p>CineTrack works offline for reading and editing what is already saved; only searching for new titles needs the network. There are no accounts, no server, and the user can export the collection if they want to move it.</p>
 <p>The lesson was that “local-first” does not mean improvising: it requires a schema, migrations and a strict separation between what is stored and how it is displayed.</p>`,
+        },
+        {
+          heading: 'What I would do differently',
+          html: `<p>I would move from localStorage to IndexedDB once the collection grows: its size limit and synchronous access stop being comfortable with thousands of items. I would also add a metadata cache so the detail view does not depend on the network, and an import mode that validates the file before replacing the collection. The underlying lesson stands: the interface should always read from local storage, even when the network responds.</p>`,
         },
       ],
       metrics: [
@@ -247,9 +287,19 @@ export const caseStudies: CaseStudy[] = [
 <p>Al arrastrar se usa un identificador estable y se actualiza el estado una sola vez al soltar, en lugar de reordenar en cada movimiento del puntero. Los controles tienen equivalentes de teclado para quienes no usan ratón.</p>`,
         },
         {
+          heading: 'Restricciones y compensaciones',
+          html: `<p>Sin backend, el tablero no puede compartirse ni sincronizarse, y el orden de las tarjetas tiene que persistirse dentro de cada columna: guardar solo la columna hace que una recarga mezcle el trabajo. Durante el arrastre conviene mantener un estado intermedio en memoria y escribir en el almacenamiento al soltar; escribir en cada movimiento multiplica las operaciones y produce parpadeos. En móvil, el gesto de arrastre compite con el desplazamiento vertical, así que la zona de agarre y el eje deben ser explícitos.</p>
+<p>La accesibilidad también condiciona el diseño: si el teclado no puede mover una tarjeta, la función principal queda fuera para parte de los usuarios.</p>
+<p>Con varias pestañas abiertas, dos estados pueden competir por el mismo almacenamiento. La app escribe al soltar y relee al enfocar, de modo que la última acción gana sin intentar fusionar tableros que no se pueden reconciliar.</p>`,
+        },
+        {
           heading: 'El resultado',
           html: `<p>El tablero se siente directo: el gesto no compite con animaciones pesadas y la recarga devuelve el mismo estado. No hay backend, ni cuentas, ni datos saliendo del navegador.</p>
 <p>La lección fue que el arrastre no es un efecto visual: es una operación de datos con un estado intermedio. Cuanto más simple sea ese estado, menos se rompe la interfaz.</p>`,
+        },
+        {
+          heading: 'Qué haría distinto',
+          html: `<p>Separaría el estado del tablero en un reducer con acciones explícitas para mover, reordenar y editar, en lugar de actualizar estructuras anidadas desde los componentes. Eso haría más fáciles las pruebas y permitiría deshacer sin guardar copias completas. También añadiría una versión del esquema desde el inicio y un aviso cuando el almacenamiento esté lleno, dos casos que aparecen cuando el tablero ya tiene datos reales y cuesta perderlos.</p>`,
         },
       ],
       metrics: [
@@ -286,9 +336,19 @@ export const caseStudies: CaseStudy[] = [
 <p>Dragging uses a stable identifier and updates state once on drop, instead of reordering on every pointer move. Controls have keyboard equivalents for people who do not use a mouse.</p>`,
         },
         {
+          heading: 'Constraints and trade-offs',
+          html: `<p>With no backend, the board cannot be shared or synchronized, and card order has to persist within each column: saving only the column lets a reload shuffle the work. During a drag it is better to keep an intermediate state in memory and write to storage on drop; writing on every move multiplies operations and produces flicker. On mobile the drag gesture competes with vertical scrolling, so the grip area and the axis have to be explicit.</p>
+<p>Accessibility shapes the design too: if the keyboard cannot move a card, the main feature is out of reach for part of the audience.</p>
+<p>With several tabs open, two states can compete for the same storage. The app writes on drop and re-reads on focus, so the last action wins without trying to merge boards that cannot be reconciled.</p>`,
+        },
+        {
           heading: 'The result',
           html: `<p>The board feels direct: the gesture does not compete with heavy animations and a reload returns the same state. There is no backend, no accounts and no data leaving the browser.</p>
 <p>The lesson was that dragging is not a visual effect: it is a data operation with an intermediate state. The simpler that state is, the less the interface breaks.</p>`,
+        },
+        {
+          heading: 'What I would do differently',
+          html: `<p>I would move the board state into a reducer with explicit actions for moving, reordering and editing, instead of updating nested structures from components. That makes tests easier and allows undo without storing full copies. I would also add a schema version from the start and a warning when storage is full, two cases that show up once the board holds real data people cannot afford to lose.</p>`,
         },
       ],
       metrics: [
@@ -335,9 +395,19 @@ export const caseStudies: CaseStudy[] = [
 <p>Los datos de ejemplo viven separados de la presentación, de modo que conectar una API real implica reemplazar una fuente, no reescribir la interfaz. Las cifras usan formato local y las fechas se muestran en una zona horaria explícita.</p>`,
         },
         {
+          heading: 'Restricciones y compensaciones',
+          html: `<p>Trabajar con datos de ejemplo permite fijar el diseño, pero también oculta lo que rompe un dashboard real: huecos, valores nulos, series que cambian de escala y picos que aplastan el resto de la gráfica. La compensación fue construir estados vacíos y de carga desde el principio, y no dejar que una gráfica sin datos se vea como un error. En tema claro y oscuro el contraste no es el mismo, así que los colores de la serie se eligieron para funcionar en ambos, no para verse bien solo sobre fondo negro.</p>
+<p>Recharts resuelve el dibujo, pero no decide qué se compara. Cada gráfica tiene una pregunta asignada y una tabla asociada para quien necesita el número exacto.</p>
+<p>Los importes y las fechas se formatean con la configuración regional del navegador y una zona horaria fija, para que dos personas no vean cifras distintas del mismo conjunto. Los ceros y los valores faltantes se muestran como tales, no como una línea que cae a cero.</p>`,
+        },
+        {
           heading: 'El resultado',
           html: `<p>El panel se entiende en el primer pantallazo: qué pasó, cuánto y dónde mirar después. La tabla sigue disponible para el detalle sin competir con la lectura principal.</p>
 <p>La lección fue que un dashboard no es una colección de gráficas, sino un orden de lectura. Si todo tiene el mismo peso, nada se lee.</p>`,
+        },
+        {
+          heading: 'Qué haría distinto',
+          html: `<p>Definiría un contrato de datos tipado antes de montar los componentes, con estados de error y carga por sección en vez de un único indicador global. También mediría el contraste de la paleta con una herramienta en lugar de confiar en la vista, y añadiría exportación a CSV desde la tabla: el detalle numérico suele ser lo primero que alguien quiere llevarse.</p>`,
         },
       ],
       metrics: [
@@ -375,9 +445,19 @@ export const caseStudies: CaseStudy[] = [
 <p>Sample data lives separately from the presentation, so connecting a real API means replacing a source, not rewriting the interface. Figures use local formatting and dates are shown in an explicit time zone.</p>`,
         },
         {
+          heading: 'Constraints and trade-offs',
+          html: `<p>Working with sample data fixes the design, but it also hides what breaks a real dashboard: gaps, null values, series that change scale and spikes that flatten the rest of the chart. The trade-off was to build empty and loading states from the start, and never let a chart with no data look like an error. Contrast is not the same in light and dark themes, so the series colors were chosen to work in both instead of looking good only on black.</p>
+<p>Recharts handles the drawing, but it does not decide what is being compared. Every chart has one assigned question and an associated table for whoever needs the exact number.</p>
+<p>Amounts and dates are formatted with the browser locale and a fixed time zone, so two people do not see different figures for the same dataset. Zeros and missing values are shown as such, not as a line dropping to zero.</p>`,
+        },
+        {
           heading: 'The result',
           html: `<p>The panel makes sense on the first screen: what happened, how much and where to look next. The table remains available for detail without competing with the main reading.</p>
 <p>The lesson was that a dashboard is not a collection of charts, but an order of reading. If everything has the same weight, nothing gets read.</p>`,
+        },
+        {
+          heading: 'What I would do differently',
+          html: `<p>I would define a typed data contract before building the components, with per-section error and loading states instead of a single global indicator. I would also measure palette contrast with a tool rather than trusting the eye, and add CSV export from the table: the numeric detail is usually the first thing someone wants to take away.</p>`,
         },
       ],
       metrics: [
@@ -424,9 +504,19 @@ export const caseStudies: CaseStudy[] = [
 <p>El backend usa FastAPI y expone las predicciones por WebSocket porque el panel necesita varias actualizaciones por minuto. Si el modelo falla, el servicio devuelve el último pronóstico válido y registra el error en lugar de romper la interfaz. Todo corre en contenedores Docker sobre un VPS propio, con healthchecks, logs con contexto y una alerta cuando el flujo de datos se detiene.</p>`,
         },
         {
+          heading: 'Restricciones y compensaciones',
+          html: `<p>Una serie financiera es ruidosa y no estacionaria: el modelo que acierta en un periodo puede fallar en el siguiente. Por eso la validación se hace por ventanas temporales y nunca se barajan las observaciones; mezclar pasado y futuro produciría métricas excelentes y un servicio inútil. La otra restricción es la latencia: la inferencia debe terminar dentro de la ventana de decisión, así que el tamaño del modelo y el preprocesamiento se eligen por tiempo, no solo por precisión.</p>
+<p>El servicio también necesita una salida honesta cuando el modelo no está seguro. Un fallback explícito es mejor que una predicción con confianza inventada.</p>
+<p>La reproducibilidad es parte de la operación: semillas fijas, versiones ancladas y el mismo preprocesador en entrenamiento e inferencia. Sin eso, comparar dos ejecuciones se vuelve una discusión sobre qué cambió.</p>`,
+        },
+        {
           heading: 'El resultado',
           html: `<p>El proyecto obtuvo el primer puesto en el concurso de deep learning de la Universidad de Pamplona y quedó como un servicio observable: dashboard en tiempo real, métricas por ventana y un procedimiento claro para volver a una versión anterior.</p>
 <p>La lección fue que el modelo es una parte del producto. La validación honesta, la latencia, el fallback y el monitoreo deciden si sirve para tomar una decisión.</p>`,
+        },
+        {
+          heading: 'Qué haría distinto',
+          html: `<p>Añadiría un registro de modelos con la versión exacta del preprocesador y del conjunto de entrenamiento, porque reconstruir un resultado semanas después depende de ambos. También mediría deriva de datos y de predicción con alertas, y compararía el ensemble contra un baseline simple en cada ventana: si el modelo complejo no supera al baseline de forma consistente, no merece el coste de operación. Y documentaría los costes de transacción en el backtest, que suelen borrar buena parte de la ventaja aparente.</p>`,
         },
       ],
       metrics: [
@@ -464,9 +554,19 @@ export const caseStudies: CaseStudy[] = [
 <p>The backend uses FastAPI and exposes predictions over WebSocket because the panel needs several updates per minute. If the model fails, the service returns the last valid forecast and logs the error instead of breaking the interface. Everything runs in Docker containers on a self-managed VPS, with healthchecks, contextual logs and an alert when the data stream stops.</p>`,
         },
         {
+          heading: 'Constraints and trade-offs',
+          html: `<p>A financial series is noisy and non-stationary: the model that works in one period can fail in the next. That is why validation runs over time windows and observations are never shuffled; mixing past and future would produce excellent metrics and a useless service. Latency is the other constraint: inference has to finish inside the decision window, so model size and preprocessing are chosen for time, not only for accuracy.</p>
+<p>The service also needs an honest way out when the model is not confident. An explicit fallback is better than a prediction with invented confidence.</p>
+<p>Reproducibility is part of operations: fixed seeds, pinned versions and the same preprocessor in training and inference. Without that, comparing two runs becomes an argument about what changed.</p>`,
+        },
+        {
           heading: 'The result',
           html: `<p>The project took first place in the Universidad de Pamplona deep learning contest and became an observable service: a real-time dashboard, per-window metrics and a clear procedure to roll back to a previous version.</p>
 <p>The lesson was that the model is one part of the product. Honest validation, latency, fallback and monitoring decide whether it is useful for a decision.</p>`,
+        },
+        {
+          heading: 'What I would do differently',
+          html: `<p>I would add a model registry with the exact version of the preprocessor and the training set, because reconstructing a result weeks later depends on both. I would also measure data and prediction drift with alerts, and compare the ensemble against a simple baseline in every window: if the complex model does not beat the baseline consistently, it does not deserve the operating cost. And I would document transaction costs in the backtest, which usually erase a large part of the apparent edge.</p>`,
         },
       ],
       metrics: [
@@ -513,9 +613,19 @@ export const caseStudies: CaseStudy[] = [
 <p>El arrastre usa eventos de puntero y guarda la posición final, no cada píxel del recorrido. La disposición vive en <code>localStorage</code>, con un botón explícito para volver al orden original. El contenido principal sigue siendo HTML legible aunque el JavaScript no cargue.</p>`,
         },
         {
+          heading: 'Restricciones y compensaciones',
+          html: `<p>La metáfora del lienzo tienta a usarlo todo como decoración, pero el contenido debe seguir siendo legible sin JavaScript y sin puntero. Por eso el HTML se genera en el build y la interactividad es una capa que se añade encima: si el script falla, el portafolio sigue siendo una página de texto. La disposición guardada impone otra decisión: se persiste el estado final, no cada movimiento, para no escribir en el almacenamiento durante el arrastre.</p>
+<p>El teclado no es una alternativa secundaria: es la forma principal de recorrer el lienzo para quien no usa puntero, así que el orden de foco y los atajos se diseñan antes que el gesto.</p>
+<p>Cada pieza interactiva es una isla pequeña: el resto del HTML no envía JavaScript. Esa disciplina mantiene la página ligera y obliga a decidir qué merece hidratación y qué puede quedarse como texto y CSS.</p>`,
+        },
+        {
           heading: 'El resultado',
           html: `<p>El portafolio se recorre como un tablero de trabajo y también se lee en orden si se prefiere. La carga es rápida porque el HTML se genera en el build y la interactividad es una capa pequeña encima.</p>
 <p>La lección fue que la metáfora visual solo funciona si respeta el contenido: primero la información, después el gesto.</p>`,
+        },
+        {
+          heading: 'Qué haría distinto',
+          html: `<p>Empezaría por la versión sin JavaScript y añadiría la capa interactiva después, en lugar de verificar al final que el contenido sigue ahí. También tiparía el esquema de la disposición para que una versión futura pueda migrar posiciones sin perder el orden, y reduciría aún más el JavaScript del cliente: la mayor parte de lo que se ve puede ser HTML y CSS. La regla que mantendría es simple: el gesto añade una forma de explorar, no la única forma de leer.</p>`,
         },
       ],
       metrics: [
@@ -553,9 +663,19 @@ export const caseStudies: CaseStudy[] = [
 <p>Dragging uses pointer events and saves the final position, not every pixel of the path. The layout lives in <code>localStorage</code>, with an explicit button to return to the original order. The main content remains readable HTML even if JavaScript fails to load.</p>`,
         },
         {
+          heading: 'Constraints and trade-offs',
+          html: `<p>The canvas metaphor tempts you to treat everything as decoration, but the content has to stay readable without JavaScript and without a pointer. That is why the HTML is generated at build time and interactivity is a layer added on top: if the script fails, the portfolio is still a text page. The saved layout imposes another decision: persist the final state, not every movement, so nothing is written during a drag.</p>
+<p>The keyboard is not a secondary alternative: it is the main way to move through the canvas for anyone not using a pointer, so focus order and shortcuts are designed before the gesture.</p>
+<p>Each interactive piece is a small island: the rest of the HTML ships no JavaScript. That discipline keeps the page light and forces a decision about what deserves hydration and what can stay as text and CSS.</p>`,
+        },
+        {
           heading: 'The result',
           html: `<p>The portfolio can be explored like a workbench and also read in order if preferred. It loads fast because the HTML is generated at build time and interactivity is a small layer on top.</p>
 <p>The lesson was that a visual metaphor only works when it respects the content: information first, gesture second.</p>`,
+        },
+        {
+          heading: 'What I would do differently',
+          html: `<p>I would start with the no-JavaScript version and add the interactive layer afterwards, instead of checking at the end that the content is still there. I would also type the layout schema so a future version can migrate positions without losing order, and cut client JavaScript even further: most of what is visible can be HTML and CSS. The rule I would keep is simple: the gesture adds a way to explore, not the only way to read.</p>`,
         },
       ],
       metrics: [
