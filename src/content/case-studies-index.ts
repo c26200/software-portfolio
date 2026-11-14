@@ -11,6 +11,7 @@ export interface CaseSummary {
   image: string;
   stack: string[];
   date: string;
+  updated?: string;
   relatedPosts: string[];
   es: { title: string; subtitle: string; category: string; summary: string };
   en: { title: string; subtitle: string; category: string; summary: string };
@@ -28,6 +29,7 @@ export const caseStudyIndex: CaseSummary[] = [
       "Framer Motion"
     ],
     "date": "2026-11-11",
+    "updated": "2026-11-14",
     "relatedPosts": [
       "diseno-dashboards-react"
     ],
@@ -56,6 +58,7 @@ export const caseStudyIndex: CaseSummary[] = [
       "localStorage"
     ],
     "date": "2026-11-11",
+    "updated": "2026-11-14",
     "relatedPosts": [
       "estado-local-react"
     ],
@@ -84,6 +87,7 @@ export const caseStudyIndex: CaseSummary[] = [
       "localStorage"
     ],
     "date": "2026-11-11",
+    "updated": "2026-11-14",
     "relatedPosts": [
       "estado-local-react"
     ],
@@ -112,6 +116,7 @@ export const caseStudyIndex: CaseSummary[] = [
       "Framer Motion"
     ],
     "date": "2026-11-11",
+    "updated": "2026-11-14",
     "relatedPosts": [
       "diseno-dashboards-react"
     ],
@@ -142,6 +147,7 @@ export const caseStudyIndex: CaseSummary[] = [
       "WebSocket"
     ],
     "date": "2026-11-11",
+    "updated": "2026-11-14",
     "relatedPosts": [
       "series-temporales-producto",
       "ia-en-tiempo-real"
@@ -171,6 +177,7 @@ export const caseStudyIndex: CaseSummary[] = [
       "Drag & drop"
     ],
     "date": "2026-11-11",
+    "updated": "2026-11-14",
     "relatedPosts": [
       "estado-local-react"
     ],

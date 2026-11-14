@@ -26,6 +26,8 @@ export interface CaseStudy {
   image: string;
   stack: string[];
   date: string;
+  /** Last content revision, used for dateModified and the sitemap lastmod. */
+  updated?: string;
   relatedPosts: string[];
   es: CaseStudyContent;
   en: CaseStudyContent;
@@ -44,6 +46,7 @@ export const caseStudies: CaseStudy[] = [
     image: '/projects/saas-landing-page.webp',
     stack: ['React', 'Tailwind CSS', 'Framer Motion'],
     date: '2026-11-11',
+    updated: '2026-11-14',
     relatedPosts: ['diseno-dashboards-react'],
     es: {
       title: 'Nexus: una landing que explica un producto de IA',
@@ -153,6 +156,7 @@ export const caseStudies: CaseStudy[] = [
     image: '/projects/cinetrack.webp',
     stack: ['React 19', 'Vite', 'OMDB API', 'localStorage'],
     date: '2026-11-11',
+    updated: '2026-11-14',
     relatedPosts: ['estado-local-react'],
     es: {
       title: 'CineTrack: un índice de cine que vive en el navegador',
@@ -262,6 +266,7 @@ export const caseStudies: CaseStudy[] = [
     image: '/projects/kanban-task-manager.webp',
     stack: ['React', '@dnd-kit', 'Tailwind CSS', 'localStorage'],
     date: '2026-11-11',
+    updated: '2026-11-14',
     relatedPosts: ['estado-local-react'],
     es: {
       title: 'Kanban Flow: un tablero físico que no pide cuenta',
@@ -370,6 +375,7 @@ export const caseStudies: CaseStudy[] = [
     image: '/projects/dashloud.webp',
     stack: ['React', 'Tailwind CSS', 'Recharts', 'Framer Motion'],
     date: '2026-11-11',
+    updated: '2026-11-14',
     relatedPosts: ['diseno-dashboards-react'],
     es: {
       title: 'DashLoud: un dashboard editorial que se lee de un vistazo',
@@ -479,6 +485,7 @@ export const caseStudies: CaseStudy[] = [
     image: '/projects/trading-predictor.webp',
     stack: ['Python', 'PyTorch', 'LSTM', 'Transformers', 'FastAPI', 'WebSocket'],
     date: '2026-11-11',
+    updated: '2026-11-14',
     relatedPosts: ['series-temporales-producto', 'ia-en-tiempo-real'],
     es: {
       title: 'TradeScope AI: del notebook a un servicio en tiempo real',
@@ -588,6 +595,7 @@ export const caseStudies: CaseStudy[] = [
     image: '/projects/portfolio-mecatronica.webp',
     stack: ['Astro', 'TypeScript', 'CSS Grid', 'Drag & drop'],
     date: '2026-11-11',
+    updated: '2026-11-14',
     relatedPosts: ['estado-local-react'],
     es: {
       title: 'Portafolio Mecatrónico: un lienzo que muestra cómo pienso',
