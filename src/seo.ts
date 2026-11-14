@@ -229,7 +229,7 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
 
   if (logical === '/blog') {
     return {
-      title: titleWithBrand('Blog'),
+      title: titleWithBrand(seo.blogTitle),
       description: seo.blogDescription,
       canonical,
       type: 'website',

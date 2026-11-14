@@ -48,7 +48,7 @@ export const caseStudies: CaseStudy[] = [
         'Tipografía a gran escala, bloques de prueba y una jerarquía que lleva del problema al botón sin ruido.',
       category: 'Landing SaaS',
       summary:
-        'Caso de estudio de Nexus: cómo diseño y construyo una landing para un producto de IA con React, Tailwind y Framer Motion, priorizando jerarquía, prueba y velocidad.',
+        'Caso de estudio de Nexus: una landing para un producto de IA con React, Tailwind y Framer Motion, priorizando jerarquía, prueba y velocidad.',
       sections: [
         {
           heading: 'El problema',
@@ -311,7 +311,7 @@ export const caseStudies: CaseStudy[] = [
         'Pocas métricas, una gráfica que responde y una tabla que se puede escanear, en claro y oscuro.',
       category: 'Dashboard analítico',
       summary:
-        'Caso de estudio de DashLoud: dashboard analítico con React, Tailwind, Recharts y Framer Motion. Jerarquía editorial, métricas clave, gráfica de ingresos y transacciones.',
+        'Caso de estudio de DashLoud: dashboard con React, Tailwind, Recharts y Framer Motion. Jerarquía editorial, métricas clave, gráfica de ingresos y transacciones.',
       sections: [
         {
           heading: 'El problema',
@@ -351,7 +351,7 @@ export const caseStudies: CaseStudy[] = [
         'Few metrics, one chart that answers and a scannable table, in light and dark themes.',
       category: 'Analytics dashboard',
       summary:
-        'DashLoud case study: an analytics dashboard built with React, Tailwind, Recharts and Framer Motion. Editorial hierarchy, key metrics, revenue chart and transactions.',
+        'DashLoud case study: an analytics dashboard built with React, Tailwind and Recharts. Editorial hierarchy, key metrics, revenue chart and transactions.',
       sections: [
         {
           heading: 'The problem',
@@ -399,7 +399,7 @@ export const caseStudies: CaseStudy[] = [
         'Un ensemble LSTM + Transformer servido por WebSocket, con validación temporal estricta y un dashboard de señales.',
       category: 'Predicción bursátil',
       summary:
-        'Caso de estudio de TradeScope AI: ensemble LSTM + Transformer en PyTorch, servido con FastAPI y WebSocket, con validación walk-forward y operación en contenedores.',
+        'Caso de estudio de TradeScope AI: ensemble LSTM + Transformer en PyTorch, servido con FastAPI y WebSocket, con validación walk-forward y contenedores.',
       sections: [
         {
           heading: 'El problema',
@@ -487,7 +487,7 @@ export const caseStudies: CaseStudy[] = [
         'Notas y piezas técnicas arrastrables, navegación por teclado y una disposición que se guarda entre visitas.',
       category: 'Portafolio interactivo',
       summary:
-        'Caso de estudio del Portafolio Mecatrónico: un portafolio Astro con lienzo arrastrable, notas y piezas técnicas, navegación por teclado y disposición persistente.',
+        'Caso de estudio del Portafolio Mecatrónico: un portafolio Astro con lienzo arrastrable, notas, piezas técnicas y navegación por teclado.',
       sections: [
         {
           heading: 'El problema',
@@ -527,7 +527,7 @@ export const caseStudies: CaseStudy[] = [
         'Draggable notes and technical parts, keyboard navigation and a layout that persists between visits.',
       category: 'Interactive portfolio',
       summary:
-        'Mechatronics Portfolio case study: an Astro portfolio with a draggable canvas, notes and technical parts, keyboard navigation and persistent layout.',
+        'Mechatronics Portfolio case study: an Astro portfolio with a draggable canvas, notes, technical parts and keyboard navigation.',
       sections: [
         {
           heading: 'The problem',
