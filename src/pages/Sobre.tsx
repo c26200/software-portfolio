@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from '../i18n';
 import { localizePath, pathLanguage } from '../i18n-paths';
+import { caseStudyIndex, getCaseSummary } from '../content/case-studies-index';
 
 interface Fact {
   label: string;
@@ -84,6 +85,29 @@ export default function Sobre() {
               <p>{item.text}</p>
             </div>
           ))}
+        </div>
+      </div>
+
+      <div className="sobre-block">
+        <h2>{t('sobre.projectsTitle')}</h2>
+        <p className="sobre-note">{t('sobre.projectsNote')}</p>
+        <div className="sobre-rows">
+          {caseStudyIndex.map((study) => {
+            const copy = getCaseSummary(study, language);
+            return (
+              <div className="sobre-row" key={study.slug}>
+                <span className="yr">{copy.category}</span>
+                <div>
+                  <h3>
+                    <Link to={localizePath(`/proyectos/${study.slug}`, language)}>
+                      {copy.title}
+                    </Link>
+                  </h3>
+                  <p>{copy.summary}</p>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
 
