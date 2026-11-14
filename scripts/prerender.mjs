@@ -45,6 +45,7 @@ function assertIndexesMatch() {
       continue;
     }
     if (study.slugEn !== summary.slugEn) problems.push(`${study.slug} slugEn`);
+    if (study.updated !== summary.updated) problems.push(`${study.slug} updated`);
     for (const lang of ['es', 'en']) {
       for (const key of ['title', 'subtitle', 'category', 'summary']) {
         if (study[lang][key] !== summary[lang][key]) {

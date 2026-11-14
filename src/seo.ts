@@ -363,7 +363,7 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
       headline: content.title,
       description: content.summary,
       datePublished: study.date,
-      dateModified: study.date,
+      dateModified: study.updated ?? study.date,
       inLanguage: schemaLanguage,
       image: caseImage,
       keywords: study.stack.join(', '),
@@ -382,7 +382,7 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
       canonical,
       type: 'article',
       publishedTime: study.date,
-      lastModified: study.date,
+      lastModified: study.updated ?? study.date,
       ogImage: caseImage,
       alternates,
       jsonLd: {

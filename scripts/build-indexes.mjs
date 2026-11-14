@@ -57,6 +57,7 @@ const caseIndex = caseStudies.map((study) => ({
   image: study.image,
   stack: study.stack,
   date: study.date,
+  ...(study.updated ? { updated: study.updated } : {}),
   relatedPosts: study.relatedPosts,
   es: {
     title: study.es.title,
@@ -109,6 +110,7 @@ export interface CaseSummary {
   image: string;
   stack: string[];
   date: string;
+  updated?: string;
   relatedPosts: string[];
   es: { title: string; subtitle: string; category: string; summary: string };
   en: { title: string; subtitle: string; category: string; summary: string };
