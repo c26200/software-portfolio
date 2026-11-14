@@ -17,7 +17,18 @@ export const PORTRAIT = `${SITE_ORIGIN}/img/carlos-gordillo.jpg`;
 export const LOGO = `${SITE_ORIGIN}/favicon-512.png`;
 
 /** Manual content revision date for the static pages, used by the sitemap. */
-export const SITE_LAST_MODIFIED = '2026-11-11';
+export const SITE_LAST_MODIFIED = '2026-11-14';
+
+/**
+ * Appends the brand to a page title only when the result still fits a SERP
+ * result (~60 characters). Long headlines keep the full title visible instead
+ * of being truncated by the trailing brand.
+ */
+const BRAND_SUFFIX = ` — ${SITE_NAME}`;
+
+export function titleWithBrand(title: string): string {
+  return title.length + BRAND_SUFFIX.length <= 60 ? `${title}${BRAND_SUFFIX}` : title;
+}
 
 export const SAME_AS = [
   'https://github.com/c26200',
@@ -181,6 +192,7 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
       jsonLd: {
         '@context': 'https://schema.org',
         '@graph': [
+          personNode(seo),
           organizationNode(),
           {
             '@type': 'ProfilePage',
@@ -217,7 +229,7 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
 
   if (logical === '/blog') {
     return {
-      title: `Blog — ${SITE_NAME}`,
+      title: titleWithBrand('Blog'),
       description: seo.blogDescription,
       canonical,
       type: 'website',
@@ -227,6 +239,7 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
       jsonLd: {
         '@context': 'https://schema.org',
         '@graph': [
+          personNode(seo),
           organizationNode(),
           {
             '@type': 'Blog',
@@ -266,6 +279,7 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
 
     const blogPath = localizePath('/blog', lang);
     const graph: Record<string, unknown>[] = [
+      personNode(seo),
       organizationNode(),
       article,
       {
@@ -308,7 +322,7 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
     }
 
     return {
-      title: `${content.title} — ${SITE_NAME}`,
+      title: titleWithBrand(content.title),
       description: content.excerpt,
       canonical,
       type: 'article',
@@ -346,7 +360,7 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
     };
 
     return {
-      title: `${content.title} — ${SITE_NAME}`,
+      title: titleWithBrand(content.title),
       description: content.summary,
       canonical,
       type: 'article',
@@ -357,6 +371,7 @@ export function getPageMeta(pathname: string, language: string): PageMetadata {
       jsonLd: {
         '@context': 'https://schema.org',
         '@graph': [
+          personNode(seo),
           organizationNode(),
           article,
           {

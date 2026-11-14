@@ -142,7 +142,9 @@
     "bio": [
       "I am a mechatronics engineer, graduated in April 2026 from Universidad de Pamplona. Mechatronics taught me to think in systems that sense, control and talk to each other; software let me carry that same logic into products anyone can open in a browser.",
       "I started by automating processes that were done by hand. At Universidad de Pamplona I designed and shipped the institutional agreements system: a Node.js backend, a React and TypeScript frontend, PostgreSQL, and n8n ETL pipelines that processed more than 50,000 records.",
-      "Today I teach programming at SENA and work as an independent consultant. I build with React, Node.js, Python and Docker, integrate deep learning models, and operate the whole stack: Linux servers, databases, automation and deployments."
+      "Today I teach programming at SENA and work as an independent consultant. I build with React, Node.js, Python and Docker, integrate deep learning models, and operate the whole stack: Linux servers, databases, automation and deployments.",
+      "I work with teams and individuals who need to turn an idea or a manual process into a product that works. I have delivered internal management systems, dashboards, landing pages and predictive models, and in every project I stayed for the part that usually falls outside the contract: containers, backups, monitoring and deployments.",
+      "When I am not building, I teach programming at SENA. Explaining a concept to someone seeing it for the first time forces you to order it, and that same order is what I apply to the architecture and documentation I deliver."
     ],
     "workTitle": "How I work",
     "work": [
@@ -177,6 +179,8 @@
         "note": "University recognition for a deep learning project."
       }
     ],
+    "projectsTitle": "Projects you can review",
+    "projectsNote": "Each case study covers the problem, the technical decisions and what ended up running, not just the final screenshot.",
     "ctaTitle": "Should we work together?",
     "ctaButton": "Email me",
     "ctaContact": "See the portfolio",

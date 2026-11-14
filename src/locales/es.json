@@ -142,7 +142,9 @@
     "bio": [
       "Soy ingeniero mecatrónico, graduado en abril de 2026 por la Universidad de Pamplona. La mecatrónica me enseñó a pensar en sistemas que se miden, se controlan y se comunican entre sí; el software me dejó llevar esa misma lógica a productos que cualquiera puede abrir en un navegador.",
       "Empecé automatizando procesos que se hacían a mano. En la Universidad de Pamplona diseñé y desplegué el sistema de gestión de convenios interinstitucionales: backend en Node.js, frontend en React con TypeScript, PostgreSQL y pipelines ETL en n8n que procesaron más de 50.000 registros.",
-      "Hoy soy instructor de programación en el SENA y trabajo como consultor independiente. Construyo con React, Node.js, Python y Docker, integro modelos de aprendizaje profundo y opero la infraestructura completa: servidores Linux, bases de datos, automatizaciones y despliegues."
+      "Hoy soy instructor de programación en el SENA y trabajo como consultor independiente. Construyo con React, Node.js, Python y Docker, integro modelos de aprendizaje profundo y opero la infraestructura completa: servidores Linux, bases de datos, automatizaciones y despliegues.",
+      "Trabajo con equipos y personas que necesitan convertir una idea o un proceso manual en un producto que funcione. He entregado sistemas de gestión interna, dashboards, landing pages y modelos predictivos, y en cada proyecto me quedé también con la parte que suele quedar fuera del contrato: contenedores, copias de seguridad, monitoreo y despliegues.",
+      "Cuando no estoy construyendo, enseño programación en el SENA. Explicar un concepto a alguien que lo ve por primera vez obliga a ordenarlo, y ese mismo orden es el que aplico a la arquitectura y a la documentación de lo que entrego."
     ],
     "workTitle": "Cómo trabajo",
     "work": [
@@ -177,6 +179,8 @@
         "note": "Reconocimiento universitario por un proyecto de aprendizaje profundo."
       }
     ],
+    "projectsTitle": "Proyectos que puedes revisar",
+    "projectsNote": "Cada caso explica el problema, las decisiones técnicas y lo que quedó funcionando, no solo la captura final.",
     "ctaTitle": "¿Trabajamos juntos?",
     "ctaButton": "Escríbeme",
     "ctaContact": "Ver el portafolio",

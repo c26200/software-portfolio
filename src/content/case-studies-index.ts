@@ -30,13 +30,13 @@ export const caseStudyIndex: CaseSummary[] = [
       "diseno-dashboards-react"
     ],
     "es": {
-      "title": "Nexus: una landing que explica un producto de IA en una pantalla",
+      "title": "Nexus: una landing que explica un producto de IA",
       "subtitle": "Tipografía a gran escala, bloques de prueba y una jerarquía que lleva del problema al botón sin ruido.",
       "category": "Landing SaaS",
       "summary": "Caso de estudio de Nexus: cómo diseño y construyo una landing para un producto de IA con React, Tailwind y Framer Motion, priorizando jerarquía, prueba y velocidad."
     },
     "en": {
-      "title": "Nexus: a landing page that explains an AI product in one screen",
+      "title": "Nexus: a landing page that explains an AI product",
       "subtitle": "Large-scale type, proof blocks and a hierarchy that walks from problem to button without noise.",
       "category": "SaaS landing",
       "summary": "Nexus case study: how I design and build a landing page for an AI product with React, Tailwind and Framer Motion, prioritizing hierarchy, proof and speed."
@@ -57,7 +57,7 @@ export const caseStudyIndex: CaseSummary[] = [
       "estado-local-react"
     ],
     "es": {
-      "title": "CineTrack: un índice de cine personal que vive en el navegador",
+      "title": "CineTrack: un índice de cine que vive en el navegador",
       "subtitle": "Búsqueda real de películas, tres formas de ver la misma colección y persistencia local sin cuentas.",
       "category": "Índice de cine",
       "summary": "Caso de estudio de CineTrack: un índice de cine con React 19, Vite, OMDB y localStorage. Búsqueda, vistas wall/kanban/lista, puntuaciones y notas sin backend."
@@ -84,13 +84,13 @@ export const caseStudyIndex: CaseSummary[] = [
       "estado-local-react"
     ],
     "es": {
-      "title": "Kanban Flow: un tablero que se siente físico y no pide cuenta",
+      "title": "Kanban Flow: un tablero físico que no pide cuenta",
       "subtitle": "Arrastrar y soltar preciso, edición en línea y un estado que sobrevive a la recarga.",
       "category": "Gestión de tareas",
       "summary": "Caso de estudio de Kanban Flow: tablero con arrastrar y soltar entre columnas, edición en línea y persistencia en localStorage, construido con React y @dnd-kit."
     },
     "en": {
-      "title": "Kanban Flow: a board that feels physical and asks for no account",
+      "title": "Kanban Flow: a physical board that asks for no account",
       "subtitle": "Precise drag and drop, inline editing and state that survives a reload.",
       "category": "Task management",
       "summary": "Kanban Flow case study: a board with drag and drop across columns, inline editing and localStorage persistence, built with React and @dnd-kit."
