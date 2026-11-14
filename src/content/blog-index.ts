@@ -11,6 +11,7 @@ export interface FaqItem {
 
 export interface PostSummary {
   slug: string;
+  slugEn: string;
   date: string;
   updated?: string;
   es: { title: string; excerpt: string; faq: FaqItem[] };
@@ -20,6 +21,7 @@ export interface PostSummary {
 export const postIndex: PostSummary[] = [
   {
     "slug": "etl-n8n-postgresql",
+    "slugEn": "etl-n8n-postgresql",
     "date": "2026-11-11",
     "es": {
       "title": "ETL con n8n y PostgreSQL",
@@ -68,6 +70,7 @@ export const postIndex: PostSummary[] = [
   },
   {
     "slug": "series-temporales-producto",
+    "slugEn": "time-series-to-product",
     "date": "2026-05-01",
     "updated": "2026-11-11",
     "es": {
@@ -117,6 +120,7 @@ export const postIndex: PostSummary[] = [
   },
   {
     "slug": "docker-fundamentals",
+    "slugEn": "docker-fundamentals",
     "date": "2026-04-15",
     "updated": "2026-11-11",
     "es": {
@@ -166,6 +170,7 @@ export const postIndex: PostSummary[] = [
   },
   {
     "slug": "estado-local-react",
+    "slugEn": "local-state-react",
     "date": "2026-11-11",
     "es": {
       "title": "Estado local en React: persistir datos sin backend",
@@ -214,6 +219,7 @@ export const postIndex: PostSummary[] = [
   },
   {
     "slug": "diseno-dashboards-react",
+    "slugEn": "readable-dashboards-react",
     "date": "2026-11-11",
     "es": {
       "title": "Dashboards que se leen: jerarquía y datos en React",
@@ -262,6 +268,7 @@ export const postIndex: PostSummary[] = [
   },
   {
     "slug": "ia-en-tiempo-real",
+    "slugEn": "real-time-ai",
     "date": "2026-11-11",
     "es": {
       "title": "IA en tiempo real: servir un modelo sin romper la interfaz",

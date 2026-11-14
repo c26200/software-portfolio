@@ -35,6 +35,7 @@ function extractFaq(html) {
 
 const blogIndex = posts.map((post) => ({
   slug: post.slug,
+  slugEn: post.slugEn,
   date: post.date,
   ...(post.updated ? { updated: post.updated } : {}),
   es: {
@@ -51,6 +52,7 @@ const blogIndex = posts.map((post) => ({
 
 const caseIndex = caseStudies.map((study) => ({
   slug: study.slug,
+  slugEn: study.slugEn,
   href: study.href,
   image: study.image,
   stack: study.stack,
@@ -85,6 +87,7 @@ export interface FaqItem {
 
 export interface PostSummary {
   slug: string;
+  slugEn: string;
   date: string;
   updated?: string;
   es: { title: string; excerpt: string; faq: FaqItem[] };
@@ -101,6 +104,7 @@ export function getPostSummary(post: PostSummary, language: string) {
 const caseSource = `${banner}
 export interface CaseSummary {
   slug: string;
+  slugEn: string;
   href: string;
   image: string;
   stack: string[];
@@ -117,8 +121,31 @@ export function getCaseSummary(study: CaseSummary, language: string) {
 }
 `;
 
+// Spanish logical path -> English logical path, only where the two differ.
+// The client imports this tiny map to build localized links and canonicals.
+const pathPairs = {
+  '/sobre': '/about',
+  ...Object.fromEntries(
+    posts
+      .filter((post) => post.slugEn !== post.slug)
+      .map((post) => [`/blog/${post.slug}`, `/blog/${post.slugEn}`]),
+  ),
+  ...Object.fromEntries(
+    caseStudies.map((study) => [
+      `/proyectos/${study.slug}`,
+      `/projects/${study.slugEn}`,
+    ]),
+  ),
+};
+
+const pathsSource = `${banner}
+export const EN_PATH_BY_ES_PATH: Record<string, string> = ${JSON.stringify(pathPairs, null, 2)};
+`;
+
 const root = 'C:/Users/Carlos Gordillo/repos/portfolio/src/content';
 await fs.writeFile(`${root}/blog-index.ts`, blogSource);
 await fs.writeFile(`${root}/case-studies-index.ts`, caseSource);
+await fs.writeFile(`${root}/locale-paths.ts`, pathsSource);
 console.log(`blog-index: ${blogIndex.length} posts`);
 console.log(`case-studies-index: ${caseIndex.length} studies`);
+console.log(`locale-paths: ${Object.keys(pathPairs).length} localized paths`);

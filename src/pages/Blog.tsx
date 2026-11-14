@@ -16,7 +16,8 @@ export default function Blog() {
           <i aria-hidden="true" />
           Blog
         </p>
-        <h1 className="blog-index-title">{t('blog.title')}</h1>
+        <h1 className="blog-index-title">{t('blog.heading')}</h1>
+        <p className="blog-intro">{t('blog.intro')}</p>
 
         <div className="blog-list">
           {postIndex.length === 0 ? (

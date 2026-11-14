@@ -319,6 +319,8 @@
   },
   "blog": {
     "title": "Blog",
+    "heading": "Blog de desarrollo full stack e IA",
+    "intro": "Escribo sobre lo que construyo y lo que se rompe mientras lo construyo: desarrollo full stack con React, Node.js y Python, inteligencia artificial aplicada, datos, Docker e infraestructura. Cada artículo parte de un problema real —un flujo ETL que duplica filas, un dashboard que nadie entiende, un modelo que solo funciona en el notebook— y termina con las decisiones concretas que volvería a tomar. No hay listas de tendencias ni resúmenes de documentación: hay código, errores y criterios para elegir. Si estás montando un producto completo y quieres ver cómo se conectan interfaz, API, datos y despliegue, empieza por cualquiera de estos artículos; cada uno enlaza al caso de estudio o al siguiente paso del proceso.",
     "back": "← Volver",
     "readMore": "Leer más",
     "publishedOn": "Publicado el",
@@ -363,7 +365,8 @@
     "breadcrumbHome": "Inicio",
     "aboutTitle": "Sobre Carlos Gordillo — Full Stack & IA",
     "aboutDescription": "Ingeniero mecatrónico de la Universidad de Pamplona y desarrollador full stack e IA en Colombia. Formación, trayectoria y cómo trabajo.",
-    "blogDescription": "Artículos sobre inteligencia artificial, series temporales, Docker y desarrollo full stack por Carlos Gordillo.",
+    "blogTitle": "Blog de desarrollo full stack e IA",
+    "blogDescription": "Artículos sobre desarrollo full stack, inteligencia artificial, datos, Docker y series temporales. Problemas reales, código y decisiones explicadas paso a paso.",
     "notFoundTitle": "Página no encontrada — Carlos Gordillo",
     "notFoundDescription": "La página que buscas no existe o se ha movido."
   },

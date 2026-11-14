@@ -27,6 +27,7 @@ function assertIndexesMatch() {
       problems.push(`missing post index for ${post.slug}`);
       continue;
     }
+    if (post.slugEn !== summary.slugEn) problems.push(`${post.slug} slugEn`);
     for (const lang of ['es', 'en']) {
       const full = post[lang];
       const meta = summary[lang];
@@ -43,6 +44,7 @@ function assertIndexesMatch() {
       problems.push(`missing case index for ${study.slug}`);
       continue;
     }
+    if (study.slugEn !== summary.slugEn) problems.push(`${study.slug} slugEn`);
     for (const lang of ['es', 'en']) {
       for (const key of ['title', 'subtitle', 'category', 'summary']) {
         if (study[lang][key] !== summary[lang][key]) {
@@ -138,16 +140,16 @@ const routes = [
   { path: '/', lang: 'es' },
   { path: '/en', lang: 'en' },
   { path: '/sobre', lang: 'es' },
-  { path: '/en/sobre', lang: 'en' },
+  { path: '/en/about', lang: 'en' },
   { path: '/blog', lang: 'es' },
   { path: '/en/blog', lang: 'en' },
   ...postIndex.flatMap((post) => [
     { path: `/blog/${post.slug}`, lang: 'es' },
-    { path: `/en/blog/${post.slug}`, lang: 'en' },
+    { path: `/en/blog/${post.slugEn}`, lang: 'en' },
   ]),
   ...caseStudyIndex.flatMap((study) => [
     { path: `/proyectos/${study.slug}`, lang: 'es' },
-    { path: `/en/proyectos/${study.slug}`, lang: 'en' },
+    { path: `/en/projects/${study.slugEn}`, lang: 'en' },
   ]),
 ];
 

@@ -8,6 +8,8 @@ export interface BlogContent {
 
 export interface BlogPost {
   slug: string;
+  /** English URL slug. Shared with the Spanish slug when it already reads well in English. */
+  slugEn: string;
   date: string;
   updated?: string;
   es: BlogContent;
@@ -22,6 +24,7 @@ export interface TocItem {
 const corePosts: BlogPost[] = [
   {
     slug: 'etl-n8n-postgresql',
+    slugEn: 'etl-n8n-postgresql',
     date: '2026-11-11',
     es: {
       title: 'ETL con n8n y PostgreSQL',
@@ -188,6 +191,7 @@ SET amount = EXCLUDED.amount,
   },
   {
     slug: 'series-temporales-producto',
+    slugEn: 'time-series-to-product',
     date: '2026-05-01',
     updated: '2026-11-11',
     es: {
@@ -348,12 +352,13 @@ SET amount = EXCLUDED.amount,
 <h3>When should I retrain?</h3>
 <p>When error or data distribution changes persistently. Combine a schedule with drift triggers; retraining daily without evidence only adds operational risk.</p>
 <h2>Further reading</h2>
-<p>The code is on <a href="https://github.com/c26200/trading-predictor" target="_blank" rel="noopener noreferrer">GitHub</a> and the full walkthrough, including the product decisions, is in the <a href="/en/proyectos/trading-predictor">TradeScope AI</a> case study. If you are building something similar, the order that worked for me was: data, validation, baseline, model and only then interface. The infrastructure side is in <a href="/en/blog/docker-fundamentals">Docker for Developers</a>, and if you want to discuss the approach you can write to me from the <a href="/en#contacto">contact page</a>.</p>
+<p>The code is on <a href="https://github.com/c26200/trading-predictor" target="_blank" rel="noopener noreferrer">GitHub</a> and the full walkthrough, including the product decisions, is in the <a href="/en/projects/trading-predictor">TradeScope AI</a> case study. If you are building something similar, the order that worked for me was: data, validation, baseline, model and only then interface. The infrastructure side is in <a href="/en/blog/docker-fundamentals">Docker for Developers</a>, and if you want to discuss the approach you can write to me from the <a href="/en#contacto">contact page</a>.</p>
 `,
     },
   },
   {
     slug: 'docker-fundamentals',
+    slugEn: 'docker-fundamentals',
     date: '2026-04-15',
     updated: '2026-11-11',
     es: {
@@ -643,7 +648,7 @@ volumes:
 <h3>How do I reduce image size?</h3>
 <p>Use Alpine, multi-stage builds, <code>.dockerignore</code> and production-only dependencies in the final stage. Inspect size by layer before optimizing blindly.</p>
 <h2>Further reading</h2>
-<p>The official reference is the <a href="https://docs.docker.com/" target="_blank" rel="noopener noreferrer">Docker</a> and <a href="https://docs.docker.com/compose/" target="_blank" rel="noopener noreferrer">Docker Compose</a> documentation. The Convenios case study, with PostgreSQL, n8n and a NestJS API in containers, is <a href="https://github.com/c26200/convenios-dashboard" target="_blank" rel="noopener noreferrer">here</a>. If you want a second opinion on your infrastructure, <a href="/en#contacto">let's talk</a>. You can also read how I take an AI model to a service in <a href="/en/blog/series-temporales-producto">From Time Series to Product</a>.</p>
+<p>The official reference is the <a href="https://docs.docker.com/" target="_blank" rel="noopener noreferrer">Docker</a> and <a href="https://docs.docker.com/compose/" target="_blank" rel="noopener noreferrer">Docker Compose</a> documentation. The Convenios case study, with PostgreSQL, n8n and a NestJS API in containers, is <a href="https://github.com/c26200/convenios-dashboard" target="_blank" rel="noopener noreferrer">here</a>. If you want a second opinion on your infrastructure, <a href="/en#contacto">let's talk</a>. You can also read how I take an AI model to a service in <a href="/en/blog/time-series-to-product">From Time Series to Product</a>.</p>
 `,
     },
   },

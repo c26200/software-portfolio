@@ -30,12 +30,15 @@ export default function App({ pages }: { pages: PageComponents }) {
             <Route path="/" element={<Home />} />
             <Route path="/en" element={<Home />} />
             <Route path="/sobre" element={<Sobre />} />
+            <Route path="/en/about" element={<Sobre />} />
+            {/* Legacy English URLs redirect at the CDN; these keep local dev working. */}
             <Route path="/en/sobre" element={<Sobre />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/en/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/en/blog/:slug" element={<BlogPost />} />
             <Route path="/proyectos/:slug" element={<CaseStudy />} />
+            <Route path="/en/projects/:slug" element={<CaseStudy />} />
             <Route path="/en/proyectos/:slug" element={<CaseStudy />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

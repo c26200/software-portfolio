@@ -6,6 +6,7 @@
 
 export interface CaseSummary {
   slug: string;
+  slugEn: string;
   href: string;
   image: string;
   stack: string[];
@@ -18,6 +19,7 @@ export interface CaseSummary {
 export const caseStudyIndex: CaseSummary[] = [
   {
     "slug": "saas-landing-page",
+    "slugEn": "saas-landing-page",
     "href": "https://github.com/c26200/saas-landing-page",
     "image": "/projects/saas-landing-page.webp",
     "stack": [
@@ -33,7 +35,7 @@ export const caseStudyIndex: CaseSummary[] = [
       "title": "Nexus: una landing que explica un producto de IA",
       "subtitle": "Tipografía a gran escala, bloques de prueba y una jerarquía que lleva del problema al botón sin ruido.",
       "category": "Landing SaaS",
-      "summary": "Caso de estudio de Nexus: cómo diseño y construyo una landing para un producto de IA con React, Tailwind y Framer Motion, priorizando jerarquía, prueba y velocidad."
+      "summary": "Caso de estudio de Nexus: una landing para un producto de IA con React, Tailwind y Framer Motion, priorizando jerarquía, prueba y velocidad."
     },
     "en": {
       "title": "Nexus: a landing page that explains an AI product",
@@ -44,6 +46,7 @@ export const caseStudyIndex: CaseSummary[] = [
   },
   {
     "slug": "cinetrack",
+    "slugEn": "cinetrack",
     "href": "https://github.com/c26200/cinetrack",
     "image": "/projects/cinetrack.webp",
     "stack": [
@@ -71,6 +74,7 @@ export const caseStudyIndex: CaseSummary[] = [
   },
   {
     "slug": "kanban-task-manager",
+    "slugEn": "kanban-task-manager",
     "href": "https://github.com/c26200/kanban-task-manager",
     "image": "/projects/kanban-task-manager.webp",
     "stack": [
@@ -98,6 +102,7 @@ export const caseStudyIndex: CaseSummary[] = [
   },
   {
     "slug": "dashloud",
+    "slugEn": "dashloud",
     "href": "https://github.com/c26200/dashloud",
     "image": "/projects/dashloud.webp",
     "stack": [
@@ -114,17 +119,18 @@ export const caseStudyIndex: CaseSummary[] = [
       "title": "DashLoud: un dashboard editorial que se lee de un vistazo",
       "subtitle": "Pocas métricas, una gráfica que responde y una tabla que se puede escanear, en claro y oscuro.",
       "category": "Dashboard analítico",
-      "summary": "Caso de estudio de DashLoud: dashboard analítico con React, Tailwind, Recharts y Framer Motion. Jerarquía editorial, métricas clave, gráfica de ingresos y transacciones."
+      "summary": "Caso de estudio de DashLoud: dashboard con React, Tailwind, Recharts y Framer Motion. Jerarquía editorial, métricas clave, gráfica de ingresos y transacciones."
     },
     "en": {
       "title": "DashLoud: an editorial dashboard you read at a glance",
       "subtitle": "Few metrics, one chart that answers and a scannable table, in light and dark themes.",
       "category": "Analytics dashboard",
-      "summary": "DashLoud case study: an analytics dashboard built with React, Tailwind, Recharts and Framer Motion. Editorial hierarchy, key metrics, revenue chart and transactions."
+      "summary": "DashLoud case study: an analytics dashboard built with React, Tailwind and Recharts. Editorial hierarchy, key metrics, revenue chart and transactions."
     }
   },
   {
     "slug": "trading-predictor",
+    "slugEn": "trading-predictor",
     "href": "https://github.com/c26200/trading-predictor",
     "image": "/projects/trading-predictor.webp",
     "stack": [
@@ -144,7 +150,7 @@ export const caseStudyIndex: CaseSummary[] = [
       "title": "TradeScope AI: del notebook a un servicio en tiempo real",
       "subtitle": "Un ensemble LSTM + Transformer servido por WebSocket, con validación temporal estricta y un dashboard de señales.",
       "category": "Predicción bursátil",
-      "summary": "Caso de estudio de TradeScope AI: ensemble LSTM + Transformer en PyTorch, servido con FastAPI y WebSocket, con validación walk-forward y operación en contenedores."
+      "summary": "Caso de estudio de TradeScope AI: ensemble LSTM + Transformer en PyTorch, servido con FastAPI y WebSocket, con validación walk-forward y contenedores."
     },
     "en": {
       "title": "TradeScope AI: from notebook to a real-time service",
@@ -155,6 +161,7 @@ export const caseStudyIndex: CaseSummary[] = [
   },
   {
     "slug": "portfolio-mecatronica",
+    "slugEn": "mechatronics-portfolio",
     "href": "https://github.com/c26200/mechatronics-portfolio",
     "image": "/projects/portfolio-mecatronica.webp",
     "stack": [
@@ -171,13 +178,13 @@ export const caseStudyIndex: CaseSummary[] = [
       "title": "Portafolio Mecatrónico: un lienzo que muestra cómo pienso",
       "subtitle": "Notas y piezas técnicas arrastrables, navegación por teclado y una disposición que se guarda entre visitas.",
       "category": "Portafolio interactivo",
-      "summary": "Caso de estudio del Portafolio Mecatrónico: un portafolio Astro con lienzo arrastrable, notas y piezas técnicas, navegación por teclado y disposición persistente."
+      "summary": "Caso de estudio del Portafolio Mecatrónico: un portafolio Astro con lienzo arrastrable, notas, piezas técnicas y navegación por teclado."
     },
     "en": {
       "title": "Mechatronics Portfolio: a canvas that shows how I think",
       "subtitle": "Draggable notes and technical parts, keyboard navigation and a layout that persists between visits.",
       "category": "Interactive portfolio",
-      "summary": "Mechatronics Portfolio case study: an Astro portfolio with a draggable canvas, notes and technical parts, keyboard navigation and persistent layout."
+      "summary": "Mechatronics Portfolio case study: an Astro portfolio with a draggable canvas, notes, technical parts and keyboard navigation."
     }
   }
 ];

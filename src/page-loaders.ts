@@ -18,9 +18,10 @@ export const pageLoaders: Record<PageName, () => Promise<{ default: PageComponen
 export function pageForPath(pathname: string): PageName {
   const path = pathname.replace(/\/+$/, '') || '/';
   if (path === '/' || path === '/en') return 'Home';
-  if (path === '/sobre' || path === '/en/sobre') return 'Sobre';
+  if (path === '/sobre' || path === '/en/about' || path === '/en/sobre') return 'Sobre';
   if (path === '/blog' || path === '/en/blog') return 'Blog';
   if (/^\/(en\/)?blog\/[^/]+$/.test(path)) return 'BlogPost';
-  if (/^\/(en\/)?proyectos\/[^/]+$/.test(path)) return 'CaseStudy';
+  if (/^\/(proyectos)\/[^/]+$/.test(path)) return 'CaseStudy';
+  if (/^\/en\/(projects|proyectos)\/[^/]+$/.test(path)) return 'CaseStudy';
   return 'NotFound';
 }

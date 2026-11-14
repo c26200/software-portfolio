@@ -319,6 +319,8 @@
   },
   "blog": {
     "title": "Blog",
+    "heading": "Full stack and AI development blog",
+    "intro": "I write about what I build and what breaks while I build it: full stack development with React, Node.js and Python, applied artificial intelligence, data, Docker and infrastructure. Every article starts from a real problem — an ETL flow that duplicates rows, a dashboard nobody understands, a model that only works in a notebook — and ends with the concrete decisions I would make again. No trend lists and no documentation summaries: there is code, failure and the criteria for choosing. If you are building a complete product and want to see how interface, API, data and deployment connect, start with any of these articles; each one links to the case study or to the next step in the process.",
     "back": "← Back",
     "readMore": "Read more",
     "publishedOn": "Published on",
@@ -363,7 +365,8 @@
     "breadcrumbHome": "Home",
     "aboutTitle": "About Carlos Gordillo — Full Stack & AI",
     "aboutDescription": "Mechatronics engineer from Universidad de Pamplona and full stack and AI developer in Colombia. Education, background and how I work.",
-    "blogDescription": "Articles on artificial intelligence, time series, Docker and full stack development by Carlos Gordillo.",
+    "blogTitle": "Full stack and AI development blog",
+    "blogDescription": "Articles on full stack development, applied artificial intelligence, data, Docker and time series. Real problems, code and the decisions behind each project.",
     "notFoundTitle": "Page not found — Carlos Gordillo",
     "notFoundDescription": "The page you are looking for does not exist or has moved."
   },

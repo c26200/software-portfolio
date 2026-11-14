@@ -9,7 +9,7 @@ export default function BlogPost() {
   const { t } = useTranslation();
   const { pathname } = useLocation();
   const language = pathLanguage(pathname);
-  const post = posts.find((item) => item.slug === slug);
+  const post = posts.find((item) => item.slug === slug || item.slugEn === slug);
   const copy = post ? getPostContent(post, language) : undefined;
   const [tocOpen, setTocOpen] = useState(false);
 
