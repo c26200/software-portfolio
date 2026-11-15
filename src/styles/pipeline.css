@@ -339,6 +339,25 @@
   .pipe-log {
     max-height: 200px;
   }
+
+  /* En móvil el panel se lee centrado; el log y el comando siguen a la
+     izquierda porque son una terminal. */
+  .pipeline-head {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+  }
+  .pipe-detail {
+    text-align: center;
+  }
+  .pipe-detail p {
+    margin-inline: auto;
+  }
+  .pipe-cmd,
+  .pipe-log {
+    text-align: left;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

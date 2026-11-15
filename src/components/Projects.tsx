@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { flushSync } from 'react-dom';
 import { useTranslation } from '../i18n';
 import { showcaseProjects, projectImageSrcSet, type ShowcaseProject } from '../content/projects';
 import Reveal from './Reveal';
@@ -18,15 +19,21 @@ export default function Projects() {
   const trackRef = useRef<HTMLDivElement>(null);
   const [preview, setPreview] = useState<ShowcaseProject | null>(null);
   const [order, setOrder] = useState<number[]>(INITIAL_ORDER);
+  const [paused, setPaused] = useState(false);
   const orderRef = useRef<number[]>(INITIAL_ORDER);
   const positionRef = useRef(0);
   const stepRef = useRef(0);
   const draggedRef = useRef(false);
   const previewOpenRef = useRef(false);
+  const pausedRef = useRef(false);
 
   useEffect(() => {
     previewOpenRef.current = preview !== null;
   }, [preview]);
+
+  useEffect(() => {
+    pausedRef.current = paused;
+  }, [paused]);
 
   // Bucle infinito reciclando las mismas tarjetas: al salir una por la izquierda
   // se reordena al final de la pista, así nunca hay copias duplicadas.
@@ -46,26 +53,27 @@ export default function Projects() {
       if (step > 0) stepRef.current = step;
     };
 
-    const rotateOrder = (direction: 1 | -1) => {
+    // Reordena la pista y deja que React confirme el DOM antes de aplicar el
+    // nuevo transform. Si el orden y el transform se pintan en frames
+    // distintos, el reciclado se ve como un salto.
+    const rotateBy = (turns: number) => {
       const current = orderRef.current;
-      const next =
-        direction === 1
-          ? [...current.slice(1), current[0]]
-          : [current[current.length - 1], ...current.slice(0, -1)];
+      const count = current.length;
+      if (!count) return;
+      const offset = ((turns % count) + count) % count;
+      if (offset === 0) return;
+      const next = [...current.slice(offset), ...current.slice(0, offset)];
       orderRef.current = next;
-      setOrder(next);
+      flushSync(() => setOrder(next));
     };
 
     const normalize = () => {
       const step = stepRef.current;
       if (step <= 0) return;
-      while (positionRef.current >= step) {
-        positionRef.current -= step;
-        rotateOrder(1);
-      }
-      while (positionRef.current < 0) {
-        positionRef.current += step;
-        rotateOrder(-1);
+      const turns = Math.floor(positionRef.current / step);
+      if (turns !== 0) {
+        positionRef.current -= turns * step;
+        rotateBy(turns);
       }
       apply();
     };
@@ -82,9 +90,11 @@ export default function Projects() {
     let startX = 0;
     let lastX = 0;
     let resumeAt = 0;
+    let keyboardFocus = false;
 
     const onPointerDown = (event: PointerEvent) => {
       if (event.pointerType === 'mouse' && event.button !== 0) return;
+      keyboardFocus = false;
       down = true;
       moved = false;
       draggedRef.current = false;
@@ -115,6 +125,11 @@ export default function Projects() {
       // Deja la pista quieta un momento tras el gesto para poder tocar una tarjeta
       resumeAt = performance.now() + 2200;
       rail.classList.remove('drag');
+      // El clic del arrastre se dispara de inmediato; después de eso un clic
+      // normal (o Enter) ya no debe quedar bloqueado por un arrastre anterior.
+      window.setTimeout(() => {
+        draggedRef.current = false;
+      }, 300);
     };
 
     // Trackpads y ruedas horizontales siguen moviendo la pista
@@ -133,8 +148,13 @@ export default function Projects() {
     const onLeave = (event: PointerEvent) => {
       if (event.pointerType === 'mouse') hovering = false;
     };
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Tab') keyboardFocus = true;
+    };
     const onFocusIn = () => {
-      focused = true;
+      // Solo pausa cuando el foco llega con el teclado. El foco que deja un
+      // toque o un clic no debe congelar la pista para siempre.
+      focused = keyboardFocus;
     };
     const onFocusOut = () => {
       focused = false;
@@ -164,6 +184,7 @@ export default function Projects() {
         !down &&
         !document.hidden &&
         !previewOpenRef.current &&
+        !pausedRef.current &&
         now >= resumeAt
       ) {
         positionRef.current += (SPEED * delta) / 1000;
@@ -184,6 +205,7 @@ export default function Projects() {
     rail.addEventListener('pointerleave', onLeave);
     rail.addEventListener('focusin', onFocusIn);
     rail.addEventListener('focusout', onFocusOut);
+    document.addEventListener('keydown', onKeyDown);
 
     return () => {
       cancelAnimationFrame(raf);
@@ -198,6 +220,7 @@ export default function Projects() {
       rail.removeEventListener('pointerleave', onLeave);
       rail.removeEventListener('focusin', onFocusIn);
       rail.removeEventListener('focusout', onFocusOut);
+      document.removeEventListener('keydown', onKeyDown);
     };
   }, []);
 
@@ -276,6 +299,14 @@ export default function Projects() {
       <div className="rail-foot">
         <div className="rail-line" />
         <span className="rail-hint">01 — {String(showcaseProjects.length).padStart(2, '0')}</span>
+        <button
+          type="button"
+          className="rail-toggle"
+          aria-pressed={paused}
+          onClick={() => setPaused((value) => !value)}
+        >
+          {paused ? t('kinetic.railPlay') : t('kinetic.railPause')}
+        </button>
       </div>
 
 

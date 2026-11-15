@@ -1524,8 +1524,60 @@ html.has-cursor * {
 @media (max-width: 900px) {
   .card .meta {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 6px;
+    text-align: center;
   }
   .card .cat { padding-bottom: 0; }
+}
+
+/* --- móvil: todo el texto de interfaz centrado --------------------------- */
+@media (max-width: 900px) {
+  .about-copy p,
+  .about-copy .big-line,
+  .exp-row p,
+  .pipeline-lead,
+  .sobre-body p,
+  .sobre-card p,
+  .sobre-row p,
+  .sobre-note,
+  .sobre-facts dt,
+  .sobre-facts dd,
+  .blog-intro,
+  .case-title,
+  .case-subtitle,
+  .case-summary,
+  .case-metrics,
+  .case-lessons,
+  .case-others,
+  .preview-cat,
+  .preview-title,
+  .preview-desc,
+  .preview-actions {
+    text-align: center;
+  }
+  .about-copy p,
+  .about-copy .big-line,
+  .exp-row p {
+    margin-inline: auto;
+  }
+  .stack { justify-content: center; }
+  .sobre-body,
+  .sobre-top,
+  .sobre-rows,
+  .sobre-cards,
+  .sobre-facts,
+  .case-meta-row,
+  .case-stack,
+  .preview-stack,
+  .preview-actions {
+    justify-content: center;
+  }
+  .case-others a { justify-content: center; }
+  .sobre-row h3,
+  .sobre-row h3 a { text-align: center; }
+  /* El cuerpo de artículos y casos sigue a la izquierda: centrar párrafos
+     largos obliga a barrer la vista en cada línea y se lee peor. */
+  .blog-prose,
+  .case-prose { text-align: left; }
 }
