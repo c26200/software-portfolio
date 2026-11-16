@@ -80,7 +80,7 @@
   "about": {
     "photoAlt": "Carlos Gordillo, ingeniero full stack e IA, en Puerto Boyacá, Colombia",
     "paragraphs": [
-      "Desarrollador Full Stack e IA enfocado en construir productos completos: interfaces, APIs, datos y despliegue. Trabajo con React, TypeScript, Node.js y Python, e integro modelos de aprendizaje profundo — LSTM, Transformers y redes convolucionales — para convertir datos en decisiones.",
+      "Desarrollador full stack e IA. Diseño y despliego productos completos —interfaz, API, datos e infraestructura— con React, TypeScript, Python y Docker. Integro modelos de aprendizaje profundo (LSTM, Transformers y CNNs) para convertir datos en decisiones.",
       "Diseño y opero la infraestructura que sostiene esos productos: contenedores Docker sobre servidores Linux propios, PostgreSQL, pipelines ETL con n8n y exposición segura mediante Cloudflare Tunnel y políticas Zero Trust. He procesado más de 50.000 registros y desplegado dashboards de monitoreo en tiempo real.",
       "Me interesa la intersección entre producto, datos e inteligencia artificial: modelos que se entrenan, se sirven y se explican. Cuando no estoy construyendo, exploro nuevas arquitecturas de automatización y formas de hacer que los sistemas complejos se sientan simples."
     ],
@@ -115,7 +115,7 @@
     "kicker": "Sobre mí",
     "titleA": "Sobre",
     "titleEm": "Carlos Gordillo",
-    "lead": "Ingeniero mecatrónico de la Universidad de Pamplona, desarrollador full stack e IA y estudiante de maestría en ciberseguridad. Construyo productos completos y opero la infraestructura que los sostiene.",
+    "lead": "Ingeniero mecatrónico de la Universidad de Pamplona y desarrollador full stack e IA. Curso una maestría en ciberseguridad en la Universidad Europea. Construyo productos completos y opero la infraestructura que los sostiene.",
     "photoAlt": "Carlos Gordillo, ingeniero mecatrónico y desarrollador full stack e IA",
     "facts": [
       {
