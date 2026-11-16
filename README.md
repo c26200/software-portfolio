@@ -14,6 +14,8 @@ projects with real screenshots, an animated CI/CD pipeline and a bilingual blog.
 - Light and dark themes, switchable from the header and persisted per visitor
 - Draggable project rail with screenshots of six deployed apps, linked to their repositories
   and to a full case study for each one
+- Language-aware CV download: Spanish pages serve the Spanish PDF and English pages
+  the English one, from the hero, the contact section and the about page
 - Latest articles section on the home page, with links to the full blog
 - Animated CI/CD pipeline demo with eight stages, pause on scroll and reduced-motion support
 - Blog with bilingual pillar guides, table of contents, FAQ schema and related posts, plus a
@@ -35,6 +37,8 @@ npm install
 npm run dev       # http://localhost:5173
 npm run build     # generates dist/
 npm run indexes   # regenerates the content indexes after editing content
+npm run cv        # regenerates the Spanish and English CV PDFs from cv/
+                  # uses Chrome, Edge or Chromium; override with CHROME_PATH
 npm run preview
 ```
 
@@ -42,8 +46,11 @@ npm run preview
 
 ```
 public/               favicon, OG images, project screenshots, robots.txt, 404.html
+                      cv/ — downloadable Spanish and English CV PDFs
+cv/                   cv-es.html, cv-en.html, cv.css — print-ready CV sources
 scripts/              prerender.mjs — renders each route and the sitemap at build
                       build-indexes.mjs — generates the lightweight content indexes
+                      build-cv.mjs — prints the CV sources to PDF with headless Chromium
 src/
 ├── components/       Hero, KineticCanvas, Marquee, About, Stat, Experience,
 │                     Pipeline, Projects, LatestPosts, Contact, Header,

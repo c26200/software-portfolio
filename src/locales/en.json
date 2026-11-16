@@ -52,13 +52,16 @@
     "marquee": [
       "React",
       "Node.js",
+      "Next.js",
+      "FastAPI",
       "Python",
       "Docker",
       "n8n",
       "PostgreSQL",
       "LSTM",
       "Transformers",
-      "Cloudflare"
+      "Cloudflare",
+      "Cybersecurity"
     ],
     "themeToDark": "Switch to dark mode",
     "themeToLight": "Switch to light mode",
@@ -92,7 +95,7 @@
       },
       "institution": {
         "label": "Institution",
-        "value": "Universidad de Pamplona"
+        "value": "Universidad de Pamplona · Universidad Europea"
       },
       "availability": {
         "label": "Availability",
@@ -100,7 +103,7 @@
       },
       "languages": {
         "label": "Languages",
-        "value": "Spanish (Native) · English (Technical)"
+        "value": "Spanish (Native) · English (Intermediate, technical)"
       },
       "contact": {
         "label": "Contact",
@@ -112,7 +115,7 @@
     "kicker": "About",
     "titleA": "About",
     "titleEm": "Carlos Gordillo",
-    "lead": "Mechatronics engineer from Universidad de Pamplona and full stack and AI developer. I build complete products and operate the infrastructure behind them.",
+    "lead": "Mechatronics engineer from Universidad de Pamplona, full stack and AI developer and master's student in cybersecurity. I build complete products and operate the infrastructure behind them.",
     "photoAlt": "Carlos Gordillo, mechatronics engineer and full stack and AI developer",
     "facts": [
       {
@@ -129,11 +132,11 @@
       },
       {
         "label": "Education",
-        "value": "Mechatronics Engineering, Universidad de Pamplona"
+        "value": "Mechatronics Engineering · Master's in Cybersecurity (in progress)"
       },
       {
         "label": "Languages",
-        "value": "Spanish native · English technical"
+        "value": "Spanish native · English intermediate (technical)"
       },
       {
         "label": "Availability",
@@ -142,9 +145,9 @@
     ],
     "bioTitle": "How I got here",
     "bio": [
-      "I am a mechatronics engineer, graduated in April 2026 from Universidad de Pamplona. Mechatronics taught me to think in systems that sense, control and talk to each other; software let me carry that same logic into products anyone can open in a browser.",
+      "I am a mechatronics engineer, graduated in December 2025 from Universidad de Pamplona. Mechatronics taught me to think in systems that sense, control and talk to each other; software let me carry that same logic into products anyone can open in a browser.",
       "I started by automating processes that were done by hand. At Universidad de Pamplona I designed and shipped the institutional agreements system: a Node.js backend, a React and TypeScript frontend, PostgreSQL, and n8n ETL pipelines that processed more than 50,000 records.",
-      "Today I teach programming at SENA and work as an independent consultant. I build with React, Node.js, Python and Docker, integrate deep learning models, and operate the whole stack: Linux servers, databases, automation and deployments.",
+      "Today I teach programming at SENA, study a Master's Degree in Cybersecurity and work as an independent consultant. I build with React, Node.js, Python and Docker, integrate deep learning models, and operate the whole stack: Linux servers, databases, automation and deployments.",
       "I work with teams and individuals who need to turn an idea or a manual process into a product that works. I have delivered internal management systems, dashboards, landing pages and predictive models, and in every project I stayed for the part that usually falls outside the contract: containers, backups, monitoring and deployments.",
       "When I am not building, I teach programming at SENA. Explaining a concept to someone seeing it for the first time forces you to order it, and that same order is what I apply to the architecture and documentation I deliver."
     ],
@@ -166,19 +169,25 @@
     "educationTitle": "Education",
     "education": [
       {
-        "year": "2019 — 2026",
+        "year": "2026 — Present",
+        "title": "Master's Degree in Cybersecurity",
+        "org": "Universidad Europea",
+        "note": "In progress. Systems, network and application security."
+      },
+      {
+        "year": "2019 — 2025",
         "title": "Mechatronics Engineering",
         "org": "Universidad de Pamplona",
-        "note": "Pamplona, Norte de Santander · Graduated April 2026. Coursework in systems, control and automation."
+        "note": "Pamplona, Norte de Santander · Graduated December 2025. Coursework in systems, control and automation."
       }
     ],
     "awardsTitle": "Recognition",
     "awardLabel": "Recognition",
     "awards": [
       {
-        "title": "First place — Deep Learning contest",
-        "org": "Universidad de Pamplona",
-        "note": "University recognition for a deep learning project."
+        "title": "First place — International AI Festival 2025",
+        "org": "International AI Festival",
+        "note": "Recognition for a real-time prediction and monitoring system built with deep learning."
       }
     ],
     "projectsTitle": "Projects you can review",
@@ -191,13 +200,13 @@
   "experience": {
     "items": [
       {
-        "year": "2026 — Present",
+        "year": "April 2026 — Present",
         "org": "SENA",
-        "role": "Instructor — Software Programming",
+        "role": "Instructor — Teleinformatic Systems and Software Programming",
         "desc": "Technical instruction in programming and software development. Competency-based curriculum design, hands-on labs and active methodologies to build measurable skills."
       },
       {
-        "year": "2025",
+        "year": "June — December 2025",
         "org": "Universidad de Pamplona",
         "role": "Agreement Manager · Data Automation",
         "desc": "Full Stack architecture and implementation on a self-managed Linux server with Docker: backend (Node.js/Express), frontend (React + TypeScript) and PostgreSQL. ETL pipeline design with n8n for massive spreadsheet ingestion — over 50,000 records — with transformation, validation and incremental loading. Secure exposure with Cloudflare Tunnel and Zero Trust policies."
@@ -287,7 +296,7 @@
       "trading-predictor": {
         "title": "TradeScope AI",
         "category": "Market prediction",
-        "description": "Financial forecasting system with an LSTM + Transformer ensemble, WebSocket price streaming and a real-time signal dashboard. First place in the Universidad de Pamplona deep learning contest."
+        "description": "Financial forecasting system with an LSTM + Transformer ensemble, WebSocket price streaming and a real-time signal dashboard. First place at the International AI Festival 2025."
       },
       "portfolio-mecatronica": {
         "title": "Mechatronics Portfolio",
@@ -318,6 +327,12 @@
       "github": "GitHub",
       "phone": "+57 311 490 0238"
     }
+  },
+  "cv": {
+    "download": "Download CV",
+    "downloadShort": "CV",
+    "format": "PDF · 1 page",
+    "aria": "Download CV as PDF (English)"
   },
   "blog": {
     "title": "Blog",
@@ -353,6 +368,8 @@
       "React",
       "TypeScript",
       "Node.js",
+      "Next.js",
+      "FastAPI",
       "Python",
       "Artificial intelligence",
       "Deep Learning",
@@ -362,7 +379,8 @@
       "DevOps",
       "PostgreSQL",
       "n8n",
-      "Cloudflare"
+      "Cloudflare",
+      "Cybersecurity"
     ],
     "breadcrumbHome": "Home",
     "aboutTitle": "About Carlos Gordillo — Full Stack & AI",

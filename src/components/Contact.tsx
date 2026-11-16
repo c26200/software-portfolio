@@ -1,4 +1,5 @@
 import { useTranslation } from '../i18n';
+import CvDownload from './CvDownload';
 
 export default function Contact() {
   const { t } = useTranslation();
@@ -40,6 +41,7 @@ export default function Contact() {
             {t('contact.links.github')} ↗
           </a>
           <a href="tel:+573114900238">{t('contact.links.phone')}</a>
+          <CvDownload className="" />
         </div>
       </div>
     </section>
