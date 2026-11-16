@@ -80,7 +80,7 @@
   "about": {
     "photoAlt": "Carlos Gordillo, full stack and AI engineer, in Puerto Boyacá, Colombia",
     "paragraphs": [
-      "Full Stack and AI developer focused on building complete products: interfaces, APIs, data and deployment. I work with React, TypeScript, Node.js and Python, and integrate deep learning models — LSTM, Transformers and convolutional networks — to turn data into decisions.",
+      "Full stack and AI developer. I design and ship complete products —interface, API, data and infrastructure— with React, TypeScript, Python and Docker. I integrate deep learning models (LSTMs, Transformers and CNNs) to turn data into decisions.",
       "I design and operate the infrastructure behind those products: Docker containers on self-managed Linux servers, PostgreSQL, ETL pipelines with n8n, and secure exposure through Cloudflare Tunnel and Zero Trust policies. I have processed over 50,000 records and shipped real-time monitoring dashboards.",
       "I care about the intersection of product, data and artificial intelligence: models that are trained, served and explained. When I am not building, I explore new automation architectures and ways to make complex systems feel simple."
     ],
@@ -115,7 +115,7 @@
     "kicker": "About",
     "titleA": "About",
     "titleEm": "Carlos Gordillo",
-    "lead": "Mechatronics engineer from Universidad de Pamplona, full stack and AI developer and master's student in cybersecurity. I build complete products and operate the infrastructure behind them.",
+    "lead": "Mechatronics engineer from Universidad de Pamplona and full stack and AI developer. I am pursuing a master's degree in cybersecurity at Universidad Europea. I build complete products and operate the infrastructure behind them.",
     "photoAlt": "Carlos Gordillo, mechatronics engineer and full stack and AI developer",
     "facts": [
       {
