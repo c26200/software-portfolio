@@ -485,7 +485,7 @@ export const caseStudies: CaseStudy[] = [
     image: '/projects/trading-predictor.webp',
     stack: ['Python', 'PyTorch', 'LSTM', 'Transformers', 'FastAPI', 'WebSocket'],
     date: '2026-11-11',
-    updated: '2026-11-14',
+    updated: '2026-11-16',
     relatedPosts: ['series-temporales-producto', 'ia-en-tiempo-real'],
     es: {
       title: 'TradeScope AI: del notebook a un servicio en tiempo real',
@@ -518,7 +518,7 @@ export const caseStudies: CaseStudy[] = [
         },
         {
           heading: 'El resultado',
-          html: `<p>El proyecto obtuvo el primer puesto en el concurso de deep learning de la Universidad de Pamplona y quedó como un servicio observable: dashboard en tiempo real, métricas por ventana y un procedimiento claro para volver a una versión anterior.</p>
+          html: `<p>El proyecto obtuvo el primer puesto en el Festival Internacional de IA 2025 y quedó como un servicio observable: dashboard en tiempo real, métricas por ventana y un procedimiento claro para volver a una versión anterior.</p>
 <p>La lección fue que el modelo es una parte del producto. La validación honesta, la latencia, el fallback y el monitoreo deciden si sirve para tomar una decisión.</p>`,
         },
         {
@@ -568,7 +568,7 @@ export const caseStudies: CaseStudy[] = [
         },
         {
           heading: 'The result',
-          html: `<p>The project took first place in the Universidad de Pamplona deep learning contest and became an observable service: a real-time dashboard, per-window metrics and a clear procedure to roll back to a previous version.</p>
+          html: `<p>The project took first place at the International AI Festival 2025 and became an observable service: a real-time dashboard, per-window metrics and a clear procedure to roll back to a previous version.</p>
 <p>The lesson was that the model is one part of the product. Honest validation, latency, fallback and monitoring decide whether it is useful for a decision.</p>`,
         },
         {

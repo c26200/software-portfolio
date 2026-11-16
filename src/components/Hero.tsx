@@ -1,4 +1,5 @@
 import { useTranslation } from '../i18n';
+import CvDownload from './CvDownload';
 import KineticCanvas from './KineticCanvas';
 import Marquee from './Marquee';
 
@@ -36,6 +37,7 @@ export default function Hero() {
             <a className="btn" href="#contacto">
               {t('kinetic.ctaContact')} ↗
             </a>
+            <CvDownload />
           </div>
         </div>
       </div>

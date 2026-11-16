@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from '../i18n';
 import { localizePath, pathLanguage } from '../i18n-paths';
 import { caseStudyIndex, getCaseSummary } from '../content/case-studies-index';
+import CvDownload from '../components/CvDownload';
 
 interface Fact {
   label: string;
@@ -153,6 +154,7 @@ export default function Sobre() {
           <a className="btn solid" href={`mailto:${t('contact.email')}`}>
             {t('sobre.ctaButton')}
           </a>
+          <CvDownload />
           <Link className="btn" to={localizePath('/', language)}>
             {t('sobre.ctaContact')}
           </Link>

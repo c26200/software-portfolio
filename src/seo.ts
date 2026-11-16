@@ -17,7 +17,7 @@ export const PORTRAIT = `${SITE_ORIGIN}/img/carlos-gordillo.jpg`;
 export const LOGO = `${SITE_ORIGIN}/favicon-512.png`;
 
 /** Manual content revision date for the static pages, used by the sitemap. */
-export const SITE_LAST_MODIFIED = '2026-11-14';
+export const SITE_LAST_MODIFIED = '2026-11-16';
 
 /**
  * Appends the brand to a page title only when the result still fits a SERP

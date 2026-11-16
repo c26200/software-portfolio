@@ -147,7 +147,7 @@ export const caseStudyIndex: CaseSummary[] = [
       "WebSocket"
     ],
     "date": "2026-11-11",
-    "updated": "2026-11-14",
+    "updated": "2026-11-16",
     "relatedPosts": [
       "series-temporales-producto",
       "ia-en-tiempo-real"
